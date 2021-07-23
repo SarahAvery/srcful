@@ -17,16 +17,6 @@ module.exports = () => {
         }
       });
   });
-  // router.get('/:id', (req, res) => {
-  //   fetch(process.env.API_URL + '/users/' + req.params.id)
-  //     .then(data => data.json())
-  //     .then(json => {
-  //       if (json.users) {
-  //         res.render("profile", { users: json.users });
-  //       }
-  //       res.redirect('/');
-  //     });
-  // });
 
   return router;
 };
