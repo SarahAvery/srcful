@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <title>Profile Page</title>
+  </head>
+
+  <body>
+    <header></header>
+    <main>
+      <div id="root"></div>
+
+      <!-- <script>
+        document.addEventListener('DOMContentLoaded' , () => {
+          fetch('/api/users').then(data => data.json()).then( json => {
+            console.log(json.users)
+            const ul = document.createElement('ul')
+            const lis = json.users.map(user => {
+              const li = document.createElement('li')
+              li.innerHTML = user.name
+              return li
+            })
+            
+            lis.forEach(element => {
+              console.log(element)
+              ul.appendChild(element)
+            });
+  
+            console.log(ul)
+            document.querySelector('#root').appendChild(ul)
+          })
+        })
+      </script> -->
+      <h1>Profile Page</h1>
+
+      <%= users[0].name %>
+    </main>
+    <footer></footer>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </body>
+</html>
