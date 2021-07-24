@@ -49,21 +49,32 @@
       color: rgb(255, 255, 255);
       cursor: pointer;
     }
+
+    .edit-btn.active {
+      background-color: rgb(125, 201, 194);
+    }
   }
 
   // Edit Profile
   .edit-popout {
     background: rgb(255, 255, 255);
-    height: 350px;
+    height: 300px;
     width: 400px;
     z-index: 12;
     position: absolute;
     right: -10px;
     border: 1px solid rgb(201, 143, 125);
     border-radius: 8px;
+    margin-top: 10px;
+    opacity: 1;
+    transition: opacity 300 ease-in-out;
 
     .edit-container {
       padding: 20px 30px 20px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
 
       h2 {
         color: rgb(125, 201, 194);
@@ -75,10 +86,11 @@
         margin-top: 20px;
 
         .form-group {
-          display: flex;
-          flex-wrap: wrap;
           width: 80%;
-          justify-content: flex-start;
+
+          div {
+            margin: 10px 0;
+          }
 
           label {
             margin-top: 16px;
@@ -86,7 +98,7 @@
           input {
             margin: 10px 0;
             padding: 2px;
-            min-width: 250px;
+            width: 100%;
             border-radius: 4px;
             outline: none;
             border: 0.75px solid #222;
@@ -94,7 +106,8 @@
 
           .btn-container {
             width: auto;
-            margin: 10px auto;
+            display: flex;
+            justify-content: center;
 
             button {
               outline: none;
@@ -110,5 +123,9 @@
         }
       }
     }
+  }
+
+  .edit-popout.hidden {
+    opacity: 0;
   }
 }

@@ -15,7 +15,22 @@
     $(".profile-container")
       .find(".edit-btn")
       .on("click", function () {
-        $(".edit-btn").css("background-color", "rgb(125, 201, 194)");
+        if ($(".edit-btn").hasClass("active")) {
+          $(".edit-btn").removeClass("active");
+        } else {
+          $(".edit-btn").addClass("active");
+        }
+      });
+
+    // Popout Edit
+    $(".profile-container")
+      .find(".edit-btn")
+      .on("click", function () {
+        if ($(".edit-btn").hasClass("active")) {
+          $(".edit-popout").removeClass("hidden");
+        } else {
+          $(".edit-popout").addClass("hidden");
+        }
       });
 
     // DONT REMOVE BELOW CODE PLEASE
