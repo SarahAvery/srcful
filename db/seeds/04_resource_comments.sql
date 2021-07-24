@@ -12,7 +12,7 @@ resource_comments (
 -- 1 - 33 user id's
 -- 1 - 33 res_id
 
-INSERT INTO resource_comments (title, content, user_id, resource_id) 
+INSERT INTO resource_comments (title, content, user_id, resource_id)
 VALUES ('Great resource', 'This resource was really helpful.', 1, 1),
 ('Okay resource', 'This resource could be better.', 2, 2),
 ('Bad resource', 'This resource was not helpful.', 3, 2),
