@@ -11,13 +11,15 @@
   </head>
 
   <body>
-    <header></header>
+    <header><%- include('partials/_nav') %></header>
     <main>
-      <div id="root"></div>
+      <div>
+        <div id="root"></div>
 
-      <h1>Profile Page</h1>
+        <h1>Profile Page</h1>
 
-      <%= users[0].name %>
+        <%= users[0].name %>
+      </div>
     </main>
     <footer></footer>
 
