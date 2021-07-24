@@ -40,10 +40,6 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/api/users");
-<<<<<<< HEAD
-// const widgetsRoutes = require("./routes/api/widgets"); // WILL REMOVE OR UPDATE LATER
-=======
->>>>>>> main
 const profileRoutes = require("./routes/profile");
 const loginRoutes = require("./routes/login");
 const signup = require("./routes/signup");
