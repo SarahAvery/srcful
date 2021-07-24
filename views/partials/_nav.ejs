@@ -18,8 +18,6 @@
         <div class="logo"><a href="/">srcful</a></div>
 
         <ul>
-          <li><a href="/">about</a></li>
-          <li><a href="/">contact</a></li>
           <li><a href="/login" class="login">login</a></li>
           <li><a href="/signup" class="signup">sign up</a></li>
         </ul>
@@ -31,7 +29,24 @@
         <div class="logo"><a href="/">srcful</a></div>
         <ul>
           <input type="text" placeholder="Search.." class="search" />
-          <li><a href="/">about</a></li>
+          <li><a href="/">my resources</a></li>
+          <li>
+            <a href="/">
+              <i class="fas fa-user-alt fa-lg"></i>
+            </a>
+          </li>
+          <li><a href="/logout" class="signup">logout</a></li>
+        </ul>
+      </nav> -->
+
+      <!-- ONCE SET UP TO CHECK IF USER, IMPLEMENT BELOW -->
+
+      <!-- <nav>
+        <div class="logo"><a href="/">srcful</a></div>
+        <ul>
+          <%# if(typeof user !== 'undefined') { %>
+
+          <input type="text" placeholder="Search.." class="search" />
           <li><a href="/">my resources</a></li>
           <li>
             <a href="/">
@@ -39,82 +54,21 @@
               <i class="fas fa-user-alt fa-lg"></i>
             </a>
           </li>
-          <li><a href="/">contact</a></li>
+
+          <%# } else { %>
+
+          <li><a href="/login" class="login">login</a></li>
+          <li><a href="/signup" class="signup">sign up</a></li>
+          <%# } %>
         </ul>
       </nav> -->
-
-      <!-- <nav class="navbar navbar-expand-md navbar-dark bg-success">
-      <a class="navbar-brand" href="/urls">srcful</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/urls">My URLs</a>
-          <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
-        </div>
-      </div>
-  
-      <%# if(typeof user !== 'undefined') { %>
-      <div class="form-inline">
-        <form action="/logout" method="POST" class="form-inline">
-          <label for="user" class="navbar-brand"
-            >Signed In:
-            <span style="text-decoration: underline; padding-left: 5px"
-              ><%# user.email %></span
-            ></label
-          >
-          <button
-            class="btn btn-outline-secondary"
-            name="login"
-            type="submit"
-            style="margin-left: 16px"
-          >
-            Logout
-          </button>
-        </form>
-      </div>
-      <%# } else { %>
-  
-      <div class="form-inline">
-        <a href="/register">
-          <button
-            class="btn btn-primary"
-            name="login"
-            type="submit"
-            style="margin-left: 16px"
-          >
-            Register
-          </button></a
-        >
-        <a href="/login">
-          <button
-            class="btn btn-primary"
-            name="login"
-            type="submit"
-            style="
-              margin-left: 16px;
-              background-color: #f85e37;
-              border-color: #f85e37;
-            "
-          >
-            Login
-          </button></a
-        >
-      </div>
-      <%# } %>
-    </nav> -->
     </header>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      data-auto-a11y="true"
+    ></script>
   </body>
 </html>
