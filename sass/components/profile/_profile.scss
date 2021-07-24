@@ -1,0 +1,131 @@
+.profile-container {
+  width: 100%;
+  margin: 0 5%;
+
+  .info-container {
+    padding: 20px 0;
+
+    // h2 {
+    //   padding: 20px 0;
+    // }
+
+    .personal,
+    .stats-info {
+      padding: 10px 0;
+      border-bottom: 1px solid rgb(125, 201, 194);
+
+      h3 {
+        padding: 5px 0;
+        color: rgb(125, 201, 194);
+        font-weight: bolder;
+      }
+
+      p {
+        padding: 4px 0;
+        font-weight: bold;
+
+        span {
+          font-weight: 400;
+        }
+      }
+
+      .password-box span {
+        margin-top: 6px;
+      }
+    }
+  }
+  .btn-container {
+    width: auto;
+    margin: 10px auto;
+
+    button {
+      outline: none;
+      border-radius: 10px;
+      padding: 8px;
+      min-width: 60px;
+      font-size: 18px;
+      border: none;
+      background-color: rgb(201, 143, 125);
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+    }
+
+    .edit-btn.active {
+      background-color: rgb(125, 201, 194);
+    }
+  }
+
+  // Edit Profile
+  .edit-popout {
+    background: rgb(255, 255, 255);
+    height: 300px;
+    width: 400px;
+    z-index: 12;
+    position: absolute;
+    right: -10px;
+    border: 1px solid rgb(201, 143, 125);
+    border-radius: 8px;
+    margin-top: 10px;
+    opacity: 1;
+    transition: opacity 300 ease-in-out;
+
+    .edit-container {
+      padding: 20px 30px 20px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        color: rgb(125, 201, 194);
+        text-align: center;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        .form-group {
+          width: 80%;
+
+          div {
+            margin: 10px 0;
+          }
+
+          label {
+            margin-top: 16px;
+          }
+          input {
+            margin: 10px 0;
+            padding: 2px;
+            width: 100%;
+            border-radius: 4px;
+            outline: none;
+            border: 0.75px solid #222;
+          }
+
+          .btn-container {
+            width: auto;
+            display: flex;
+            justify-content: center;
+
+            button {
+              outline: none;
+              border-radius: 10px;
+              padding: 8px;
+              min-width: 60px;
+              font-size: 18px;
+              border: none;
+              background-color: rgb(201, 143, 125);
+              color: rgb(255, 255, 255);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .edit-popout.hidden {
+    opacity: 0;
+  }
+}
