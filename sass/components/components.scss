@@ -1,12 +1,15 @@
 //
 //______ LAYOUT
-@import "./layout/layout.scss";
+@import "./layout/_layout.scss";
+@import "./layout/_css_reset.scss";
 
 //
-//______ GENARIC
+//______ GENERIC
+@import "./layout/generic";
 
 //
 //______ NAV
+@import "./nav/nav";
 
 //
 //______ HEADER
@@ -31,3 +34,5 @@
 
 //
 //______ FOOTER
+
+@import "./footer/footer";

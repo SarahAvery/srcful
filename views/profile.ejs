@@ -11,15 +11,23 @@
   </head>
 
   <body>
-    <header></header>
+<<<<<<< HEAD
+    <!-- header -->
+    <%- include('partials/_nav') %>
+=======
+    <header><%- include('partials/_nav') %></header>
+>>>>>>> main
     <main>
-      <div id="root"></div>
+      <div>
+        <div id="root"></div>
 
-      <h1>Profile Page</h1>
+        <h1>Profile Page</h1>
 
-      <%= users[0].name %>
+        <%= users[0].name %>
+      </div>
     </main>
-    <footer></footer>
+    <!-- footer -->
+    <%- include('partials/_footer') %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

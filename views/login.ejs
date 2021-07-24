@@ -14,21 +14,31 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
-  <header></header>
-  <main style="margin: 1em;">
+<<<<<<< HEAD
+ <!-- header -->
+    <%- include('partials/_nav') %>
+=======
+  <header>
+    <%- include('partials/_nav') %>
+  </header>
+>>>>>>> main
+  <main >
     <!-- Login Form -->
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-      <div class="">
-        <label for="email">Email Address</label>
-        <input class="" type="email" name="email" placeholder="Enter email" style="width: 300px; margin-bottom: 1em">
-        <label for="password">Password</label>
-        <input class="" type="password" name="password" placeholder="Password" style="width: 300px; margin-bottom: 1em">
-        <button type="submit" class="">Login</button>
-      </div>
-    </form>
+    <div>
+      <h2>Login</h2>
+      <form action="/login" method="POST">
+        <div class="">
+          <label for="email">Email Address</label>
+          <input class="" type="email" name="email" placeholder="Enter email" style="width: 300px; margin-bottom: 1em">
+          <label for="password">Password</label>
+          <input class="" type="password" name="password" placeholder="Password" style="width: 300px; margin-bottom: 1em">
+          <button type="submit" class="">Login</button>
+        </div>
+      </form>
+    </div>
   </main>
-  <footer></footer>
+  <!-- footer -->
+  <%- include('partials/_footer') %>
  
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
