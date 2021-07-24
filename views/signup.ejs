@@ -17,19 +17,29 @@
 
       <div class="signup-form">
         <h2>Sign up</h2>
-        <form class="form" method="POST" action="/register">
+        <form class="form" method="POST" action="/signup">
           <div class="form-group">
+            <div>
+              <label for="text">username:</label>
+              <input
+                type="username"
+                name="username"
+                placeholder="Username"
+                required
+              />
+            </div>
             <div>
               <label for="email">email:</label>
               <input
                 type="email"
                 name="email"
                 placeholder="email@address.com"
+                required
               />
             </div>
             <div>
               <label for="password">password: </label>
-              <input type="password" name="password" />
+              <input type="password" name="password" required/>
             </div>
             <div class="btn-container">
               <button type="submit">sign up</button>
