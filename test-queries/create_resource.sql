@@ -1,4 +1,5 @@
 -- Check if user is logged in somewhere in JS file, or only display/allow access to url if logged in
+-- i.e. check if req.session.userID != null
 
 -- Create new resource using form data (function paramater -> newResource)
 
