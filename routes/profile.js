@@ -11,7 +11,8 @@ module.exports = () => {
       .then((data) => data.json())
       .then((json) => {
         if (json.users) {
-          res.render("profile", { users: json.users });
+          const templateVars = { users: json.users };
+          res.render("profile", templateVars);
         } else {
           res.redirect("/");
         }
@@ -20,3 +21,20 @@ module.exports = () => {
 
   return router;
 };
+
+// module.exports = () => {
+//   router.get("/:id", (req, res) => {
+//     fetch(process.env.API_URL + "/users")
+//       .then((data) => data.json())
+//       .then((json) => {
+//         if (json.users) {
+//           const templateVars = { users: json.users };
+//           res.render("profile", templateVars);
+//         } else {
+//           res.redirect("/");
+//         }
+//       });
+//   });
+
+//   return router;
+// };

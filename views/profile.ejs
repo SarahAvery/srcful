@@ -14,12 +14,54 @@
     <!-- header -->
     <%- include('partials/_nav') %>
     <main>
-      <div>
-        <div id="root"></div>
+      <div class="profile-container">
+        <div class="edit-popout">
+          <div class="edit-container">
+            <h2>update profile</h2>
+            <form class="form" method="POST" action="/register">
+              <div class="form-group">
+                <div>
+                  <label for="username">username:</label>
+                  <input type="text" name="username" placeholder="username" />
+                </div>
+                <div>
+                  <label for="password">password: </label>
+                  <input type="password" name="password" />
+                </div>
+                <div class="btn-container">
+                  <button type="submit">sign up</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
 
-        <h1>Profile Page</h1>
+        <h1>My Profile</h1>
 
-        <%= users[0].name %>
+        <div class="info-container">
+          <!-- <h2>about me:</h2> -->
+
+          <div class="personal">
+            <h3 class="subtitle">personal</h3>
+            <p class="username-box">
+              username: <span><%= users[9].username %></span>
+            </p>
+            <p class="email-box">email:<span><%= users[9].email %></span></p>
+            <p class="password-box">password: <span>********</span></p>
+          </div>
+          <div class="stats-info">
+            <h3 class="subtitle">my stats</h3>
+            <p class="resources">number of resources: <span>5</span></p>
+            <p class="my-likes">resouces i've liked: <span>9</span></p>
+            <p class="created">
+              member since:
+              <span>june 26th, 2021 <%= users[9].created_at %></span>
+            </p>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button class="edit-btn" type="button">edit</button>
+        </div>
       </div>
     </main>
     <!-- footer -->
