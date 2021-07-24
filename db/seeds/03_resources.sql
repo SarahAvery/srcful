@@ -32,8 +32,11 @@ VALUES ('Cute otters', 'Otters at the Toronto zoo', 'https://www.torontozoo.com/
  ('maecenas tristique est et', 'Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', 'http://jsfiddle.net/', 14),
  ('penatibus et magnis', 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.', 'https://jquery.com/', 4),
  ('Mongo DB', 'While a table might seem like a good place to store data, as you can see from the example above, there are fields in this data set that require multiple values and would not be easy to search or display if modeled in a single column (for example – size and tags).
+
 In a SQL database you might solve this problem by creating a relational table.
+
 In MongoDB, data is stored as documents. These documents are stored in MongoDB in JSON (JavaScript Object Notation) format. JSON documents support embedded fields, so related data and lists of data can be stored with the document instead of an external table.
+
 JSON is formatted as name/value pairs. In JSON documents, fieldnames and values are separated by a colon, fieldname and value pairs are separated by commas, and sets of fields are encapsulated in “curly braces” ({}).', 'https://www.mongodb.com/', 15),
  ('Intro to SQL', 'Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum.', 'https://www.w3schools.com/sql/sql_intro.asp', 4),
  ('arcu libero rutrum', 'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'https://www.barnesandnoble.com/', 7),

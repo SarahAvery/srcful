@@ -11,6 +11,8 @@ CREATE TABLE resources (
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- creator_id can not be null
+
   -- category_id --> JOIN resource_catergories ON resources.id = resource_categories.resource_id
 
 /*
