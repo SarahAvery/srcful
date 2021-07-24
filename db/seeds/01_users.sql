@@ -2,11 +2,9 @@
 /* 
   users (
   id uuid DEFAULT uuid_generate_v1() PRIMARY KEY NOT NULL,
-
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
@@ -47,4 +45,3 @@ VALUES ('alice1', 'alice_monte@gmail.com', 'password'),
  ('dsunderlandr', 'lbrixeyr@nydailynews.com', 'IjxYpUgrDq'),
  ('msustins', 'dmapledorums@google.de', 'nhd8ZjVk6w'),
  ('tlovet', 'bthreadgoldt@kickstarter.com', 'jq2ttZb');
-

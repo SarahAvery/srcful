@@ -28,4 +28,3 @@ VALUES ('nature', 'Resources relating to nature.'),
 ('Dev Life', 'Duis mattis egestas metus.'),
 ('SQL','Mauris sit amet eros.'),
 ('Java', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor.');
-
