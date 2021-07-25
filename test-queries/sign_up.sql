@@ -2,10 +2,10 @@
 
 SELECT username, email
 FROM users
-WHERE username = '${user.name}' || email = '${user.email}';
+WHERE username = '${user.name}' OR email = '${user.email}';
 
 -- If neither exist, add new user to database
 
-INSERT INTO users (username, email, password) 
-VALUES ('${user.name}', '${user.email}', '$(user.password}') 
+INSERT INTO users (username, email, password)
+VALUES ('${user.name}', '${user.email}', '$(user.password}')
 RETURNING *;
