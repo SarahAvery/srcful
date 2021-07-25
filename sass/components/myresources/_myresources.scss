@@ -37,4 +37,98 @@
       }
     }
   }
+
+  .resources {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+
+    .card {
+      width: 350px;
+      margin: 10px auto;
+      border: 1px solid lightgrey;
+      border-radius: 4px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .card .title,
+    .main,
+    .footer {
+      margin: 5px;
+      /*   background: lightgreen; */
+      width: 100%;
+    }
+
+    h3,
+    .description {
+      text-transform: capitalize;
+    }
+
+    .description button {
+      margin-top: 8px;
+    }
+
+    .iframe-container {
+      padding: 5px 0;
+    }
+    iframe {
+      width: 100%;
+      height: 320px;
+      border-radius: 4px;
+    }
+
+    /* READ MORE  */
+
+    .full {
+      background: lightgrey;
+      padding: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 0.5px solid black;
+      border-radius: 4px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid lightgrey;
+      padding-top: 5px;
+    }
+
+    .icons a {
+      color: black;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      /*   border: 1px solid pink; */
+      flex-grow: 1;
+    }
+
+    .badge {
+      padding: 4px;
+      margin: 4px;
+      border: 1px solid grey;
+      border-radius: 10px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .php {
+      background: rgb(123, 25, 209, 0.5);
+    }
+    .js {
+      background: rgb(125, 197, 219, 0.5);
+    }
+
+    .wordpress {
+      background: rgb(125, 179, 174, 0.5);
+    }
+  }
 }
