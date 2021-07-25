@@ -4,7 +4,3 @@
 SELECT id, username, email, password
 FROM users
 WHERE username = '${user.name}' || email = '${user.email}';
-
-
-
-
