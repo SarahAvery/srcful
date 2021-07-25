@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 // app.set("view engine", "ejs");
 
@@ -21,27 +21,30 @@ module.exports = (db) => {
     //If inputs blank, error (currently required in html)
 
     // Else store new user in database: login query
-    db.query(`
+    db.query(
+      `
       INSERT INTO users(username, email, password)
       VALUES ($1, $2, $3)
       RETURNING *;
-      `, [user.username, user.email, user.password])
-      .then(data => {
+      `,
+      [user.username, user.email, user.password]
+    )
+      .then((data) => {
         const newUser = data.rows[0];
         if (!newUser) {
-          res.send({error: "error"});
+          res.send({ error: "error" });
         } else {
           req.session.userId = user.id;
           res.send("🤗");
         }
       })
-      .catch(e => {
+      .catch((e) => {
         res.status(500);
         res.send(e);
-      })
+      });
 
     // Redirect to /myresources
-    res.redirect('/my-resources');
+    res.redirect("/my-resources");
   });
   return router;
 };

@@ -36,7 +36,7 @@
         $(".save-btn").toggleClass("active");
       });
 
-    // My Resource Edit and Create New Buttons
+    // My Resource Edit, Create New, Full Article Buttons
     $(".myresource-container")
       .find(".create-new")
       .on("click", function () {
@@ -49,6 +49,11 @@
         $(".edit-btn").toggleClass("active");
       });
 
+    $(".myresource-container")
+      .find(".full")
+      .on("click", function (e) {
+        $(e.target).toggleClass("active");
+      });
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {
