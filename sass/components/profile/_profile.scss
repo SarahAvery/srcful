@@ -11,11 +11,11 @@
     .personal,
     .stats-info {
       padding: 10px 0;
-      border-bottom: 1px solid rgb(125, 201, 194);
+      border-bottom: 1px solid rgb(38, 116, 135);
 
       h3 {
         padding: 5px 0;
-        color: rgb(125, 201, 194);
+        color: rgb(38, 116, 135);
         font-weight: bolder;
       }
 
@@ -44,13 +44,13 @@
       min-width: 60px;
       font-size: 18px;
       background-color: transparent;
-      border: 1px solid rgb(201, 143, 125);
-      color: rgb(201, 143, 125);
+      border: 1px solid rgb(176, 141, 125);
+      color: rgb(176, 141, 125);
       cursor: pointer;
     }
 
     .edit-btn.active {
-      background-color: rgb(201, 143, 125);
+      background-color: rgb(176, 141, 125);
       color: rgb(255, 255, 255);
     }
   }
@@ -63,7 +63,7 @@
     z-index: 12;
     position: absolute;
     right: -10px;
-    border: 1px solid rgb(125, 201, 194);
+    border: 1px solid rgb(38, 116, 135);
     border-radius: 8px;
     margin-top: 10px;
     opacity: 1;
@@ -77,7 +77,7 @@
       align-items: center;
 
       h2 {
-        color: rgb(125, 201, 194);
+        color: rgb(38, 116, 135);
         text-align: center;
       }
       form {
@@ -116,12 +116,12 @@
               min-width: 60px;
               font-size: 18px;
               background-color: none;
-              border: 1px solid rgb(201, 143, 125);
-              color: rgb(201, 143, 125);
+              border: 1px solid rgb(176, 141, 125);
+              color: rgb(176, 141, 125);
             }
 
             .save-btn.active {
-              background-color: rgb(201, 143, 125);
+              background-color: rgb(176, 141, 125);
               color: rgb(255, 255, 255);
             }
           }
