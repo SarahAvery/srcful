@@ -26,14 +26,13 @@ module.exports = (db) => {
   // router.get("/:id", (req, res) => {
   //   console.log(req.params);
   //   db.query(`SELECT * FROM users WHERE users.id = ${req.params.id}`)
-  //     .then(data => {
+  //     .then((data) => {
   //       console.log(data);
-  //       const users = data.rows;
-  //       res.json({users});
-  //     }).catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
+  //       const users = data.rows[0];
+  //       res.json({ users });
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
   //     });
   // });
 
