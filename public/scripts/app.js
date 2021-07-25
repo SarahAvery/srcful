@@ -33,6 +33,17 @@
         }
       });
 
+    // Profile Save Button CSS
+    $(".profile-container")
+      .find(".save-btn")
+      .on("click", function () {
+        if ($(".save-btn").hasClass("active")) {
+          $(".save-btn").removeClass("active");
+        } else {
+          $(".save-btn").addClass("active");
+        }
+      });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {

@@ -119,6 +119,10 @@
               background-color: rgb(201, 143, 125);
               color: rgb(255, 255, 255);
             }
+
+            .save-btn.active {
+              background-color: rgb(125, 201, 194);
+            }
           }
         }
       }
