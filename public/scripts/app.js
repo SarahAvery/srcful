@@ -15,11 +15,7 @@
     $(".profile-container")
       .find(".edit-btn")
       .on("click", function () {
-        if ($(".edit-btn").hasClass("active")) {
-          $(".edit-btn").removeClass("active");
-        } else {
-          $(".edit-btn").addClass("active");
-        }
+        $(".edit-btn").toggleClass("active");
       });
 
     // Popout Edit
@@ -37,11 +33,20 @@
     $(".profile-container")
       .find(".save-btn")
       .on("click", function () {
-        if ($(".save-btn").hasClass("active")) {
-          $(".save-btn").removeClass("active");
-        } else {
-          $(".save-btn").addClass("active");
-        }
+        $(".save-btn").toggleClass("active");
+      });
+
+    // My Resource Edit and Create New Buttons
+    $(".myresource-container")
+      .find(".create-new")
+      .on("click", function () {
+        $(".create-new").toggleClass("active");
+      });
+
+    $(".myresource-container")
+      .find(".edit-btn")
+      .on("click", function () {
+        $(".edit-btn").toggleClass("active");
       });
 
     // DONT REMOVE BELOW CODE PLEASE
