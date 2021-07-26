@@ -15,7 +15,7 @@ module.exports = (db) => {
     .then(data => {
       const user = data.rows[0];
       if (bcrypt.compareSync(password, user.password)) {
-        //create cookie session: req.session.userId = user.id;
+        req.session.userId = user.id;
         res.redirect("/my-resources");
       } else {
         //invalid password
