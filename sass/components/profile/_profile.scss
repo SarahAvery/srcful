@@ -1,12 +1,9 @@
+@import "../mixins.scss";
 .profile-container {
   @include main-container;
 
   .info-container {
     padding: 20px 0;
-
-    // h2 {
-    //   padding: 20px 0;
-    // }
 
     .personal,
     .stats-info {
