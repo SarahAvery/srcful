@@ -54,6 +54,15 @@
       .on("click", function (e) {
         $(e.target).toggleClass("active");
       });
+
+    // Resource/New Create Button
+
+    $(".new-form")
+      .find(".create-btn")
+      .on("click", function () {
+        $(".create-btn").addClass("active");
+      });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {
