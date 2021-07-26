@@ -39,7 +39,7 @@
         min-width: 100%;
         border-radius: 4px;
         outline: none;
-        border: 0.75px solid #222;
+        border: 0.75px solid rgb(34, 34, 34);
       }
 
       div.categories {
@@ -55,7 +55,7 @@
           cursor: pointer;
           display: inline-block;
           padding: 5px 50px 5px 10px;
-          border: 1px solid #ccc;
+          border: 1px solid rgb(204, 204, 204);
           border-radius: 4px;
         }
 
@@ -88,6 +88,22 @@
           width: 60%;
           margin-left: 40%;
           border-radius: 4px;
+          overflow-y: scroll;
+          max-height: 150px;
+
+          &::-webkit-scrollbar {
+            width: 8px;
+            height: 100%;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: rgb(38, 116, 135);
+            border-radius: 4px;
+
+            &:hover {
+              background: rgb(176, 141, 125);
+            }
+          }
         }
 
         .dropdown-check-list ul.items li {

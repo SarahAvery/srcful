@@ -42,35 +42,19 @@
               <div id="list1" class="dropdown-check-list" tabindex="100">
                 <span class="anchor">categories</span>
                 <ul class="items">
-                  <li>
-                    <input type="checkbox" name="js" value="js" id="js" />
-                    <label for="js">javascript</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="js" value="js" id="webhook" />
-                    <label for="webhook">webhook</label>
-                  </li>
+                  <% categories.forEach(category => { %>
                   <li>
                     <input
                       type="checkbox"
-                      name="js"
-                      value="js"
-                      id="wordpress"
+                      name="<%= category.title %>"
+                      value="<%= category.title %>"
+                      id="<%= category.title %>"
                     />
-                    <label for="wordpress">wordpress</label>
+                    <label for="<%= category.title %>"
+                      ><%= category.title %></label
+                    >
                   </li>
-                  <li>
-                    <input type="checkbox" name="js" value="js" id="oauth" />
-                    <label for="oauth">oauth</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="js" value="js" id="devlife" />
-                    <label for="devlife">devlife</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="js" value="js" id="json" />
-                    <label for="json">json</label>
-                  </li>
+                  <% }) %>
                 </ul>
               </div>
             </div>
