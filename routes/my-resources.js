@@ -12,5 +12,9 @@ module.exports = () => {
   router.get("/", (req, res) => {
     res.render("my-resources");
   });
+
+  router.get("/new", (req, res) => {
+    res.render("resources_new");
+  });
   return router;
 };
