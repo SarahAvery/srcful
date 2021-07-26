@@ -18,44 +18,64 @@
 
     <main>
       <!-- Login Form -->
-      <div class="login-form">
+      <div class="new-form">
         <h2>Create New Resource</h2>
         <form action="/my-resources/new" method="POST">
           <div class="form-group">
             <div>
               <label for="title">title:</label>
-              <input
-                type="text"
-                name="title"
-                placeholder="Title"
-              />
+              <input type="text" name="title" placeholder="title" />
             </div>
             <div>
               <label for="description">description:</label>
-              <input
-                type="text"
-                name="description"
-                placeholder="Description"
-              />
+              <input type="text" name="description" placeholder="description" />
             </div>
             <div>
               <label for="url">url:</label>
-              <input
-                type="text"
-                name="url"
-                placeholder="Url"
-              />
+              <input type="text" name="url" placeholder="https://" />
             </div>
             <div>
-              <label for="imageURL">imageURL:</label>
-              <input
-                type="text"
-                name="imageURL"
-                placeholder="imageURL"
-              />
+              <label for="imageURL">image uRL:</label>
+              <input type="text" name="imageURL" placeholder="https://" />
+            </div>
+            <div class="categories">
+              <div id="list1" class="dropdown-check-list" tabindex="100">
+                <span class="anchor">categories</span>
+                <ul class="items">
+                  <li>
+                    <input type="checkbox" name="js" value="js" id="js" />
+                    <label for="js">javascript</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="js" value="js" id="webhook" />
+                    <label for="webhook">webhook</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      name="js"
+                      value="js"
+                      id="wordpress"
+                    />
+                    <label for="wordpress">wordpress</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="js" value="js" id="oauth" />
+                    <label for="oauth">oauth</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="js" value="js" id="devlife" />
+                    <label for="devlife">devlife</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="js" value="js" id="json" />
+                    <label for="json">json</label>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="btn-container">
-              <button type="submit" class="">Submit</button>
+              <button type="submit" class="create-btn">create</button>
             </div>
           </div>
         </form>
@@ -66,5 +86,6 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/dropdown.js"></script>
   </body>
 </html>
