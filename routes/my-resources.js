@@ -2,13 +2,26 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
+<<<<<<< HEAD
 module.exports = (db) => {
+=======
+module.exports = () => {
+>>>>>>> main
   router.get("/", (req, res) => {
     res.render("my-resources");
   });
 
   router.get("/new", (req, res) => {
-    res.render("resources_new");
+    fetch(process.env.API_URL + "/categories")
+      .then((data) => data.json())
+      .then((json) => {
+        if (json.categories) {
+          const templateVars = { categories: json.categories };
+          res.render("resources_new", templateVars);
+        } else {
+          res.redirect("/");
+        }
+      });
   });
 
   router.post("/new", (req, res) => {
