@@ -2,11 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
-<<<<<<< HEAD
 module.exports = (db) => {
-=======
-module.exports = () => {
->>>>>>> main
   router.get("/", (req, res) => {
     res.render("my-resources");
   });
