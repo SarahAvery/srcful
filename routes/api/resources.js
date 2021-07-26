@@ -10,7 +10,10 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM resources LIMIT 8;`)
+    const queryString = `SELECT users.username AS username, resources.*
+    FROM resources
+    JOIN users ON creator_id = users.id LIMIT 8;`;
+    db.query(queryString)
       .then((data) => {
         const resources = data.rows;
         res.json({ resources });

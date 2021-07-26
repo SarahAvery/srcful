@@ -46,6 +46,7 @@
 
       .main {
         display: block;
+        margin: 5px;
 
         .img-container {
           padding: 5px 0;
@@ -56,34 +57,67 @@
             height: 320px;
           }
         }
-        .btn-container {
-          margin: 5px;
-          display: flex;
-          justify-content: center;
 
-          .full {
-            border: 1px solid rgb(38, 116, 135);
-            color: rgb(38, 116, 135);
-          }
+        .description {
+          margin: 10px 5px;
+          text-transform: capitalize;
 
-          .full.active {
-            background-color: rgb(38, 116, 135);
-            color: rgb(255, 255, 255);
+          .btn-container {
+            margin: 5px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+
+            .full {
+              border: 1px solid rgb(38, 116, 135);
+              color: rgb(38, 116, 135);
+            }
+
+            .full.active {
+              background-color: rgb(38, 116, 135);
+              color: rgb(255, 255, 255);
+            }
           }
         }
       }
 
-      .description {
-        text-transform: capitalize;
-      }
+      .footer {
+        margin: 5px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border-top: 1px solid rgb(38, 116, 135);
+        padding-top: 5px;
 
-      .description button {
-        margin-top: 8px;
-      }
+        .badges {
+          display: flex;
+          flex-wrap: wrap;
+          flex-grow: 1;
 
-      .img-container {
-        img {
-          width: 200px;
+          .badge {
+            padding: 4px;
+            margin: 4px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            min-width: 30px;
+            text-align: center;
+          }
+        }
+        .icons {
+          padding-top: 5px;
+
+          a {
+            color: black;
+            .fa-comment-dots {
+              color: rgb(38, 116, 135);
+              fill: rgb(38, 116, 135);
+            }
+
+            .fa-heart {
+              color: rgb(176, 141, 125);
+              fill: rgb(176, 141, 125);
+            }
+          }
         }
       }
     }
@@ -96,51 +130,13 @@
 
 /* READ MORE  */
 
-.full {
-  background: lightgrey;
-  padding: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  border: 0.5px solid black;
-  border-radius: 4px;
-}
-
 /* FOOTER */
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border-top: 1px solid lightgrey;
-  padding-top: 5px;
-}
-
-.icons a {
-  color: black;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  /*   border: 1px solid pink; */
-  flex-grow: 1;
-}
-
-.badge {
-  padding: 4px;
-  margin: 4px;
-  border: 1px solid grey;
-  border-radius: 10px;
-  /*   min-width: 30px; */
-  text-align: center;
-}
 
 .php {
   background: rgb(123, 25, 209, 0.5);
 }
 .js {
   background: rgb(125, 197, 219, 0.5);
-  width: 24px;
 }
 
 .wordpress {
