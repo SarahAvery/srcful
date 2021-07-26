@@ -10,11 +10,11 @@
 
 --  1 - 33 usser.id
 
-INSERT INTO resources (title, description, url, creator_id)
-VALUES ('Cute otters', 'Otters at the Toronto zoo', 'https://www.torontozoo.com/img/1200/20190417030828061NorthAmericanRiverOtter2.jpg', 9),
-('Auston Matthews Headshot', 'Offical NHL headshot for player Auston Matthews of the Toronto Maple Leafs', 'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479318.jpg', 18),
-('Grizzly Giant Sequoia Tree', '26th largest sequoia tree in the world, located at Yosemite Park', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/Grizzly_Giant_Mariposa_Grove.jpg', 21),
- ('cursus id turpis integer', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.', 'https://preactjs.com/' , 9),
+INSERT INTO resources (title, description, url, image_url, creator_id)
+VALUES ('Cute otters', 'Otters at the Toronto zoo', 'https://www.torontozoo.com/img/1200/20190417030828061NorthAmericanRiverOtter2.jpg', 'https://www.torontozoo.com/img/1200/20190417030828061NorthAmericanRiverOtter2.jpg',9),
+('Auston Matthews Headshot', 'Offical NHL headshot for player Auston Matthews of the Toronto Maple Leafs', 'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479318.jpg', 'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479318.jpg', 18),
+('Grizzly Giant Sequoia Tree', '26th largest sequoia tree in the world, located at Yosemite Park', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/Grizzly_Giant_Mariposa_Grove.jpg', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/Grizzly_Giant_Mariposa_Grove.jpg', 21),
+ ('cursus id turpis integer', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.', 'https://preactjs.com/' ,'https://images.unsplash.com/photo-1592609931095-54a2168ae893?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 9),
  ('morbi sem mauris laoreet ut', 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.', 'https://www.barnesandnoble.com/', 16),
  ('Guide to AWS', 'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', 'https://docs.aws.amazon.com/index.html?nc2=h_ql_doc', 2),
  ('cum sociis natoque penatibus et magnis', 'Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.', 'https://www.barnesandnoble.com/', 28),

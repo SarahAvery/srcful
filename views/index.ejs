@@ -16,10 +16,62 @@
     <!-- header -->
     <%- include('partials/_nav') %>
     <main>
-      <div>
-        <div id="root"></div>
-
+      <div class="home-page">
         <h1>Home Page</h1>
+
+        <div class="card-container">
+          <% resources.forEach(resource => { %>
+          <p><%# resource.title %></p>
+          <div class="card">
+            <div class="title">
+              <h3><%= resource.title %></h3>
+              <p>posted by: username</p>
+            </div>
+            <div class="main">
+              <div></div>
+                <p>
+                  <a href="<%= resource.url %>"
+                    target=”_blank”><i class="fas fa-link"></i
+                  ></a>
+                </p>
+              </div>
+              <div class="iframe-container">
+                <img src="<%= resource.image_url %>" alt="">
+                <!-- <iframe
+                  src="<%= resource.url %>"
+                  title="preact"
+                  frameborder="0"
+                  scrolling="no"
+                > -->
+                </iframe>
+              </div>
+              <div class="description">
+                <p class="teaser">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                  ipsum dolor elit...
+                </p>
+                <button class="full">full article</button>
+              </div>
+            </div>
+            <div class="footer">
+              <p class="badges">
+                <span class="badge php">Python</span>
+                <span class="badge js">JS</span>
+                <span class="badge wordpress">wordPress</span>
+              </p>
+              <p class="icons">
+                <a href="/"
+                  ><i class="fas fa-comment-dots"><sup>5</sup></i></a
+                >
+                <a href="/">
+                  <i class="fas fa-heart"><sup>9</sup></i></a
+                >
+              </p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
       </div>
     </main>
 

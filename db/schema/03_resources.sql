@@ -6,6 +6,7 @@ CREATE TABLE resources (
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   url VARCHAR(255),
+  image_url VARCHAR(255) ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE

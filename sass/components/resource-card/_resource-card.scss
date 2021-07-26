@@ -1,0 +1,7 @@
+.home-page {
+  @include main-container;
+
+  .card-container {
+    background: lightblue;
+  }
+}
