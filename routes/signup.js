@@ -19,7 +19,6 @@ module.exports = (db) => {
     //If username taken, error
     //If email already registered, error
     //If inputs blank, error (currently required in html)
-
     // Else store new user in database: register query
     db.query(
       `
@@ -29,22 +28,20 @@ module.exports = (db) => {
       `,
       [user.username, user.email, user.password]
     )
-      .then((data) => {
-        const newUser = data.rows[0];
-        if (!newUser) {
-          res.send({ error: "error" });
-        } else {
-          req.session.userId = user.id;
-          res.send("🤗");
-        }
-      })
-      .catch((e) => {
-        res.status(500);
-        res.send(e);
-      });
+    .then((data) => {
+      const newUser = data.rows[0];
+      if (!newUser) {
+        res.send({ error: "error" });
+      } else {
+        req.session.userId = newUser.id;
+        res.redirect("/my-resources");
+      }
+    })
+    .catch((e) => {
+      res.status(500);
+      res.send(e.stack);
+    });
 
-    // Redirect to /myresources
-    res.redirect("/my-resources");
   });
   return router;
 };
