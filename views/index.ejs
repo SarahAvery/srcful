@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      data-auto-a11y="true"
+    ></script>
     <title>Home Page</title>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -21,29 +25,23 @@
 
         <div class="card-container">
           <% resources.forEach(resource => { %>
-          <p><%# resource.title %></p>
           <div class="card">
             <div class="title">
               <h3><%= resource.title %></h3>
               <p>posted by: username</p>
+              <div class="web-link">
+                <a href="<%= resource.url %>" target="_blank"
+                  ><i class="fas fa-link"></i
+                ></a>
+              </div>
             </div>
             <div class="main">
-              <div></div>
-                <p>
-                  <a href="<%= resource.url %>"
-                    target=”_blank”><i class="fas fa-link"></i
-                  ></a>
-                </p>
-              </div>
-              <div class="iframe-container">
-                <img src="<%= resource.image_url %>" alt="">
-                <!-- <iframe
-                  src="<%= resource.url %>"
-                  title="preact"
-                  frameborder="0"
-                  scrolling="no"
-                > -->
-                </iframe>
+              <div class="img-container">
+                <% if ( resource.image_url !== null) { %>
+                <img src="<%= resource.image_url %>" alt="" />
+                <% } else { %>
+                <img src="https://source.unsplash.com/random/600x600" alt="" />
+                <% } %>
               </div>
               <div class="description">
                 <p class="teaser">
@@ -51,7 +49,9 @@
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua
                   ipsum dolor elit...
                 </p>
-                <button class="full">full article</button>
+                <div class="btn-container">
+                  <a class="button full">full article</a>
+                </div>
               </div>
             </div>
             <div class="footer">
@@ -61,12 +61,8 @@
                 <span class="badge wordpress">wordPress</span>
               </p>
               <p class="icons">
-                <a href="/"
-                  ><i class="fas fa-comment-dots"><sup>5</sup></i></a
-                >
-                <a href="/">
-                  <i class="fas fa-heart"><sup>9</sup></i></a
-                >
+                <a href="/"><i class="fas fa-comment-dots"></i><sup>5</sup></a>
+                <a href="/"> <i class="fas fa-heart"></i><sup>9</sup></a>
               </p>
             </div>
           </div>
