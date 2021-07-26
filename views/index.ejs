@@ -44,11 +44,7 @@
                 <% } %>
               </div>
               <div class="description">
-                <p class="teaser">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                  ipsum dolor elit...
-                </p>
+                <p class="teaser"><%= resource.substring %>...</p>
                 <div class="btn-container">
                   <a class="button full">full article</a>
                 </div>
@@ -61,8 +57,20 @@
                 <span class="badge wordpress">wordPress</span>
               </p>
               <p class="icons">
-                <a href="/"><i class="fas fa-comment-dots"></i><sup>5</sup></a>
-                <a href="/"> <i class="fas fa-heart"></i><sup>9</sup></a>
+                <a href="/"
+                  ><i class="fas fa-comment-dots"></i
+                  ><sup>
+                    <% if ( resource.commentCount !== 0) { %> <%=
+                    resource.commentCount %> <% } else { %> <% } %>
+                  </sup></a
+                >
+                <a href="/">
+                  <i class="fas fa-heart"></i
+                  ><sup>
+                    <% if ( resource.commentCount !== 0) { %> <%=
+                    resource.commentCount %> <% } else { %> <% } %></sup
+                  ></a
+                >
               </p>
             </div>
           </div>
