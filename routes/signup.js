@@ -20,7 +20,7 @@ module.exports = (db) => {
     //If email already registered, error
     //If inputs blank, error (currently required in html)
 
-    // Else store new user in database: login query
+    // Else store new user in database: register query
     db.query(
       `
       INSERT INTO users(username, email, password)
