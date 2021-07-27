@@ -86,6 +86,15 @@
         // We need to do something with the value!!
       });
 
+    // Create New Resource Artile Textarea
+
+    $("#article-div")
+      .find("textarea")
+      .on("click", () => {
+        $("#article-div").css({ width: "600px", margin: "0 -50%" });
+        $("textarea").css({ width: "600px", height: "300px" });
+      });
+
     // // Like button
     // $(".like-btn").on("click", function(e) {
     //     $(this).toggleClass("liked");
