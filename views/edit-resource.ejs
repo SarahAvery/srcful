@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="icon" href="/favicon_io/favicon-16x16.png" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <title>Edit Resource</title>
+  </head>
+
+  <body>
+    <!-- header -->
+    <%- include("partials/_nav") %>
+    <main>
+      <div class="profile-container">
+        <h1>Resource</h1>
+
+        <div class="info-container">
+          <div class="edit-popout hidden">
+            <div class="edit-container">
+              <h2>Edit Resource</h2>
+              <p id="errorMessage" class="hidden"></p>
+              <form class="form" method="POST" action="/my-resources/:id/edit">
+                <div class="form-group">
+                  <div>
+                    <label for="description">new description:</label>
+                    <textarea name="description" placeholder="description" required></textarea>
+                  </div>
+                  <div>
+                    <label for="image_url">new image URL:</label>
+                    <input type="text" name="image_url" placeholder="image URL" required/>
+                  </div>
+                  <div class="btn-container">
+                    <button class="save-btn" type="submit">save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        <div class="personal">
+          <h3 class="subtitle">Info</h3>
+          <p class="username-box">
+            Title: <span><%= resource.title %></span>
+          </p>
+          <p class="username-box">
+            Description: <span><%= resource.description %></span>
+          </p>
+          <p class="username-box">
+            URL: <span><%= resource.url %></span>
+          </p>
+          <p class="username-box">
+            Image URL: <span><%= resource.image_url %></span>
+          </p>
+          <p class="username-box">
+            Categories: <span><%= resource.categories %></span>
+          </p>
+        </div>
+        <div class="btn-container">
+          <button class="edit-btn">edit</button>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <%- include("partials/_footer") %>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </body>
+</html>
