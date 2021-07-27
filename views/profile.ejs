@@ -13,29 +13,9 @@
 
   <body>
     <!-- header -->
-    <%- include('partials/_nav') %>
+    <%- include("partials/_nav") %>
     <main>
       <div class="profile-container">
-        <div class="edit-popout hidden">
-          <div class="edit-container">
-            <h2>update profile</h2>
-            <form class="form" method="POST" action="">
-              <div class="form-group">
-                <div>
-                  <label for="username">new username:</label>
-                  <input type="text" name="username" placeholder="username" />
-                </div>
-                <div>
-                  <label for="password">new password:</label>
-                  <input type="password" name="password" />
-                </div>
-                <div class="btn-container">
-                  <button class="save-btn" type="submit">save</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
 
         <h1>My Profile</h1>
 
@@ -45,28 +25,25 @@
           <div class="personal">
             <h3 class="subtitle">personal</h3>
             <p class="username-box">
-              username: <span><%= users[9].username %></span>
+              username: <span><%= user.username %></span>
             </p>
-            <p class="email-box">email:<span><%= users[9].email %></span></p>
-            <p class="password-box">password: <span>********</span></p>
+            <p class="email-box">email: <span><%= user.email %></span></p>
+            <p class="password-box">password: <span><%= user.password.slice(0, 1).concat("*****").concat(user.password.slice(user.password.length - 1)) %></span></p>
           </div>
           <div class="stats-info">
             <h3 class="subtitle">my stats</h3>
-            <p class="resources">number of resources: <span>5</span></p>
-            <p class="my-likes">resouces i've liked: <span>9</span></p>
-            <p class="created">
-              member since:
-              <span>june 26th, 2021 <%= users[9].created_at %></span>
-            </p>
+            <p class="resources">number of resources: <span><%= created_resources %></span></p>
+            <p class="my-likes">resources i've liked: <span><%= user_likes %></span></p>
+            <p class="created">member since: <span><%= user.created_at.slice(0,10) %></span></p>
           </div>
         </div>
         <div class="btn-container">
-          <button class="edit-btn" type="button">edit</button>
+          <form method="GET" action="/edit_profile"><td><input type="submit" value="Edit"></td></form>
         </div>
       </div>
     </main>
     <!-- footer -->
-    <%- include('partials/_footer') %>
+    <%- include("partials/_footer") %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

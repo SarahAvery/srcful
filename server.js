@@ -52,6 +52,7 @@ const indexRoutes = require("./routes/api/resources");
 const categoryRoutes = require("./routes/api/categorys");
 
 const profileRoutes = require("./routes/profile");
+const editProfileRoutes = require("./routes/edit_profile");
 const loginRoutes = require("./routes/login");
 const signup = require("./routes/signup");
 const myResources = require("./routes/my-resources");
@@ -70,6 +71,7 @@ app.use("/api/categories", categoryRoutes(db));
 
 // html routes
 app.use("/profile", profileRoutes(db));
+app.use("/edit_profile", editProfileRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/signup", signup(db));
 app.use("/my-resources", myResources(db));
