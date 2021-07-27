@@ -18,23 +18,25 @@ module.exports = (db) => {
     const userLikes = `SELECT users.id as user_id, count(resource_likes.id) AS num_of_likes
       FROM users
       JOIN resource_likes ON user_id = users.id
-      GROUP BY users.id
-      ORDER BY users.id ASC;`;
+      GROUP BY users.id`;
 
     const userComments = `
     SELECT users.id as user_id, count(resource_comments.title) AS num_of_comments
     FROM users
     JOIN resource_comments ON user_id = users.id
-    GROUP BY users.id
-    ORDER BY users.id ASC;`;
+    GROUP BY users.id;`;
+
+    const userResources = `SELECT users.id as user_id, count(resources.id) AS num_of_resources
+    FROM users
+    JOIN resources ON creator_id = users.id
+    GROUP BY users.id;`;
 
     const likesQueryFunc = (prevResources) => {
-      // likesCount
       return new Promise((resolve) => {
         db.query(userLikes).then((data) => {
-          const ratingData = data.rows;
+          const likesData = data.rows;
           const combined = prevResources.map((user) => {
-            const match = ratingData.find((likes) => likes.user_id === user.id);
+            const match = likesData.find((likes) => likes.user_id === user.id);
             user.likeCount = (match && match.num_of_likes) || 0;
             return user;
           });
@@ -45,7 +47,6 @@ module.exports = (db) => {
     };
 
     const commentsQueryFunc = (prevResources) => {
-      // commentsCount
       return new Promise((resolve) => {
         db.query(userComments).then((data) => {
           const commentData = data.rows;
@@ -62,6 +63,23 @@ module.exports = (db) => {
       });
     };
 
+    const resourceQueryFunc = (prevResources) => {
+      return new Promise((resolve) => {
+        db.query(userResources).then((data) => {
+          const resData = data.rows;
+          const combined = prevResources.map((user) => {
+            const match = resData.find(
+              (resources) => resources.user_id === user.id
+            );
+            user.resourceCount = (match && match.num_of_resources) || 0;
+            return user;
+          });
+
+          resolve(combined);
+        });
+      });
+    };
+
     db.query(userQuery)
       .then((data) => {
         const users = data.rows;
@@ -69,6 +87,7 @@ module.exports = (db) => {
       })
       .then(likesQueryFunc)
       .then(commentsQueryFunc)
+      .then(resourceQueryFunc)
       .then((data) => {
         res.json({ users: data });
       })
