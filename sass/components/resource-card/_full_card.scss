@@ -20,6 +20,7 @@
         .edit-btn {
           border: 1px solid rgb(176, 141, 125);
           color: rgb(176, 141, 125);
+          margin-right: 5px;
         }
 
         .edit-btn.active {
@@ -156,10 +157,6 @@
 
               .star-input:checked + .star ~ .star {
                 color: rgb(192, 192, 192);
-              }
-
-              .star-input:not(:checked) {
-                color: red;
               }
             }
           }
