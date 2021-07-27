@@ -12,13 +12,14 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const user = req.body;
+    const templateVars = {};
 
+    //If inputs blank, error (currently required in html)
     // Hash password
     user.password = bcrypt.hashSync(user.password, 12);
 
     //If username taken, error
     //If email already registered, error
-    //If inputs blank, error (currently required in html)
     // Else store new user in database: register query
     db.query(
       `
@@ -30,16 +31,20 @@ module.exports = (db) => {
     )
     .then((data) => {
       const newUser = data.rows[0];
-      if (!newUser) {
-        res.send({ error: "error" });
-      } else {
-        req.session.userId = newUser.id;
-        res.redirect("/my-resources");
-      }
+      req.session.userId = newUser.id;
+      res.redirect("/my-resources");
     })
     .catch((e) => {
       res.status(500);
-      res.send(e.stack);
+      if (e.constraint === 'users_username_key') {
+        templateVars.error = "Username already taken";
+        res.render("signup", templateVars);
+      } else if (e.constraint === 'users_email_key') {
+        templateVars.error = "Email already registered";
+        res.render("signup", templateVars);
+      } else {
+        res.send(e);
+      }
     });
 
   });

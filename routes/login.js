@@ -10,6 +10,7 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const { email, password } = req.body;
+    const templateVars = {};
 
     db.query(`SELECT * FROM users WHERE email = $1;`, [email])
       .then((data) => {
@@ -19,13 +20,16 @@ module.exports = (db) => {
           res.redirect("/my-resources");
         } else {
           //invalid password
-          res.send({ error: "invalid password" });
+          res.status(500);
+          templateVars.error = "Invalid Password";
+          res.render("login", templateVars);
         }
       })
       .catch((e) => {
         //invalid email
         res.status(500);
-        res.send({ error: "invalid email" });
+        templateVars.error = "Invalid Email";
+        res.render("login", templateVars);
       });
   });
   return router;
