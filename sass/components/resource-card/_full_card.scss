@@ -1,0 +1,204 @@
+.article-container {
+  @include main-container;
+
+  .resource-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+
+    .header-banner {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px 0;
+      width: 100%;
+
+      .btn-container {
+        width: auto;
+
+        .edit-btn {
+          border: 1px solid rgb(176, 141, 125);
+          color: rgb(176, 141, 125);
+          margin-right: 5px;
+        }
+
+        .edit-btn.active {
+          background-color: rgb(176, 141, 125);
+          color: rgb(255, 255, 255);
+        }
+
+        .delete {
+          border: 1px solid rgb(255, 0, 0);
+          color: rgb(255, 0, 0);
+        }
+        .delete.active {
+          background-color: rgb(255, 0, 0);
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
+
+    .resource {
+      margin-top: 10px;
+
+      .card .title,
+      .main,
+      .footer {
+        width: 100%;
+      }
+
+      .card {
+        margin: 10px 0;
+        margin: 10px auto;
+        border: 1px solid rgb(38, 116, 135);
+        border-radius: 4px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .web-link {
+          width: 100%;
+          padding-bottom: 10px;
+
+          a {
+            color: black;
+          }
+        }
+
+        .title {
+          margin: 5px;
+
+          h1 {
+            text-transform: capitalize;
+            padding-top: 10px;
+            text-align: center;
+            font-size: 40px;
+          }
+
+          p {
+            text-align: center;
+            padding: 4px 0;
+          }
+        }
+
+        .main {
+          display: block;
+          margin: 5px;
+
+          .img-container {
+            padding: 5px 0;
+            width: 100%;
+            border-bottom: 1px solid rgb(38, 116, 135);
+
+            img {
+              width: 100%;
+              height: 320px;
+              object-fit: contain;
+            }
+          }
+
+          .description {
+            margin: 10px 5px;
+            text-transform: capitalize;
+          }
+        }
+
+        .footer {
+          margin: 5px;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          border-top: 1px solid rgb(38, 116, 135);
+          padding-top: 5px;
+
+          .badges {
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
+
+            .badge {
+              padding: 4px;
+              margin: 4px;
+              border: 1px solid grey;
+              border-radius: 10px;
+              min-width: 30px;
+              text-align: center;
+            }
+          }
+          .icons {
+            padding-top: 10px;
+            padding-right: 4px;
+            display: flex;
+
+            a {
+              margin: 0 5px;
+              color: black;
+
+              .fa-comment-dots {
+                color: rgb(38, 116, 135);
+                fill: rgb(38, 116, 135);
+              }
+
+              .fa-heart {
+                color: rgb(176, 141, 125);
+                fill: rgb(176, 141, 125);
+              }
+            }
+
+            .rating {
+              padding: 0 20px;
+              .star-input {
+                display: none;
+              }
+
+              .star {
+                color: rgb(38, 116, 135);
+              }
+
+              .star-input:checked + .star ~ .star {
+                color: rgb(192, 192, 192);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* READ MORE  */
+
+  /* FOOTER */
+
+  .php {
+    background: rgb(123, 25, 209, 0.5);
+  }
+  .js {
+    background: rgb(125, 197, 219, 0.5);
+  }
+
+  .wordpress {
+    background: rgb(125, 179, 174, 0.5);
+  }
+
+  // COMMENTS
+  .comment-container {
+    margin-top: 10px;
+    border: 1px solid lightgrey;
+    width: 100%;
+  }
+
+  .comment {
+    margin: 5px;
+    border: 1px solid black;
+    padding: 10px;
+  }
+
+  .comment p {
+    padding: 2px 0;
+  }
+
+  .comment-date {
+    font-size: 12px;
+    color: grey;
+  }
+}

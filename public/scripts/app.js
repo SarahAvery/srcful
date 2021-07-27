@@ -63,6 +63,29 @@
         $(".create-btn").addClass("active");
       });
 
+    // Full Article Edit and Delete Buttons
+    $(".resource-container")
+      .find(".edit-btn")
+      .on("click", function () {
+        $(".edit-btn").addClass("active");
+      });
+
+    $(".resource-container")
+      .find(".delete")
+      .on("click", function () {
+        $(".delete").addClass("active");
+      });
+
+    // Star Rating
+    $(".rating")
+      .find("form")
+      .on("click", (e) => {
+        const rating = e.target.value;
+        console.log(rating);
+
+        // We need to do something with the value!!
+      });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {
