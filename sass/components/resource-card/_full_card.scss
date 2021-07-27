@@ -127,9 +127,12 @@
           .icons {
             padding-top: 10px;
             padding-right: 4px;
+            display: flex;
 
             a {
+              margin: 0 5px;
               color: black;
+
               .fa-comment-dots {
                 color: rgb(38, 116, 135);
                 fill: rgb(38, 116, 135);
@@ -138,6 +141,25 @@
               .fa-heart {
                 color: rgb(176, 141, 125);
                 fill: rgb(176, 141, 125);
+              }
+            }
+
+            .rating {
+              padding: 0 20px;
+              .star-input {
+                display: none;
+              }
+
+              .star {
+                color: rgb(38, 116, 135);
+              }
+
+              .star-input:checked + .star ~ .star {
+                color: rgb(192, 192, 192);
+              }
+
+              .star-input:not(:checked) {
+                color: red;
               }
             }
           }

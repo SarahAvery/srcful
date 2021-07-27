@@ -76,6 +76,16 @@
         $(".delete").addClass("active");
       });
 
+    // Star Rating
+    $(".rating")
+      .find("form")
+      .on("click", (e) => {
+        const rating = e.target.value;
+        console.log(rating);
+
+        // We need to do something with the value!!
+      });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {
