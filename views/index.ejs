@@ -52,9 +52,9 @@
             </div>
             <div class="footer">
               <p class="badges">
-                <span class="badge php">Python</span>
-                <span class="badge js">JS</span>
-                <span class="badge wordpress">wordPress</span>
+                <% resource.categories.forEach(category => { %>
+                <span class="badge php"><%= category %></span>
+                <% } )%>
               </p>
               <p class="icons">
                 <a href="/"
