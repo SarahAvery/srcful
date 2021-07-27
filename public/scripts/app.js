@@ -103,6 +103,15 @@
       });
     // !!! When need to handle this with ajax, like tweeter. Once comment is rendered, the button will need to have the active class removed
 
+    // Comments Load More Button
+
+    $("#load-more")
+      .find(".load-more")
+      .on("click", function () {
+        $(".load-more").addClass("active");
+      });
+    // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
+
     // // Like button
     // $(".like-btn").on("click", function(e) {
     //     $(this).toggleClass("liked");
