@@ -86,6 +86,13 @@
         // We need to do something with the value!!
       });
 
+    // // Like button
+    // $(".like-btn").on("click", function(e) {
+    //     $(this).toggleClass("liked");
+    //     const url = ($(this).attr("class").includes("liked")) ? "/like" : "/like/remove";
+    //     $.post(url, resource_id);
+    //   });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {
