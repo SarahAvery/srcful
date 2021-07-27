@@ -43,7 +43,7 @@
 
           p,
           a {
-            color: grey;
+            color: rgb(128, 128, 128);
           }
         }
       }
@@ -93,35 +93,6 @@
         border-top: 1px solid rgb(38, 116, 135);
         padding-top: 5px;
 
-        .icons {
-          padding: 10px 4px;
-          width: 100%;
-          text-align: right;
-
-          a.icon,
-          i.icon {
-            padding: 0 4px;
-          }
-
-          a {
-            color: rgb(204, 15, 15);
-            padding: 0 4px;
-            .fa-comment-dots {
-              color: rgb(38, 116, 135);
-              fill: rgb(38, 116, 135);
-            }
-
-            .fa-heart {
-              color: rgb(176, 141, 125);
-              fill: rgb(176, 141, 125);
-            }
-          }
-
-          .fa-star {
-            color: gold;
-          }
-        }
-
         .badges {
           display: flex;
           flex-wrap: wrap;
@@ -143,6 +114,28 @@
 
           .badge:nth-child(2n + 1) {
             background: rgb(176, 141, 125);
+          }
+        }
+        .icons {
+          padding: 10px 4px;
+          width: 100%;
+          text-align: right;
+
+          a {
+            color: black;
+            .fa-comment-dots {
+              color: rgb(38, 116, 135);
+              fill: rgb(38, 116, 135);
+            }
+
+            .fa-heart {
+              color: rgb(176, 141, 125);
+              fill: rgb(176, 141, 125);
+            }
+          }
+
+          .fa-star {
+            color: gold;
           }
         }
       }
