@@ -16,11 +16,30 @@
     <%- include("partials/_nav") %>
     <main>
       <div class="profile-container">
-
         <h1>My Profile</h1>
 
         <div class="info-container">
-          <!-- <h2>about me:</h2> -->
+          <div class="edit-popout hidden">
+            <div class="edit-container">
+              <h2>update profile</h2>
+              <p id="errorMessage" class="hidden"></p>
+              <form class="form" method="POST" action="">
+                <div class="form-group">
+                  <div>
+                    <label for="username">new username:</label>
+                    <input type="text" name="username" placeholder="username" />
+                  </div>
+                  <div>
+                    <label for="password">new password:</label>
+                    <input type="password" name="password" />
+                  </div>
+                  <div class="btn-container">
+                    <button class="save-btn" type="submit">save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
 
           <div class="personal">
             <h3 class="subtitle">personal</h3>
@@ -28,17 +47,30 @@
               username: <span><%= user.username %></span>
             </p>
             <p class="email-box">email: <span><%= user.email %></span></p>
-            <p class="password-box">password: <span><%= user.password.slice(0, 1).concat("*****").concat(user.password.slice(user.password.length - 1)) %></span></p>
+            <p class="password-box">
+              password:
+              <span
+                ><%= user.password.slice(0,
+                1).concat("*****").concat(user.password.slice(user.password.length
+                - 1)) %></span
+              >
+            </p>
           </div>
           <div class="stats-info">
             <h3 class="subtitle">my stats</h3>
-            <p class="resources">number of resources: <span><%= created_resources %></span></p>
-            <p class="my-likes">resources i've liked: <span><%= user_likes %></span></p>
-            <p class="created">member since: <span><%= user.created_at.slice(0,10) %></span></p>
+            <p class="resources">
+              number of resources: <span><%= created_resources %></span>
+            </p>
+            <p class="my-likes">
+              resources i've liked: <span><%= user_likes %></span>
+            </p>
+            <p class="created">
+              member since: <span><%= user.created_at.slice(0,10) %></span>
+            </p>
           </div>
         </div>
         <div class="btn-container">
-          <form method="GET" action="/edit_profile"><td><input type="submit" value="Edit"></td></form>
+          <button class="edit-btn">edit</button>
         </div>
       </div>
     </main>
