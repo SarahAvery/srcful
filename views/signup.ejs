@@ -18,10 +18,15 @@
       <div class="signup-form">
         <h2>Sign up</h2>
         <form class="form" method="POST" action="/signup">
+          <% if (locals.error) { %>
+            <p>
+            <span style="color: red; font-weight: bolder; font-size: 18px"><%= error %></span>
+            </p>
+          <% } %>
           <div class="form-group">
             <div>
               <label for="username">username:</label>
-              <input type="text" name="username" placeholder="username" />
+              <input type="text" name="username" placeholder="username" required/>
             </div>
             <div>
               <label for="email">email:</label>

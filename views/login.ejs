@@ -21,13 +21,11 @@
       <div class="login-form">
         <h2>Login</h2>
         <form action="/login" method="POST">
-          <!-- <%# locals.some %> <%# if (typeof error !== 'undefined') { %>
-        <p>
-          <span style="color: red; font-weight: bolder; font-size: 18px"
-            ><%# error %></span
-          >
-        </p>
-        <%# } %> -->
+          <% if (locals.error) { %>
+            <p>
+            <span style="color: red; font-weight: bolder; font-size: 18px"><%= error %></span>
+            </p>
+          <% } %>
           <div class="form-group">
             <div>
               <label for="email">email:</label>
