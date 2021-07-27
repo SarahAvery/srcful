@@ -32,7 +32,6 @@ module.exports = (db) => {
     GROUP BY users.id;`;
 
     const likesQueryFunc = (prevResources) => {
-      // likesCount
       return new Promise((resolve) => {
         db.query(userLikes).then((data) => {
           const likesData = data.rows;
@@ -48,7 +47,6 @@ module.exports = (db) => {
     };
 
     const commentsQueryFunc = (prevResources) => {
-      // commentsCount
       return new Promise((resolve) => {
         db.query(userComments).then((data) => {
           const commentData = data.rows;
@@ -66,7 +64,6 @@ module.exports = (db) => {
     };
 
     const resourceQueryFunc = (prevResources) => {
-      // commentsCount
       return new Promise((resolve) => {
         db.query(userResources).then((data) => {
           const resData = data.rows;
