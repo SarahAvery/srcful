@@ -37,10 +37,10 @@ module.exports = (db) => {
       .catch((e) => {
         res.status(500);
         if (e.constraint === "users_username_key") {
-          templateVars.error = "username is already taken";
+          templateVars.error = "Username already taken";
           res.render("signup", templateVars);
         } else if (e.constraint === "users_email_key") {
-          templateVars.error = "email is already registered";
+          templateVars.error = "Email already registered";
           res.render("signup", templateVars);
         } else {
           res.send(e);
