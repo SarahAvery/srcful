@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="icon" href="/favicon_io/favicon-16x16.png" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <title>Signup</title>
@@ -19,14 +20,21 @@
         <h2>Sign up</h2>
         <form class="form" method="POST" action="/signup">
           <% if (locals.error) { %>
-            <p>
-            <span style="color: red; font-weight: bolder; font-size: 18px"><%= error %></span>
-            </p>
+          <p>
+            <span style="color: red; font-weight: bolder; font-size: 18px"
+              ><%= error %></span
+            >
+          </p>
           <% } %>
           <div class="form-group">
             <div>
               <label for="username">username:</label>
-              <input type="text" name="username" placeholder="username" required/>
+              <input
+                type="text"
+                name="username"
+                placeholder="username"
+                required
+              />
             </div>
             <div>
               <label for="email">email:</label>
@@ -39,7 +47,7 @@
             </div>
             <div>
               <label for="password">password: </label>
-              <input type="password" name="password" required/>
+              <input type="password" name="password" required />
             </div>
             <div class="btn-container">
               <button type="submit">sign up</button>
