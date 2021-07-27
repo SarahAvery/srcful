@@ -87,5 +87,43 @@ module.exports = (db) => {
     .catch(e => res.send(e.stack));
   });
 
+  router.post("/:id/edit", (req, res) => {
+    const update = req.body;
+
+    // Update resource in database
+    db.query(
+      `
+      UPDATE resources
+      SET description = $1,
+          image_url = $2
+      WHERE id = $3;
+      `,
+      [update.description, update.image_url, req.params.id]
+    )
+    .then(() => {
+      res.redirect("/resource");
+    })
+    .catch((e) => {
+      res.status(500);
+      res.send(e.stack);
+    });
+  });
+
+  router.get("/:id/edit", (req, res) => {
+    fetch(process.env.API_URL + "/resources")
+      .then((data) => data.json())
+      .then((json) => {
+        if (json.resources) {
+          const currentResource = (json.resources).filter(resource => {
+            // return resource.id === req.params.id;
+            return resource.resource_id === 1;
+          });
+          res.render("edit-resource", { resource: currentResource[0] });
+        } else {
+          res.redirect("/");
+        }
+    });
+  });
+
   return router;
 };
