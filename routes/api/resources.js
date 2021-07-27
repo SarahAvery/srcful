@@ -22,8 +22,7 @@ module.exports = (db) => {
     const likesQuery =
       "SELECT resources.id , count(resource_likes) AS num_of_likes FROM resource_likes JOIN resources ON resource_id = resources.id GROUP BY resources.id ORDER BY resources.id ASC LIMIT 8;";
 
-    const categoryQuery =
-      "SELECT resources.id , categories.title AS category_name FROM resource_categories JOIN resources ON resource_id = resources.id JOIN categories ON category_id = categories.id ORDER BY resources.id ASC;";
+    const categoryQuery = `SELECT resources.id AS resource_id, array_agg(categories.title) AS categories FROM resource_categories JOIN resources ON resource_id = resources.id JOIN categories ON category_id = categories.id WHERE resource_categories.resource_id = resources.id GROUP BY resources.id ORDER BY resources.id ASC;`;
 
     const commentsQueryFunc = (prevResources) => {
       // commentsCount
@@ -48,7 +47,7 @@ module.exports = (db) => {
       return new Promise((resolve) => {
         db.query(likesQuery).then((data) => {
           const likeData = data.rows;
-          console.log(likeData, prevResources);
+          // console.log(likeData, prevResources);
           const combined = prevResources.map((resource) => {
             const match = likeData.find(
               (likesRes) => likesRes.id === resource.resource_id
@@ -62,26 +61,23 @@ module.exports = (db) => {
       });
     };
 
-    // const categoryQueryFunc = (prevResources) => {
-    //   // categories
-    //   return new Promise((resolve) => {
-    //     db.query(categoryQuery).then((data) => {
-    //       const categoryData = data.rows;
-    //       console.log(categoryData, prevResources);
-    //       const combined = prevResources.map((resource) => {
-    //         const match = categoryData.find(
-    //           (likesRes) => likesRes.id === resource.resource_id
-    //         );
+    const categoryQueryFunc = (data) => {
+      // categories
+      return new Promise((resolve) => {
+        db.query(categoryQuery).then((catData) => {
+          const categoryData = catData.rows;
 
-    //         resource.categories = (match && match.category_name) || null;
+          const newResources = data.map((resource) => ({
+            ...resource,
+            ...(categoryData.find(
+              (category) => category.resource_id === resource.resource_id
+            ) || { categories: [] }),
+          }));
 
-    //         return resource;
-    //       });
-
-    //       resolve(combined);
-    //     });
-    //   });
-    // };
+          resolve(newResources);
+        });
+      });
+    };
 
     db.query(resourceQuery)
       .then((data) => {
@@ -90,7 +86,7 @@ module.exports = (db) => {
       })
       .then(commentsQueryFunc)
       .then(likesQueryFunc)
-      // .then(categoryQueryFunc)
+      .then(categoryQueryFunc)
       .then((data) => {
         res.json({ resources: data });
       })
