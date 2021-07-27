@@ -75,5 +75,17 @@ module.exports = (db) => {
       });
   });
 
+  router.delete("/:id", (req, res) => {
+    // 403 forbidden if not resource creator
+    // 404 not found if resource doesn't exist
+    const queryString = `
+      DELETE FROM resources
+      WHERE id = ${req.params.id};
+    `;
+    db.query(queryString)
+    .then(() => res.redirect('/my-resources'))
+    .catch(e => res.send(e.stack));
+  });
+
   return router;
 };
