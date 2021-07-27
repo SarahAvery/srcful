@@ -115,68 +115,8 @@
                 </div>
               </div>
               <div class="footer">
-                <p class="badges">
-                  <span class="badge php">Python</span>
-                  <span class="badge js">JS</span>
-                  <span class="badge wordpress">wordPress</span>
-                </p>
                 <div class="icons">
-                  <div class="rating">
-                    <form>
-                      <input
-                        type="radio"
-                        class="star-input"
-                        name="rating"
-                        id="star-1"
-                        value="1"
-                      />
-                      <label for="star-1" class="star"
-                        ><i class="fas fa-star"></i
-                      ></label>
-                      <input
-                        type="radio"
-                        class="star-input"
-                        name="rating"
-                        id="star-2"
-                        value="2"
-                      />
-                      <label for="star-2" class="star"
-                        ><i class="fas fa-star"></i
-                      ></label>
-                      <input
-                        type="radio"
-                        class="star-input"
-                        name="rating"
-                        id="star-3"
-                        value="3"
-                        checked
-                      />
-                      <label for="star-3" class="star"
-                        ><i class="fas fa-star"></i
-                      ></label>
-                      <input
-                        type="radio"
-                        class="star-input"
-                        name="rating"
-                        id="star-4"
-                        value="4"
-                      />
-                      <label for="star-4" class="star"
-                        ><i class="fas fa-star"></i
-                      ></label>
-                      <input
-                        type="radio"
-                        class="star-input"
-                        name="rating"
-                        id="star-5"
-                        value="5"
-                      />
-                      <label for="star-5" class="star"
-                        ><i class="fas fa-star"></i
-                      ></label>
-                    </form>
-                  </div>
-                  <a href="/"
+                  <a class="icon" href="/"
                     ><i class="fas fa-comment-dots"></i
                     ><sup>
                       <!-- <%# if ( resource.commentCount !== 0) { %> <%#
@@ -184,7 +124,7 @@
                       3
                     </sup></a
                   >
-                  <a href="/">
+                  <a class="icon" href="/">
                     <i class="fas fa-heart like-btn"></i
                     ><sup>
                       <!-- <%# if ( resource.commentCount !== 0) { %> <%#
@@ -192,6 +132,74 @@
                       5
                     </sup></a
                   >
+                  <i class="icon fas fa-star"></i
+                  ><sup>
+                    <%# if ( resource.avgRating !== 0) { %> <%#
+                    resource.avgRating %> <%# } else { %> <%# } %> 3.2
+                  </sup>
+                </div>
+                <div class="badges">
+                  <!-- <%# resource.categories.forEach(category => { %>
+                  <span class="badge"><%# category %></span>
+                  <%# } )%> -->
+                  <span class="badge">Python</span>
+                  <span class="badge">JS</span>
+                  <span class="badge">wordPress</span>
+                </div>
+                <div class="rating">
+                  <form>
+                    <input
+                      type="radio"
+                      class="star-input"
+                      name="rating"
+                      id="star-1"
+                      value="1"
+                    />
+                    <label for="star-1" class="star"
+                      ><i class="fas fa-star"></i
+                    ></label>
+                    <input
+                      type="radio"
+                      class="star-input"
+                      name="rating"
+                      id="star-2"
+                      value="2"
+                    />
+                    <label for="star-2" class="star"
+                      ><i class="fas fa-star"></i
+                    ></label>
+                    <input
+                      type="radio"
+                      class="star-input"
+                      name="rating"
+                      id="star-3"
+                      value="3"
+                      checked
+                    />
+                    <label for="star-3" class="star"
+                      ><i class="fas fa-star"></i
+                    ></label>
+                    <input
+                      type="radio"
+                      class="star-input"
+                      name="rating"
+                      id="star-4"
+                      value="4"
+                    />
+                    <label for="star-4" class="star"
+                      ><i class="fas fa-star"></i
+                    ></label>
+                    <input
+                      type="radio"
+                      class="star-input"
+                      name="rating"
+                      id="star-5"
+                      value="5"
+                    />
+                    <label for="star-5" class="star"
+                      ><i class="fas fa-star"></i
+                    ></label>
+                  </form>
                 </div>
               </div>
               <!-- <div class="comment-container">
