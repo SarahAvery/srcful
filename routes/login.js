@@ -30,6 +30,27 @@ module.exports = (db) => {
       res.send({error: e});
     });
 
+
+      .then((data) => {
+        const user = data.rows[0];
+        // if (bcrypt.compareSync(password, user.password)) {
+        if (password === user.password) {
+          req.session.userId = user.id;
+          res.redirect("/my-resources");
+        } else {
+          //invalid password
+          res.status(500);
+          templateVars.error = "Invalid Password";
+          res.render("login", templateVars);
+        }
+      })
+      .catch((e) => {
+        //invalid email
+        res.status(500);
+        templateVars.error = "Invalid Email";
+        res.render("login", templateVars);
+      });
+
   });
   return router;
 };
