@@ -10,12 +10,12 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const { email, password } = req.body;
+    const templateVars = {};
 
     db.query(`SELECT * FROM users WHERE email = $1;`, [email])
       .then((data) => {
         const user = data.rows[0];
-        // if (bcrypt.compareSync(password, user.password)) {
-        if (password === user.password) {
+        if (bcrypt.compareSync(password, user.password)) {
           req.session.userId = user.id;
           res.redirect("/my-resources");
         } else {
@@ -31,7 +31,6 @@ module.exports = (db) => {
         templateVars.error = "Invalid Email";
         res.render("login", templateVars);
       });
-
   });
   return router;
 };
