@@ -10,9 +10,9 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const resourceQuery = `SELECT users.username AS username, resources.title, resources.image_url, resources.id AS resource_id, resources.url, substring(resources.description,1,140) AS substring, 
+    const resourceQuery = `SELECT users.username AS username, resources.title, resources.image_url, resources.id AS resource_id, resources.url, resources.description, substring(resources.description,1,140) AS substring,
     resources.created_at::date AS date, resources.created_at::time
-   AS time    
+   AS time
    FROM resources
    JOIN users ON creator_id = users.id LIMIT 8;`;
 
