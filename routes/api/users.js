@@ -13,40 +13,68 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    const userQuery = `SELECT * FROM users;`;
+
+    const userLikes = `SELECT users.id as user_id, count(resource_likes.id) AS num_of_likes
+      FROM users
+      JOIN resource_likes ON user_id = users.id
+      GROUP BY users.id
+      ORDER BY users.id ASC;`;
+
+    const userComments = `
+    SELECT users.id as user_id, count(resource_comments.title) AS num_of_comments
+    FROM users
+    JOIN resource_comments ON user_id = users.id
+    GROUP BY users.id
+    ORDER BY users.id ASC;`;
+
+    const likesQueryFunc = (prevResources) => {
+      // likesCount
+      return new Promise((resolve) => {
+        db.query(userLikes).then((data) => {
+          const ratingData = data.rows;
+          const combined = prevResources.map((user) => {
+            const match = ratingData.find((likes) => likes.user_id === user.id);
+            user.likeCount = (match && match.num_of_likes) || 0;
+            return user;
+          });
+
+          resolve(combined);
+        });
+      });
+    };
+
+    const commentsQueryFunc = (prevResources) => {
+      // commentsCount
+      return new Promise((resolve) => {
+        db.query(userComments).then((data) => {
+          const commentData = data.rows;
+          const combined = prevResources.map((user) => {
+            const match = commentData.find(
+              (comments) => comments.user_id === user.id
+            );
+            user.commentCount = (match && match.num_of_comments) || 0;
+            return user;
+          });
+
+          resolve(combined);
+        });
+      });
+    };
+
+    db.query(userQuery)
       .then((data) => {
         const users = data.rows;
-        res.json({ users });
+        return users;
+      })
+      .then(likesQueryFunc)
+      .then(commentsQueryFunc)
+      .then((data) => {
+        res.json({ users: data });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
-
-  // router.get("/:id", (req, res) => {
-  //   console.log(req.params);
-  //   db.query(`SELECT * FROM users WHERE users.id = ${req.params.id}`)
-  //     .then((data) => {
-  //       console.log(data);
-  //       const users = data.rows[0];
-  //       res.json({ users });
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
-
-  // router.post("/:id", (req, res) => {
-
-  // });
-
-  // router.put("/:id", (req, res) => {
-
-  // });
-
-  // router.delete("/:id", (req, res) => {
-
-  // });
-
   return router;
 };
