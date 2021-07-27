@@ -59,6 +59,7 @@
         .web-link {
           width: 100%;
           padding-bottom: 10px;
+          color: rgb(128, 128, 128);
 
           a {
             color: black;
@@ -107,33 +108,26 @@
           margin: 5px;
           display: flex;
           justify-content: space-between;
+          align-items: center;
           flex-wrap: wrap;
           border-top: 1px solid rgb(38, 116, 135);
           padding-top: 5px;
 
-          .badges {
-            display: flex;
-            flex-wrap: wrap;
-            flex-grow: 1;
-
-            .badge {
-              padding: 4px;
-              margin: 4px;
-              border: 1px solid grey;
-              border-radius: 10px;
-              min-width: 30px;
-              text-align: center;
-            }
-          }
           .icons {
-            padding-top: 10px;
-            padding-right: 4px;
-            display: flex;
+            padding: 10px 4px;
+            width: 100%;
+            text-align: right;
+
+            a.icon {
+              padding: 0 4px;
+            }
+
+            i.icon {
+              margin: 0 4px;
+            }
 
             a {
-              margin: 0 5px;
               color: black;
-
               .fa-comment-dots {
                 color: rgb(38, 116, 135);
                 fill: rgb(38, 116, 135);
@@ -145,60 +139,156 @@
               }
             }
 
-            .rating {
-              padding: 0 20px;
-              .star-input {
-                display: none;
-              }
+            .fa-star {
+              color: rgb(255, 215, 0);
+            }
+          }
 
-              .star {
-                color: rgb(38, 116, 135);
-              }
+          .badges {
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
 
-              .star-input:checked + .star ~ .star {
-                color: rgb(192, 192, 192);
-              }
+            .badge {
+              text-transform: lowerCase;
+              padding: 6px;
+              margin: 4px;
+              border-radius: 10px;
+              min-width: 30px;
+              text-align: center;
+              color: rgb(255, 255, 255);
+            }
+
+            .badge:nth-child(2n) {
+              background: rgb(38, 116, 135);
+            }
+
+            .badge:nth-child(2n + 1) {
+              background: rgb(176, 141, 125);
+            }
+          }
+
+          .rating {
+            padding: 0 20px;
+            .star-input {
+              display: none;
+            }
+
+            .star {
+              color: rgb(255, 215, 0);
+            }
+
+            .star-input:checked + .star ~ .star {
+              color: rgb(192, 192, 192);
+            }
+          }
+
+          #load-more {
+            margin: 5px auto;
+
+            button {
+              border: 1px solid rgb(38, 116, 135);
+              color: rgb(38, 116, 135);
+            }
+
+            button.active {
+              color: rgb(255, 255, 255);
+              background-color: rgb(38, 116, 135);
             }
           }
         }
       }
+
+      // COMMENTS
+      .comment-container {
+        margin-top: 20px;
+        border-top: 1px solid rgb(38, 116, 135);
+        width: 100%;
+
+        form {
+          margin: 20px 5px;
+          padding: 10px;
+          border: 1px solid rgb(176, 141, 125);
+          border-radius: 4px;
+
+          .form-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            margin-top: 5px;
+          }
+
+          input {
+            width: 80%;
+            flex-grow: 1;
+            margin-top: 5px;
+            padding: 6px;
+            border-radius: 4px;
+            outline: none;
+            border: 0.75px solid #222;
+          }
+
+          .btn-container {
+            min-width: 120px;
+
+            display: flex;
+            justify-content: flex-end;
+          }
+
+          button {
+            border: 1px solid rgb(38, 116, 135);
+            color: rgb(38, 116, 135);
+          }
+
+          button.active {
+            color: rgb(255, 255, 255);
+            background-color: rgb(38, 116, 135);
+          }
+        }
+
+        .comment {
+          margin: 5px;
+          border: 1px solid rgb(38, 116, 135);
+          border-radius: 4px;
+          padding: 10px;
+
+          .comment-body {
+            display: flex;
+            flex-wrap: wrap;
+
+            .comment-title,
+            .username {
+              width: 100%;
+            }
+
+            .comment-title {
+              padding: 2px 0;
+              text-transform: capitalize;
+            }
+
+            .username {
+              padding: 5px 0;
+              font-size: 14px;
+              color: rgb(128, 128, 128);
+            }
+
+            .comment-content {
+              padding-top: 5px;
+              padding-bottom: 10px;
+              width: 95%;
+              width: 95%;
+            }
+          }
+
+          .comment-date {
+            width: 100%;
+            text-align: right;
+            font-size: 12px;
+            color: rgb(128, 128, 128);
+          }
+        }
+      }
     }
-  }
-
-  /* READ MORE  */
-
-  /* FOOTER */
-
-  .php {
-    background: rgb(123, 25, 209, 0.5);
-  }
-  .js {
-    background: rgb(125, 197, 219, 0.5);
-  }
-
-  .wordpress {
-    background: rgb(125, 179, 174, 0.5);
-  }
-
-  // COMMENTS
-  .comment-container {
-    margin-top: 10px;
-    border: 1px solid lightgrey;
-    width: 100%;
-  }
-
-  .comment {
-    margin: 5px;
-    border: 1px solid black;
-    padding: 10px;
-  }
-
-  .comment p {
-    padding: 2px 0;
-  }
-
-  .comment-date {
-    font-size: 12px;
-    color: grey;
   }
 }

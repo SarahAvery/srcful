@@ -86,7 +86,7 @@
         // We need to do something with the value!!
       });
 
-    // Create New Resource Artile Textarea
+    // Create New Resource Article Textarea
 
     $("#article-div")
       .find("textarea")
@@ -94,6 +94,23 @@
         $("#article-div").css({ width: "600px", margin: "0 -50%" });
         $("textarea").css({ width: "600px", height: "300px" });
       });
+
+    // Comment Button
+    $(".comment-container")
+      .find(".comment-btn")
+      .on("click", function () {
+        $(".comment-btn").addClass("active");
+      });
+    // !!! When need to handle this with ajax, like tweeter. Once comment is rendered, the button will need to have the active class removed
+
+    // Comments Load More Button
+
+    $("#load-more")
+      .find(".load-more")
+      .on("click", function () {
+        $(".load-more").addClass("active");
+      });
+    // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
     // // Like button
     // $(".like-btn").on("click", function(e) {

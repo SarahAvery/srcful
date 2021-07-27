@@ -37,19 +37,22 @@
 
         .web-link {
           width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
+          p,
           a {
-            color: black;
+            color: rgb(128, 128, 128);
           }
         }
       }
 
       .main {
         display: block;
-        margin: 5px;
+        margin: 0 5px;
 
         .img-container {
-          padding: 5px 0;
           width: 100%;
 
           img {
@@ -96,17 +99,27 @@
           flex-grow: 1;
 
           .badge {
-            padding: 4px;
+            text-transform: lowerCase;
+            padding: 6px;
             margin: 4px;
-            border: 1px solid grey;
             border-radius: 10px;
             min-width: 30px;
             text-align: center;
+            color: rgb(255, 255, 255);
+          }
+
+          .badge:nth-child(2n) {
+            background: rgb(38, 116, 135);
+          }
+
+          .badge:nth-child(2n + 1) {
+            background: rgb(176, 141, 125);
           }
         }
         .icons {
-          padding-top: 10px;
-          padding-right: 4px;
+          padding: 10px 4px;
+          width: 100%;
+          text-align: right;
 
           a {
             color: black;
@@ -120,27 +133,12 @@
               fill: rgb(176, 141, 125);
             }
           }
+
+          .fa-star {
+            color: gold;
+          }
         }
       }
     }
-
-    // .card:nth-child(3n -1) {
-    //   margin: 10px;
-    // }
   }
-}
-
-/* READ MORE  */
-
-/* FOOTER */
-
-.php {
-  background: rgb(123, 25, 209, 0.5);
-}
-.js {
-  background: rgb(125, 197, 219, 0.5);
-}
-
-.wordpress {
-  background: rgb(125, 179, 174, 0.5);
 }

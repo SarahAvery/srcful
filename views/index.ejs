@@ -28,10 +28,11 @@
           <div class="card">
             <div class="title">
               <h3><%= resource.title %></h3>
-              <p>written by: <%= resource.username %></p>
+
               <div class="web-link">
+                <p>written by: <%= resource.username %></p>
                 <a href="<%= resource.url %>" target="_blank"
-                  ><i class="fas fa-link"></i
+                  ><i class="fas fa-link fa-xs"></i
                 ></a>
               </div>
             </div>
@@ -51,11 +52,6 @@
               </div>
             </div>
             <div class="footer">
-              <p class="badges">
-                <% resource.categories.forEach(category => { %>
-                <span class="badge php"><%= category %></span>
-                <% } )%>
-              </p>
               <p class="icons">
                 <a href="/"
                   ><i class="fas fa-comment-dots"></i
@@ -71,6 +67,16 @@
                     resource.commentCount %> <% } else { %> <% } %></sup
                   ></a
                 >
+                <i class="fas fa-star"></i
+                ><sup>
+                  <% if ( resource.avgRating !== 0) { %> <%= resource.avgRating
+                  %> <% } else { %> <% } %>
+                </sup>
+              </p>
+              <p class="badges">
+                <% resource.categories.forEach(category => { %>
+                <span class="badge"><%= category %></span>
+                <% } )%>
               </p>
             </div>
           </div>
