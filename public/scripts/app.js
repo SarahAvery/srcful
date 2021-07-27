@@ -63,6 +63,19 @@
         $(".create-btn").addClass("active");
       });
 
+    // Full Article Edit and Delete Buttons
+    $(".resource-container")
+      .find(".edit-btn")
+      .on("click", function () {
+        $(".edit-btn").addClass("active");
+      });
+
+    $(".resource-container")
+      .find(".delete")
+      .on("click", function () {
+        $(".delete").addClass("active");
+      });
+
     // DONT REMOVE BELOW CODE PLEASE
 
     //   const animateTopHandler = function () {

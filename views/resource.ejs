@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      data-auto-a11y="true"
+    ></script>
+    <title>My Resources</title>
+  </head>
+
+  <body>
+    <!-- header -->
+    <%- include('partials/_nav') %>
+    <main>
+      <div class="article-container">
+        <div class="resource-container">
+          <div class="header-banner">
+            <div class="btn-container">
+              <a class="button edit-btn" href="#">edit</a>
+              <a class="button delete" href="#">delete</a>
+            </div>
+          </div>
+
+          <div class="resource">
+            <%# if ( resources.id !== null) { %>
+            <div class="card">
+              <div class="title">
+                <h1><%# resources.title %>What is Vercel?</h1>
+                <p>written by: <%# resource.username %>username</p>
+              </div>
+              <div class="main">
+                <div class="img-container">
+                  <!-- <%# if ( resource.image_url !== null) { %>
+                  <img src="<%# resource.image_url %>" alt="" />
+                  <%# } else { %>
+                  <img src="https://source.unsplash.com/random/600x600" alt="" />
+                  <%# } %> -->
+                  <img
+                    src="https://assets.vercel.com/image/upload/q_auto/front/vercel/dps.png"
+                    alt=""
+                  />
+                </div>
+                <div class="description">
+                  <div class="web-link">
+                    <a
+                      href="<%# resource.url %> https://vercel.com"
+                      target="_blank"
+                      ><i class="fas fa-link"></i
+                    ></a>
+                  </div>
+                  <p class="full-article">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec scelerisque consequat odio a tincidunt. In sagittis at
+                    leo non facilisis. Ut elementum ante sit amet erat
+                    condimentum pharetra sed eu metus. Etiam facilisis justo
+                    vehicula, pulvinar metus eget, facilisis ipsum. Integer
+                    finibus gravida nunc sed fringilla. Vivamus non purus non
+                    lectus varius molestie. Vivamus convallis nisl quis mauris
+                    finibus, ut bibendum mi mollis. Cras sed odio nec enim
+                    dapibus porttitor. Ut non vehicula libero. Sed finibus sem
+                    et tempus vestibulum. Class aptent taciti sociosqu ad litora
+                    torquent per conubia nostra, per inceptos himenaeos. Etiam
+                    euismod metus sed suscipit tempus. Nam lobortis tempor
+                    risus, at lacinia massa faucibus id.
+                    <br /><br />
+                    Proin vitae ipsum at eros feugiat scelerisque eget vel
+                    justo. Proin ac mi consectetur, cursus quam eget,
+                    condimentum erat. Nulla auctor ante arcu, a accumsan massa
+                    rutrum et. Fusce ullamcorper tempus felis quis ullamcorper.
+                    Morbi varius lorem vel gravida semper. Nunc id suscipit
+                    arcu. Ut at rutrum ipsum, id fringilla orci. Aliquam erat
+                    volutpat. Pellentesque tempor nisl sed enim venenatis
+                    porttitor. Vestibulum nec odio nec est semper varius.
+                    <br /><br />
+                    Morbi vel porta nulla, ut suscipit nunc. Suspendisse odio
+                    dui, congue sit amet eros ac, maximus hendrerit purus.
+                    Mauris pretium ac est a posuere. Etiam vel ipsum sodales,
+                    sollicitudin quam tristique, varius orci. Fusce ac nisl ut
+                    urna feugiat varius aliquet ac neque. Quisque nulla ante,
+                    pharetra quis leo quis, placerat tristique nisl. Nunc eros
+                    mi, ultricies vel purus non, ultrices semper magna. Donec
+                    pharetra consectetur dolor. Mauris eget ex lobortis, rhoncus
+                    sapien quis, eleifend arcu.
+                    <br /><br />
+                    In hac habitasse platea dictumst. Praesent sagittis volutpat
+                    suscipit. Ut euismod a metus in tincidunt. Duis finibus
+                    congue ipsum sed efficitur. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis
+                    egestas. Aliquam magna nibh, gravida in enim sed, commodo
+                    dignissim turpis. Ut sem mi, condimentum eget interdum in,
+                    rutrum nec sapien.
+                    <br /><br />
+                    Cras tristique sed mauris at suscipit. Phasellus interdum,
+                    purus a aliquet dapibus, enim ipsum maximus nisi, sed
+                    dapibus turpis justo ut est. Proin ut libero augue. Aenean
+                    ut pulvinar ante, at accumsan augue. Curabitur lacus diam,
+                    aliquet non viverra ac, consectetur at massa. In mollis
+                    vulputate ultricies. Quisque consequat eu mauris nec
+                    pellentesque. Duis nec bibendum neque, non viverra turpis.
+                    Pellentesque pharetra sapien quam, vel luctus orci accumsan
+                    a. In dui turpis, congue nec ultricies sed, rhoncus eu
+                    justo. Nullam in est in ante eleifend pharetra. Proin
+                    ultrices dictum mauris at cursus. Morbi volutpat scelerisque
+                    neque in commodo. Vestibulum ante ipsum primis in faucibus
+                    orci luctus et ultrices posuere cubilia curae; Vivamus
+                    bibendum, sem non dapibus mollis, lorem libero sollicitudin
+                    magna, a ornare quam quam quis augue.
+                  </p>
+                </div>
+              </div>
+              <div class="footer">
+                <p class="badges">
+                  <span class="badge php">Python</span>
+                  <span class="badge js">JS</span>
+                  <span class="badge wordpress">wordPress</span>
+                </p>
+                <p class="icons">
+                  <a href="/"
+                    ><i class="fas fa-comment-dots"></i
+                    ><sup>
+                      <!-- <%# if ( resource.commentCount !== 0) { %> <%#
+                      resource.commentCount %> <%# } else { %> <%# } %> -->
+                      3
+                    </sup></a
+                  >
+                  <a href="/">
+                    <i class="fas fa-heart"></i
+                    ><sup>
+                      <!-- <%# if ( resource.commentCount !== 0) { %> <%#
+                      resource.commentCount %> <%# } else { %> <%# } %> -->
+                      5
+                    </sup></a
+                  >
+                </p>
+              </div>
+              <!-- <div class="comment-container">
+                <div class="comment">
+                  <p class="comment-title">comment title?</p>
+                  <p>username</p>
+                  <p class="comment-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec scelerisque consequat odio a tincidunt. In sagittis at
+                    leo non facilisis. Ut elementum ante sit amet erat
+                    condimentum ❤️
+                  </p>
+                  <p class="comment-date">June 20th, 2021 1:37pm</p>
+                </div>
+                <div class="comment">
+                  <p class="comment-title">comment title?</p>
+                  <p>username</p>
+                  <p class="comment-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec scelerisque consequat odio a tincidunt. In sagittis at
+                    leo non facilisis. Ut elementum ante sit amet erat
+                    condimentum ❤️
+                  </p>
+                  <p class="comment-date">June 20th, 2021 1:37pm</p>
+                </div>
+                <div class="comment">
+                  <p class="comment-title">comment title?</p>
+                  <p>username</p>
+                  <p class="comment-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec scelerisque consequat odio a tincidunt. In sagittis at
+                    leo non facilisis. Ut elementum ante sit amet erat
+                    condimentum ❤️
+                  </p>
+                  <p class="comment-date">June 20th, 2021 1:37pm</p>
+                </div>
+              </div> -->
+            </div>
+            <%# } else { %>
+            <!-- <p>there was an error</p> -->
+            <%# } %>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <%- include('partials/_footer') %>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </body>
+</html>
