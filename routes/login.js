@@ -21,14 +21,14 @@ module.exports = (db) => {
         } else {
           //invalid password
           res.status(500);
-          templateVars.error = "Invalid Password";
+          templateVars.error = "incorrect password";
           res.render("login", templateVars);
         }
       })
       .catch((e) => {
         //invalid email
         res.status(500);
-        templateVars.error = "Invalid Email";
+        templateVars.error = "incorrect email";
         res.render("login", templateVars);
       });
   });

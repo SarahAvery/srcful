@@ -19,13 +19,13 @@
       <div class="signup-form">
         <h2>Sign up</h2>
         <form class="form" method="POST" action="/signup">
-          <% if (locals.error) { %>
-          <p>
-            <span style="color: red; font-weight: bolder; font-size: 18px"
-              ><%= error %></span
-            >
-          </p>
-          <% } %>
+          <div class="error-container" style="opacity: 1">
+            <% if (locals.error) { %>
+            <p id="error-msg">
+              <span class="error"><%= error %></span>
+            </p>
+            <% } %>
+          </div>
           <div class="form-group">
             <div>
               <label for="username">username:</label>

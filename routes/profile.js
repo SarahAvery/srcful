@@ -11,23 +11,29 @@ module.exports = (db) => {
       .then((data) => data.json())
       .then((json) => {
         if (json.users) {
-          const currentUser = (json.users).filter(obj => {
+          const currentUser = json.users.filter((obj) => {
             return obj.id === req.session.userId;
           });
-          db.query(`SELECT COUNT(*) FROM resource_likes WHERE user_id = $1`, [req.session.userId])
-            .then ((data) => {
-              const user_likes = data.rows[0];
-              db.query(`SELECT COUNT(*) FROM resources WHERE creator_id =$1`, [req.session.userId])
-                .then ((data) => {
-                  const created_resources = data.rows[0];
-                  const templateVars = { user: currentUser[0], user_likes: user_likes.count, created_resources: created_resources.count };
-                  res.render("profile", templateVars);
-                });
+          db.query(`SELECT COUNT(*) FROM resource_likes WHERE user_id = $1`, [
+            req.session.userId,
+          ]).then((data) => {
+            const userLikes = data.rows[0];
+            db.query(`SELECT COUNT(*) FROM resources WHERE creator_id =$1`, [
+              req.session.userId,
+            ]).then((data) => {
+              const createdResources = data.rows[0];
+              const templateVars = {
+                user: currentUser[0],
+                userLikes: userLikes.count,
+                createdResources: createdResources.count,
+              };
+              res.render("profile", templateVars);
             });
+          });
         } else {
           res.redirect("/");
         }
-    });
+      });
   });
 
   router.post("/", (req, res) => {
@@ -49,26 +55,29 @@ module.exports = (db) => {
       `,
       [update.username, update.password, req.session.userId]
     )
-    .then(() => {
-      res.redirect("/profile");
-    })
-    .catch((e) => {
-      res.status(500);
-      if (e.constraint === 'users_username_key') {
-        fetch(process.env.API_URL + "/users")
-        .then((data) => data.json())
-        .then((json) => {
-          if (json.users) {
-            const templateVars = { users: json.users, error: "Username already taken" };
-            res.render("profile", templateVars);
-          } else {
-            res.redirect("/");
-          }
-        });
-      } else {
-        res.send(e.stack);
-      }
-    });
+      .then(() => {
+        res.redirect("/profile");
+      })
+      .catch((e) => {
+        res.status(500);
+        if (e.constraint === "users_username_key") {
+          fetch(process.env.API_URL + "/users")
+            .then((data) => data.json())
+            .then((json) => {
+              if (json.users) {
+                const templateVars = {
+                  users: json.users,
+                  error: "Username already taken",
+                };
+                res.render("profile", templateVars);
+              } else {
+                res.redirect("/");
+              }
+            });
+        } else {
+          res.send(e.stack);
+        }
+      });
   });
 
   return router;
