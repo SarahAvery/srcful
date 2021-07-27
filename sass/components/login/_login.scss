@@ -23,6 +23,7 @@
 
       div {
         margin: 10px 0;
+        width: 100%;
       }
 
       label {
@@ -31,7 +32,7 @@
       input {
         margin-top: 5px;
         padding: 2px;
-        min-width: 250px;
+        width: 100%;
         border-radius: 4px;
         outline: none;
         border: 0.75px solid #222;

@@ -24,19 +24,28 @@
           <div class="form-group">
             <div>
               <label for="title">title:</label>
-              <input type="text" name="title" placeholder="title" />
+              <input type="text" name="title" placeholder="title" required />
             </div>
-            <div>
-              <label for="description">description:</label>
-              <textarea name="description" placeholder="description"></textarea>
+            <div id="article-div">
+              <label for="description">article:</label>
+              <textarea
+                name="description"
+                placeholder="Lorem ipsum dolor sit amet..."
+                required
+              ></textarea>
             </div>
             <div>
               <label for="url">url:</label>
-              <input type="text" name="url" placeholder="https://" />
+              <input type="text" name="url" placeholder="https://" required />
             </div>
             <div>
               <label for="imageURL">image uRL:</label>
-              <input type="text" name="imageURL" placeholder="https://" />
+              <input
+                type="text"
+                name="imageURL"
+                placeholder="https://"
+                required
+              />
             </div>
             <div class="categories">
               <div id="list1" class="dropdown-check-list" tabindex="100">
@@ -58,14 +67,14 @@
                 </ul>
               </div>
             </div>
-            <div>
+            <!-- <div>
               <label for="category">category:</label>
               <input
                 type="text"
                 name="category"
                 placeholder="category"
               />
-            </div>
+            </div> -->
             <div class="btn-container">
               <button type="submit" class="create-btn">create</button>
             </div>
