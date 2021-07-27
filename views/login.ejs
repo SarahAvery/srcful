@@ -22,13 +22,13 @@
       <div class="login-form">
         <h2>Login</h2>
         <form action="/login" method="POST">
-          <% if (locals.error) { %>
-          <p>
-            <span style="color: red; font-weight: bolder; font-size: 18px"
-              ><%= error %></span
-            >
-          </p>
-          <% } %>
+          <div class="error-container" style="opacity: 1">
+            <% if (locals.error) { %>
+            <p id="error-msg">
+              <span class="error"><%= error %></span>
+            </p>
+            <% } %>
+          </div>
           <div class="form-group">
             <div>
               <label for="email">email:</label>

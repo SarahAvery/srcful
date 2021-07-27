@@ -83,8 +83,8 @@ module.exports = (db) => {
       WHERE id = ${req.params.id};
     `;
     db.query(queryString)
-    .then(() => res.redirect('/my-resources'))
-    .catch(e => res.send(e.stack));
+      .then(() => res.redirect("/my-resources"))
+      .catch((e) => res.send(e.stack));
   });
 
   return router;

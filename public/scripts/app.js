@@ -112,6 +112,26 @@
       });
     // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
+    // Error Messages Login
+    $(".login-form form")
+      .find("input")
+      .on("input", () => {
+        $(".error-container").css({
+          opacity: "0",
+          transition: "opacity 400ms ease-in-out",
+        });
+      });
+
+    // Error Messages Signup
+    $(".signup-form form")
+      .find("input")
+      .on("input", () => {
+        $(".error-container").css({
+          opacity: "0",
+          transition: "opacity 400ms ease-in-out",
+        });
+      });
+
     // // Like button
     // $(".like-btn").on("click", function(e) {
     //     $(this).toggleClass("liked");
