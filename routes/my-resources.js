@@ -22,6 +22,7 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     const resource = req.body;
+    console.log(resource);
     //All fields mandatory
 
     // Get the category id

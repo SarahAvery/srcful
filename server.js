@@ -58,6 +58,8 @@ const myResources = require("./routes/my-resources");
 const index = require("./routes/index");
 const logoutRoutes = require("./routes/logout");
 const resourceRoutes = require("./routes/resource");
+const likeRoutes = require("./routes/like");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
@@ -75,6 +77,7 @@ app.use("/", index(db));
 app.use("/logout", logoutRoutes());
 app.use("/my-resource/new", categoryRoutes(db));
 app.use("/resource", resourceRoutes(db));
+app.use("/like", likeRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
