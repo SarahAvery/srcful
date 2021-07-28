@@ -53,6 +53,7 @@ const categoryRoutes = require("./routes/api/categorys");
 
 const profileRoutes = require("./routes/profile");
 const editProfileRoutes = require("./routes/edit_profile");
+// const editResource = require("./routes/edit-resource");
 const loginRoutes = require("./routes/login");
 const signup = require("./routes/signup");
 const myResources = require("./routes/my-resources");
@@ -78,8 +79,9 @@ app.use("/my-resources", myResources(db));
 app.use("/", index(db));
 app.use("/logout", logoutRoutes());
 app.use("/my-resource/new", categoryRoutes(db));
-app.use("/resource", resourceRoutes(db));
+app.use("/resource:id", resourceRoutes(db));
 app.use("/like", likeRoutes(db));
+// app.use("/edit-resource", editResource(db));
 
 // Note: mount other resources here, using the same pattern above
 

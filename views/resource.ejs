@@ -17,101 +17,44 @@
 
   <body>
     <!-- header -->
-    <%- include('partials/_nav') %>
+    <%- include("partials/_nav") %>
     <main>
       <div class="article-container">
         <div class="resource-container">
           <div class="header-banner">
+          <% if (resource.user_id === loggedInUser) { %>
             <div class="btn-container">
               <a class="button edit-btn" href="/my-resources/:id/edit">edit</a>
               <a class="button delete" href="#">delete</a>
             </div>
+          <% } %>
           </div>
 
           <div class="resource">
-            <%# if ( resources.id !== null) { %>
+            <%# if ( resource.resource_id !== null) { %>
             <div class="card">
               <div class="title">
-                <h1><%# resources.title %>What is Vercel?</h1>
-                <p>written by: <%# resource.username %>username</p>
+                <h1><%= resource.title %></h1>
+                <p>written by: <%= resource.username %></p>
               </div>
               <div class="main">
                 <div class="img-container">
-                  <!-- <%# if ( resource.image_url !== null) { %>
-                  <img src="<%# resource.image_url %>" alt="" />
+                  <%# if ( resource.image_url !== null) { %>
+                  <img src="<%= resource.image_url %>" alt="" />
                   <%# } else { %>
-                  <img src="https://source.unsplash.com/random/600x600" alt="" />
-                  <%# } %> -->
-                  <img
-                    src="https://assets.vercel.com/image/upload/q_auto/front/vercel/dps.png"
-                    alt=""
-                  />
+                  <!-- <img src="https://source.unsplash.com/random/600x600" alt="" /> -->
+                  <%# } %> 
                 </div>
                 <div class="description">
                   <div class="web-link">
                     <a
-                      href="<%# resource.url %> https://vercel.com"
+                      href="<%= resource.url %>"
                       target="_blank"
                       ><i class="fas fa-link fa-xs"></i
                     ></a>
                   </div>
                   <p class="full-article">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Donec scelerisque consequat odio a tincidunt. In sagittis at
-                    leo non facilisis. Ut elementum ante sit amet erat
-                    condimentum pharetra sed eu metus. Etiam facilisis justo
-                    vehicula, pulvinar metus eget, facilisis ipsum. Integer
-                    finibus gravida nunc sed fringilla. Vivamus non purus non
-                    lectus varius molestie. Vivamus convallis nisl quis mauris
-                    finibus, ut bibendum mi mollis. Cras sed odio nec enim
-                    dapibus porttitor. Ut non vehicula libero. Sed finibus sem
-                    et tempus vestibulum. Class aptent taciti sociosqu ad litora
-                    torquent per conubia nostra, per inceptos himenaeos. Etiam
-                    euismod metus sed suscipit tempus. Nam lobortis tempor
-                    risus, at lacinia massa faucibus id.
-                    <br /><br />
-                    Proin vitae ipsum at eros feugiat scelerisque eget vel
-                    justo. Proin ac mi consectetur, cursus quam eget,
-                    condimentum erat. Nulla auctor ante arcu, a accumsan massa
-                    rutrum et. Fusce ullamcorper tempus felis quis ullamcorper.
-                    Morbi varius lorem vel gravida semper. Nunc id suscipit
-                    arcu. Ut at rutrum ipsum, id fringilla orci. Aliquam erat
-                    volutpat. Pellentesque tempor nisl sed enim venenatis
-                    porttitor. Vestibulum nec odio nec est semper varius.
-                    <br /><br />
-                    Morbi vel porta nulla, ut suscipit nunc. Suspendisse odio
-                    dui, congue sit amet eros ac, maximus hendrerit purus.
-                    Mauris pretium ac est a posuere. Etiam vel ipsum sodales,
-                    sollicitudin quam tristique, varius orci. Fusce ac nisl ut
-                    urna feugiat varius aliquet ac neque. Quisque nulla ante,
-                    pharetra quis leo quis, placerat tristique nisl. Nunc eros
-                    mi, ultricies vel purus non, ultrices semper magna. Donec
-                    pharetra consectetur dolor. Mauris eget ex lobortis, rhoncus
-                    sapien quis, eleifend arcu.
-                    <br /><br />
-                    In hac habitasse platea dictumst. Praesent sagittis volutpat
-                    suscipit. Ut euismod a metus in tincidunt. Duis finibus
-                    congue ipsum sed efficitur. Pellentesque habitant morbi
-                    tristique senectus et netus et malesuada fames ac turpis
-                    egestas. Aliquam magna nibh, gravida in enim sed, commodo
-                    dignissim turpis. Ut sem mi, condimentum eget interdum in,
-                    rutrum nec sapien.
-                    <br /><br />
-                    Cras tristique sed mauris at suscipit. Phasellus interdum,
-                    purus a aliquet dapibus, enim ipsum maximus nisi, sed
-                    dapibus turpis justo ut est. Proin ut libero augue. Aenean
-                    ut pulvinar ante, at accumsan augue. Curabitur lacus diam,
-                    aliquet non viverra ac, consectetur at massa. In mollis
-                    vulputate ultricies. Quisque consequat eu mauris nec
-                    pellentesque. Duis nec bibendum neque, non viverra turpis.
-                    Pellentesque pharetra sapien quam, vel luctus orci accumsan
-                    a. In dui turpis, congue nec ultricies sed, rhoncus eu
-                    justo. Nullam in est in ante eleifend pharetra. Proin
-                    ultrices dictum mauris at cursus. Morbi volutpat scelerisque
-                    neque in commodo. Vestibulum ante ipsum primis in faucibus
-                    orci luctus et ultrices posuere cubilia curae; Vivamus
-                    bibendum, sem non dapibus mollis, lorem libero sollicitudin
-                    magna, a ornare quam quam quis augue.
+                    <%= resource.description %>
                   </p>
                 </div>
               </div>
@@ -120,32 +63,29 @@
                   <a class="icon" href="/"
                     ><i class="fas fa-comment-dots"></i
                     ><sup>
-                      <!-- <%# if ( resource.commentCount !== 0) { %> <%#
-                        resource.commentCount %> <%# } else { %> <%# } %> -->
-                      3
+                       <%# if ( resource.commentCount !== 0) { %> <%=
+                        resource.commentCount %> <%# } else { %> <%# } %> 
+                      
                     </sup></a
                   >
                   <a class="icon" href="/">
                     <i class="fas fa-heart like-btn"></i
                     ><sup>
-                      <!-- <%# if ( resource.commentCount !== 0) { %> <%#
-                        resource.commentCount %> <%# } else { %> <%# } %> -->
-                      5
+                       <%# if ( resource.commentCount !== 0) { %> <%=
+                        resource.commentCount %> <%# } else { %> <%# } %> 
+                      
                     </sup></a
                   >
                   <i class="icon fas fa-star"></i
                   ><sup>
-                    <%# if ( resource.avgRating !== 0) { %> <%#
-                    resource.avgRating %> <%# } else { %> <%# } %> 3.2
+                    <%# if ( resource.avgRating !== 0) { %> <%=
+                    resource.avgRating %> <%# } else { %> <%# } %> 
                   </sup>
                 </div>
                 <div class="badges">
-                  <!-- <%# resource.categories.forEach(category => { %>
-                  <span class="badge"><%# category %></span>
-                  <%# } )%> -->
-                  <span class="badge">Python</span>
-                  <span class="badge">JS</span>
-                  <span class="badge">wordPress</span>
+                  <% resource.categories.forEach(function(category) { %>
+                  <span class="badge"><%= category %></span>
+                  <% }); %> 
                 </div>
                 <div class="rating">
                   <form>
@@ -215,58 +155,32 @@
                       </div>
                     </div>
                   </form>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <h4 class="comment-title">
-                        sapien non mi integer ac neque
-                      </h4>
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
-                      </p>
+                  <% for (let i = 0; i < 3; i++) { %>
+                    <% if (allComments[i]) { %>
+                    <div class="comment">
+                      <div class="comment-body">
+                        <h4 class="comment-title">
+                          <%= allComments[i].title %>
+                        </h4>
+                        <p class="username">Posted By: <%= allComments[i].username %></p>
+                        <p class="comment-content">
+                          <%= allComments[i].content %>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="comment-date"><%= allComments[i].updated_at %></p>
+                      </div>
                     </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <h4 class="comment-title">
-                        sapien non mi integer ac neque
-                      </h4>
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️ Aliquam sit amet diam in magna bibendum
-                        imperdiet. Nullam orci pede, venenatis non, sodales sed,
-                        tincidunt eu, felis
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                </div>
+                    <% } %>
+                  <% }; %> 
+                  
+                <% if (allComments.length >= 3) { %>  
                 <div id="load-more">
-                  <button class="load-more">
+                  <button class="load-more" onclick="sayHello()">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
+                <% } %>
+                  
                 </div>
               </div>
             </div>
@@ -278,7 +192,7 @@
       </div>
     </main>
     <!-- footer -->
-    <%- include('partials/_footer') %>
+    <%- include("partials/_footer") %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
