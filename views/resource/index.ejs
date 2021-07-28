@@ -152,70 +152,76 @@
                       </div>
                     </div>
                   </form>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <h4 class="comment-title">
-                        sapien non mi integer ac neque
-                      </h4>
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
-                      </p>
+                  <% for (let i = 0; i < 3; i++) { %>
+                  <% if (comment[i]) { %>
+                    <div class="comment">
+                      <div class="comment-body">
+                        <h4 class="comment-title">
+                          <%= comment[i].title %>
+                        </h4>
+                        <p class="username">Posted By: <%= comment[i].username %></p>
+                        <p class="comment-content">
+                          <%= comment[i].content %>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="comment-date"><%= comment[i].updated_at %></p>
+                      </div>
                     </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <h4 class="comment-title">
-                        sapien non mi integer ac neque
-                      </h4>
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️ Aliquam sit amet diam in magna bibendum
-                        imperdiet. Nullam orci pede, venenatis non, sodales sed,
-                        tincidunt eu, felis
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                </div>
+                    <% } %>
+                <% } %> 
+                
+                <style>.hidden { display: none; }</style>
+                  
+                <% if (comment.length >= 3) { %>  
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
+                  <div id="hidden-comments" class="hidden">
+                   <% for (let i = 3; i < comment.length; i++) { %>
+                     <div class="comment">
+                      <div class="comment-body">
+                        <h4 class="comment-title">
+                          <%= comment[i].title %>
+                        </h4>
+                        <p class="username">Posted By: <%= comment[i].username %></p>
+                        <p class="comment-content">
+                          <%= comment[i].content %>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="comment-date"><%= comment[i].updated_at %></p>
+                      </div>
+                    </div>
+                  <% } %>
                 </div>
+                </div>
+                <% } %>
+                
+                  
+                
               </div>
             </div>
             <% } else { %>
             <!-- <p>there was an error</p> -->
             <% } %>
+           
           </div>
         </div>
       </div>
     </main>
     <!-- footer -->
     <%- include("../partials/_footer") %>
+    
+     <script>
+
+    $(".load-more").on("click", function() { 
+      $(this).remove();
+      $('#hidden-comments').removeClass('hidden');
+    });
+    
+    </script>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

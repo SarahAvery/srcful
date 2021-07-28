@@ -8,7 +8,6 @@ module.exports = (db) => {
     fetch(process.env.API_URL + "/categories")
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
         res.render("resource/new", { categories: data });
       })
       .catch((err) => {
@@ -21,9 +20,19 @@ module.exports = (db) => {
       .then((data) => data.json())
       .then((json) => {
         if (json) {
-          console.log("INDEX", json);
-          res.render("resource", { resource: json[0] });
-
+          const resourceData = json[0];
+          fetch(process.env.API_URL + "/comments")
+          .then((data) => data.json())
+          .then((json) => {
+            if (json) {
+              const commentData = json;
+              const templateVars = {
+                resource: resourceData,
+                comment: commentData
+              }
+              res.render("resource", templateVars);
+            }
+          });
         } else {
           // error: could not grab json
           res.redirect("/");
