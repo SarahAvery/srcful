@@ -106,11 +106,16 @@
 
     // Comments Load More Button
 
-    $("#load-more")
-      .find(".load-more")
-      .on("click", function () {
-        $(".load-more").addClass("active");
-      });
+    $(".load-more").find(".load-more")on("click", function() { 
+      $(this).remove();
+      $('#hidden-comments').removeClass('hidden');
+    });
+
+    // $("#load-more")
+      // .find(".load-more")
+      // .on("click", function () {
+        // $(".load-more").addClass("active");
+      // });
     // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
     // Error Messages Login
