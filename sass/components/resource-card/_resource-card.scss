@@ -1,5 +1,6 @@
 .home-page {
   @include main-container;
+  padding-bottom: 20px;
 
   .card-container {
     display: flex;
@@ -139,6 +140,27 @@
           }
         }
       }
+    }
+  }
+
+  .page-index-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+
+    a {
+      margin: 10px 15px;
+    }
+
+    .prev {
+      border: 1px solid rgb(38, 116, 135);
+      color: rgb(38, 116, 135);
+    }
+    .next {
+      border: 1px solid rgb(176, 141, 125);
+      color: rgb(176, 141, 125);
     }
   }
 }
