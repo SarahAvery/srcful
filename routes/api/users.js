@@ -13,7 +13,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const userQuery = `SELECT * FROM users;`;
+    const userQuery = `SELECT users.id, users.username, users.email, users.created_at, users.updated_at FROM users;`;
 
     const userLikes = `SELECT users.id as user_id, count(resource_likes.id) AS num_of_likes
       FROM users

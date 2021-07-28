@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-// const fetch = require("node-fetch");
-const bcrypt = require("bcrypt");
+const fetch = require("node-fetch");
+const qs = require("qs");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -9,27 +9,28 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const { email, password } = req.body;
-    const templateVars = {};
+    console.log(req.headers);
+    console.log(qs.stringify(req.body));
 
-    db.query(`SELECT * FROM users WHERE email = $1;`, [email])
+    fetch(`${process.env.API_URL}/login?${qs.stringify(req.body)}`, {
+      method: "POST",
+      ...(req.headers && {
+        headers: req.headers,
+      }),
+    })
+      .then((data) => data.json())
       .then((data) => {
-        const user = data.rows[0];
-        if (bcrypt.compareSync(password, user.password)) {
-          req.session.userId = user.id;
-          res.redirect("/my-resources");
+        if (data.error) {
+          res.status(500).render("login", { error: data.error });
         } else {
-          //invalid password
-          res.status(500);
-          templateVars.error = "incorrect password";
-          res.render("login", templateVars);
+          const user = data;
+          req.session.userId = user.id;
+          res.redirect("/resources");
         }
       })
       .catch((e) => {
-        //invalid email
-        res.status(500);
-        templateVars.error = "incorrect email";
-        res.render("login", templateVars);
+        console.log(e);
+        res.render("login", { error: e });
       });
   });
   return router;

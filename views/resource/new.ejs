@@ -15,13 +15,13 @@
   </head>
 
   <body>
-    <%- include('partials/_nav') %>
+    <%- include('../partials/_nav') %>
 
     <main>
       <!-- Login Form -->
       <div class="new-form">
         <h2>Create New Resource</h2>
-        <form action="/my-resources/new" method="POST">
+        <form action="/resource/new" method="POST">
           <div class="form-group">
             <div>
               <label for="title">title:</label>
@@ -84,7 +84,7 @@
       </div>
     </main>
     <!-- footer -->
-    <%- include('partials/_footer') %>
+    <%- include('../partials/_footer') %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

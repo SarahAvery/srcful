@@ -43,43 +43,23 @@ app.use(
 );
 app.use(express.static("public"));
 
-// WE ONLY CARE ABOUT STUFF BELOW
-
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/api/users");
-const indexRoutes = require("./routes/api/resources");
-const categoryRoutes = require("./routes/api/categorys");
-
-const profileRoutes = require("./routes/profile");
-const editProfileRoutes = require("./routes/edit_profile");
-const loginRoutes = require("./routes/login");
-const signup = require("./routes/signup");
-const myResources = require("./routes/my-resources");
-const index = require("./routes/index");
-const logoutRoutes = require("./routes/logout");
-const resourceRoutes = require("./routes/resource");
-const likeRoutes = require("./routes/like");
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-
 // api routes
-app.use("/api/users", usersRoutes(db));
-app.use("/api/resources", indexRoutes(db));
-app.use("/api/categories", categoryRoutes(db));
+app.use("/api/users", require("./routes/api/users")(db));
+app.use("/api/resources", require("./routes/api/resources")(db));
+app.use("/api/resource", require("./routes/api/resource")(db));
+app.use("/api/categories", require("./routes/api/categories")(db));
+app.use("/api/user", require("./routes/api/user")(db));
+app.use("/api/like", require("./routes/api/like")(db));
+app.use("/api/login", require("./routes/api/login")(db));
 
 // html routes
-app.use("/profile", profileRoutes(db));
-app.use("/edit_profile", editProfileRoutes(db));
-app.use("/login", loginRoutes(db));
-app.use("/signup", signup(db));
-app.use("/my-resources", myResources(db));
-app.use("/", index(db));
-app.use("/logout", logoutRoutes());
-app.use("/my-resource/new", categoryRoutes(db));
-app.use("/resource", resourceRoutes(db));
-app.use("/like", likeRoutes(db));
+app.use("/", require("./routes/index")(db));
+app.use("/profile", require("./routes/profile")(db));
+app.use("/login", require("./routes/login")(db));
+app.use("/signup", require("./routes/signup")(db));
+app.use("/logout", require("./routes/logout")());
+app.use("/resources", require("./routes/resources")(db));
+app.use("/resource", require("./routes/resource")(db));
 
 // Note: mount other resources here, using the same pattern above
 
