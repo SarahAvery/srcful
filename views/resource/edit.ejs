@@ -23,7 +23,7 @@
             <div class="edit-container">
               <h2>Edit Resource</h2>
               <p id="errorMessage" class="hidden"></p>
-              <form class="form" method="POST" action="/resource/edit">
+              <form class="form" method="POST" action="/resources/<%= resource.resource_id %>/edit">
                 <div class="form-group">
                   <div>
                     <label for="description">new description:</label>
@@ -54,9 +54,9 @@
           <p class="username-box">
             Image URL: <span><%= resource.image_url %></span>
           </p>
-          <p class="username-box">
+          <!-- <p class="username-box">
             Categories: <span><%= resource.categories %></span>
-          </p>
+          </p> -->
         </div>
         <div class="btn-container">
           <button class="edit-btn">edit</button>
