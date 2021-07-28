@@ -157,32 +157,55 @@
                       </div>
                     </div>
                   </form>
-                  <% firstThreeComments.forEach(function(comment) { %>
+                  <% for (let i = 0; i < 3; i++) { %>
+                  <% if (allComments[i]) { %>
                     <div class="comment">
                       <div class="comment-body">
                         <h4 class="comment-title">
-                          <%= comment.title %>
+                          <%= allComments[i].title %>
                         </h4>
-                        <p class="username">Posted By: <%= comment.username %></p>
+                        <p class="username">Posted By: <%= allComments[i].username %></p>
                         <p class="comment-content">
-                          <%= comment.content %>
+                          <%= allComments[i].content %>
                         </p>
                       </div>
                       <div>
-                        <p class="comment-date"><%= comment.updated_at %></p>
+                        <p class="comment-date"><%= allComments[i].updated_at %></p>
                       </div>
                     </div>
-                <% }); %> 
+                    <% } %>
+                <% } %> 
+                
+                <style>.hidden { display: none; }</style>
                   
                 <% if (allComments.length >= 3) { %>  
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
+                  <div id="hidden-comments" class="hidden">
+                   <% for (let i = 3; i < allComments.length; i++) { %>
+                     <div class="comment">
+                      <div class="comment-body">
+                        <h4 class="comment-title">
+                          <%= allComments[i].title %>
+                        </h4>
+                        <p class="username">Posted By: <%= allComments[i].username %></p>
+                        <p class="comment-content">
+                          <%= allComments[i].content %>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="comment-date"><%= allComments[i].updated_at %></p>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+                </div>
                 <% } %>
                 
                   
-                </div>
+                
               </div>
             </div>
             <%# } else { %>
@@ -199,9 +222,7 @@
 
     $(".load-more").on("click", function() { 
       $(this).remove();
-      <!-- allComments.forEach(function(comment) { -->
-        <!-- $("#load-more").append(moreComments);   -->
-      <!-- }); -->
+      $('#hidden-comments').removeClass('hidden');
     });
     
     </script>
