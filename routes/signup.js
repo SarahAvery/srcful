@@ -32,7 +32,7 @@ module.exports = (db) => {
       .then((data) => {
         const newUser = data.rows[0];
         req.session.userId = newUser.id;
-        res.redirect("/my-resources");
+        res.redirect("/resources");
       })
       .catch((e) => {
         res.status(500);

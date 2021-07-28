@@ -13,7 +13,7 @@
 
   <body>
     <!-- header -->
-    <%- include("partials/_nav") %>
+    <%- include("../partials/_nav") %>
     <main>
       <div class="profile-container">
         <h1>Resource</h1>
@@ -23,7 +23,7 @@
             <div class="edit-container">
               <h2>Edit Resource</h2>
               <p id="errorMessage" class="hidden"></p>
-              <form class="form" method="POST" action="/my-resources/:id/edit">
+              <form class="form" method="POST" action="/resource/edit">
                 <div class="form-group">
                   <div>
                     <label for="description">new description:</label>
@@ -64,7 +64,7 @@
       </div>
     </main>
     <!-- footer -->
-    <%- include("partials/_footer") %>
+    <%- include("../partials/_footer") %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

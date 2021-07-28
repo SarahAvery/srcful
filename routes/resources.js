@@ -4,19 +4,21 @@ const fetch = require("node-fetch");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("my-resources");
-  });
+    if (!req.session.userId) res.redirect("/");
 
-  router.get("/new", (req, res) => {
-    fetch(process.env.API_URL + "/categories")
+    fetch(`${process.env.API_URL}/user/${req.session.userId}/resources`, {
+      method: "GET",
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
-      .then((json) => {
-        if (json.categories) {
-          const templateVars = { categories: json.categories };
-          res.render("resources_new", templateVars);
-        } else {
-          res.redirect("/");
-        }
+      .then(({ resources, likedResources }) => {
+        res.render("resources", {
+          resources,
+          likedResources,
+        });
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
       });
   });
 
@@ -35,20 +37,24 @@ module.exports = (db) => {
       resource.url,
       resource.imageURL,
       req.session.userId,
-    ]).then((data) => {
-      const newResource = data.rows[0];
-        resource.categories.forEach(category => {
-          db.query(`
+    ])
+      .then((data) => {
+        const newResource = data.rows[0];
+        resource.categories.forEach((category) => {
+          db.query(
+            `
             INSERT INTO resource_categories(resource_id, category_id)
               SELECT $1, id FROM categories WHERE title = $2;
-          `, [newResource.id, category])
+          `,
+            [newResource.id, category]
+          );
         });
-    })
-    .then(() => res.redirect("/my-resources"))
-    .catch((e) => {
-      res.status(500);
-      res.send(e.stack);
-    });
+      })
+      .then(() => res.redirect("/resources"))
+      .catch((e) => {
+        res.status(500);
+        res.send(e.stack);
+      });
   });
 
   router.delete("/:id", (req, res) => {
@@ -59,7 +65,7 @@ module.exports = (db) => {
       WHERE id = ${req.params.id};
     `;
     db.query(queryString)
-      .then(() => res.redirect("/my-resources"))
+      .then(() => res.redirect("/resources"))
       .catch((e) => res.send(e.stack));
   });
 
@@ -76,13 +82,13 @@ module.exports = (db) => {
       `,
       [update.description, update.image_url, req.params.id]
     )
-    .then(() => {
-      res.redirect("/resource");
-    })
-    .catch((e) => {
-      res.status(500);
-      res.send(e.stack);
-    });
+      .then(() => {
+        res.redirect("/resource");
+      })
+      .catch((e) => {
+        res.status(500);
+        res.send(e.stack);
+      });
   });
 
   router.get("/:id/edit", (req, res) => {
@@ -90,7 +96,7 @@ module.exports = (db) => {
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
-          const currentResource = (json.resources).filter(resource => {
+          const currentResource = json.resources.filter((resource) => {
             // return resource.id === req.params.id;
             return resource.resource_id === 1;
           });
@@ -98,7 +104,7 @@ module.exports = (db) => {
         } else {
           res.redirect("/");
         }
-    });
+      });
   });
 
   return router;

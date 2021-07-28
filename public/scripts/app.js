@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -163,5 +164,24 @@
     //   } else {
     //     $("body").removeClass("scrolled");
     //   }
+
+    $("#update_profile").on("submit", function (event) {
+      event.preventDefault();
+
+      const data = $(this).serialize();
+
+      $.ajax({
+        url: $(this).attr("action"),
+        method: "POST",
+        data,
+      })
+        .then((res) => {
+          console.log(res);
+          // update view on sucess
+        })
+        .catch((err) => {
+          // update view on err
+        });
+    });
   });
 })(jQuery);

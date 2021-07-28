@@ -23,7 +23,12 @@
             <div class="edit-container">
               <h2>update profile</h2>
               <p id="errorMessage" class="hidden"></p>
-              <form class="form" method="POST" action="">
+              <form
+                id="update_profile"
+                class="form"
+                method="POST"
+                action="/api/user"
+              >
                 <div class="form-group">
                   <div>
                     <label for="username">new username:</label>
@@ -47,25 +52,19 @@
               username: <span><%= user.username %></span>
             </p>
             <p class="email-box">email: <span><%= user.email %></span></p>
-            <p class="password-box">
-              password:
-              <span
-                ><%= user.password.slice(0,
-                1).concat("*****").concat(user.password.slice(user.password.length
-                - 1)) %></span
-              >
-            </p>
+            <p class="password-box">password:</p>
           </div>
           <div class="stats-info">
             <h3 class="subtitle">my stats</h3>
             <p class="resources">
-              number of resources: <span><%= createdResources %></span>
+              number of resources: <span><%= user.resourcesCount %></span>
             </p>
             <p class="my-likes">
-              resources i've liked: <span><%= userLikes %></span>
+              resources i've liked: <span><%= user.userLikesCount %></span>
             </p>
             <p class="created">
-              member since: <span><%= user.created_at.slice(0,10) %></span>
+              member since:
+              <span><%= new Date(user.created_at).toLocaleDateString() %></span>
             </p>
           </div>
         </div>
