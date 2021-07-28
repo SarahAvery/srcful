@@ -51,7 +51,6 @@ app.use("/api/categories", require("./routes/api/categories")(db));
 app.use("/api/user", require("./routes/api/user")(db));
 app.use("/api/like", require("./routes/api/like")(db));
 app.use("/api/login", require("./routes/api/login")(db));
-app.use("/api/comments", require("./routes/api/comments")(db));
 
 // html routes
 app.use("/", require("./routes/index")(db));

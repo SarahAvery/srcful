@@ -21,18 +21,16 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           const resourceData = json[0];
-          fetch(process.env.API_URL + "/comments")
-          .then((data) => data.json())
-          .then((json) => {
-            if (json) {
-              const commentData = json;
-              const templateVars = {
-                resource: resourceData,
-                comment: commentData
-              }
-              res.render("resource", templateVars);
+          db.query(`SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`
+          , [req.params.id])
+          .then((data) => {
+            const commentData = data.rows;
+            const templateVars = {
+              resource: resourceData,
+              comment: commentData
             }
-          });
+              res.render("resource", templateVars);
+            });
         } else {
           // error: could not grab json
           res.redirect("/");
