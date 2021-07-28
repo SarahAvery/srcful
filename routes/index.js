@@ -4,14 +4,14 @@ const fetch = require("node-fetch");
 
 module.exports = () => {
   router.get("/", (req, res) => {
+    if (req.session.userId) {
+      res.redirect("/resources");
+    }
     fetch(process.env.API_URL + "/resources")
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
-          const templateVars = { resources: json.resources };
-          if (req.session.userId) {
-            res.redirect("/resources");
-          }
+          const templateVars = { resources: json.resources, pageNum:1 };
           res.render("index", templateVars);
         } else {
           res.redirect("/");
@@ -27,7 +27,10 @@ module.exports = () => {
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
-          const templateVars = { resources: json.resources };
+          const templateVars = {
+            resources: json.resources,
+            pageNum: req.params.number,
+          };
           res.render("index", templateVars);
         } else {
           res.redirect("/");
