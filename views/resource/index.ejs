@@ -22,6 +22,7 @@
       <div class="article-container">
         <div class="resource-container">
           <div class="header-banner">
+            <% if (loggedInUser) { %>
             <div class="btn-container">
               <a
                 class="button edit-btn"
@@ -30,6 +31,7 @@
               >
               <a class="button delete" href="/resources/<%= resource.resource_id %>/delete">delete</a>
             </div>
+            <% } %>
           </div>
 
           <div class="resource">

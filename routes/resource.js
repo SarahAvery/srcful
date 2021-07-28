@@ -16,19 +16,22 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    fetch(process.env.API_URL + "/resource/" + req.params.id)
+    const loggedInUser = req.params.id;
+    fetch(process.env.API_URL + "/resource/" + loggedInUser)
       .then((data) => data.json())
       .then((json) => {
         if (json) {
           const resourceData = json[0];
           db.query(`SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`
-          , [req.params.id])
+          , [loggedInUser])
           .then((data) => {
             const commentData = data.rows;
             const templateVars = {
               resource: resourceData,
-              comment: commentData
+              comment: commentData,
+              loggedInUser: loggedInUser
             }
+              console.log(loggedInUser);
               res.render("resource", templateVars);
             });
         } else {
@@ -37,6 +40,8 @@ module.exports = (db) => {
         }
       });
   });
+  
+  
 
   // Create a resource
   router.post("/new", (req, res) => {
