@@ -14,12 +14,12 @@ module.exports = (db) => {
     const user = req.body;
     const templateVars = {};
 
-    //If inputs blank, error (currently required in html)
+    // If inputs blank, error (currently required in html)
     // Hash password
     user.password = bcrypt.hashSync(user.password, 12);
 
-    //If username taken, error
-    //If email already registered, error
+    // If username taken, error
+    // If email already registered, error
     // Else store new user in database: register query
     db.query(
       `
@@ -47,5 +47,6 @@ module.exports = (db) => {
         }
       });
   });
+
   return router;
 };
