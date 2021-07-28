@@ -20,10 +20,11 @@ module.exports = (db) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log("DATA:", data);
         if (data.error) {
           res.status(500).render("login", { error: data.error });
         } else {
+          const user = data;
+          req.session.userId = user.id;
           res.redirect("/resources");
         }
       })
