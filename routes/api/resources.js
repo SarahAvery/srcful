@@ -14,30 +14,36 @@ const resourceQuery = `SELECT users.username AS username, resources.title, resou
     FROM resources
     JOIN users ON creator_id = users.id OFFSET $1 LIMIT ${limit};`;
 
+const allResourcesQuery = `SELECT users.username AS username, resources.title, resources.image_url, resources.id AS resource_id, resources.url, resources.description, substring(resources.description,1,140) AS substring,
+    resources.created_at::date AS date, resources.created_at::time
+    AS time
+    FROM resources
+    JOIN users ON creator_id = users.id;`;
+
 const commentQuery = `
-    SELECT resources.id, count(resource_comments.title) AS num_of_comments 
-    FROM resource_comments 
-    JOIN resources ON resource_id = resources.id 
+    SELECT resources.id, count(resource_comments.title) AS num_of_comments
+    FROM resource_comments
+    JOIN resources ON resource_id = resources.id
     GROUP BY resources.id;`;
 
 const likesQuery = `
-    SELECT resources.id, count(resource_likes) AS num_of_likes 
-    FROM resource_likes 
-    JOIN resources ON resource_id = resources.id 
+    SELECT resources.id, count(resource_likes) AS num_of_likes
+    FROM resource_likes
+    JOIN resources ON resource_id = resources.id
     GROUP BY resources.id;`;
 
 const categoryQuery = `
-    SELECT resources.id AS resource_id, array_agg(categories.title) AS categories 
-    FROM resource_categories 
-    JOIN resources ON resource_id = resources.id 
-    JOIN categories ON category_id = categories.id 
-    WHERE resource_categories.resource_id = resources.id 
+    SELECT resources.id AS resource_id, array_agg(categories.title) AS categories
+    FROM resource_categories
+    JOIN resources ON resource_id = resources.id
+    JOIN categories ON category_id = categories.id
+    WHERE resource_categories.resource_id = resources.id
     GROUP BY resources.id;`;
 
 const ratingQuery = `
-    SELECT resources.id AS resource_id, round(avg(resource_ratings.rating),1) AS avg_rating 
-    FROM resource_ratings 
-    JOIN resources ON resource_id = resources.id 
+    SELECT resources.id AS resource_id, round(avg(resource_ratings.rating),1) AS avg_rating
+    FROM resource_ratings
+    JOIN resources ON resource_id = resources.id
     GROUP BY resources.id;`;
 
 module.exports = (db) => {
@@ -146,6 +152,16 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
+  });
+
+  router.get("/all", (req, res) => {
+    db.query(allResourcesQuery)
+    .then((data) => {
+      res.json({ resources: data.rows });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
   });
 
   return router;

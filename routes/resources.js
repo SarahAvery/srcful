@@ -57,7 +57,7 @@ module.exports = (db) => {
       });
   });
 
-  router.delete("/:id", (req, res) => {
+  router.get("/:id/delete", (req, res) => {
     // 403 forbidden if not resource creator
     // 404 not found if resource doesn't exist
     const queryString = `
@@ -92,15 +92,19 @@ module.exports = (db) => {
   });
 
   router.get("/:id/edit", (req, res) => {
-    fetch(process.env.API_URL + "/resources")
+    fetch(`${process.env.API_URL}/resources/all`, {
+      method: "GET",
+      ...(req.headers && {
+        headers: req.headers,
+      }),
+    })
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
           const currentResource = json.resources.filter((resource) => {
-            // return resource.id === req.params.id;
-            return resource.resource_id === 1;
+            return resource.resource_id == req.params.id;
           });
-          res.render("edit-resource", { resource: currentResource[0] });
+          res.render("resource/edit", { resource: currentResource[0] });
         } else {
           res.redirect("/");
         }

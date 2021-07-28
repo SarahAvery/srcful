@@ -31,6 +31,9 @@ module.exports = (db) => {
   // Create a resource
   router.post("/new", (req, res) => {
     const resource = req.body;
+    if (!Array.isArray(resource.categories)) {
+      resource.categories = [resource.categories];
+    }
     //All fields mandatory
 
     let queryString = `
