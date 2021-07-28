@@ -8,7 +8,7 @@ module.exports = (db) => {
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
-        res.render("resource/new", { categories: data });
+        res.render("resource/new", { categories: data, user: req.session.userId });
       })
       .catch((err) => {
         res.redirect("/");
@@ -21,7 +21,7 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           console.log("INDEX", json);
-          res.render("resource", { resource: json[0] });
+          res.render("resource", { resource: json[0], user: req.session.userId });
         } else {
           res.redirect("/");
         }
