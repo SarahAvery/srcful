@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = () => {
+module.exports = (db) => {
   router.get("/", (req, res) => {
-    req.session = null;
-    res.redirect("/");
+    res.json({ userId: req.session.userId || null });
   });
 
   return router;

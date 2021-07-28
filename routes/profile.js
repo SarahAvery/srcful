@@ -1,82 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
-const bcrypt = require("bcrypt");
 
 // THIS IS AN HTML REQUEST/RENDER
 // ALL REQUESTS SHOULD BE MOCKED USING THIS STRUCTURE
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    fetch(process.env.API_URL + "/users")
+    if (!req.session.userId) res.redirect("/");
+
+    fetch(`${process.env.API_URL}/user`, {
+      method: "GET",
+      // We must forward the request headers to the api request to access session data
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((json) => {
-        if (json.users) {
-          const currentUser = json.users.filter((obj) => {
-            return obj.id === req.session.userId;
-          });
-          db.query(`SELECT COUNT(*) FROM resource_likes WHERE user_id = $1`, [
-            req.session.userId,
-          ]).then((data) => {
-            const userLikes = data.rows[0];
-            db.query(`SELECT COUNT(*) FROM resources WHERE creator_id =$1`, [
-              req.session.userId,
-            ]).then((data) => {
-              const createdResources = data.rows[0];
-              const templateVars = {
-                user: currentUser[0],
-                userLikes: userLikes.count,
-                createdResources: createdResources.count,
-              };
-              res.render("profile", templateVars);
-            });
-          });
-        } else {
-          res.redirect("/");
-        }
-      });
-  });
-
-  router.post("/", (req, res) => {
-    const update = req.body;
-    const templateVars = {};
-
-    //If inputs blank?
-    // Hash password
-    update.password = bcrypt.hashSync(update.password, 12);
-
-    //If username taken, error
-    // Else update user in database
-    db.query(
-      `
-      UPDATE users
-      SET username = $1,
-          password = $2
-      WHERE id = $3;
-      `,
-      [update.username, update.password, req.session.userId]
-    )
-      .then(() => {
-        res.redirect("/profile");
+        console.log(json);
+        if (!json) res.redirect("/");
+        res.render("profile", { user: json });
       })
-      .catch((e) => {
-        res.status(500);
-        if (e.constraint === "users_username_key") {
-          fetch(process.env.API_URL + "/users")
-            .then((data) => data.json())
-            .then((json) => {
-              if (json.users) {
-                const templateVars = {
-                  users: json.users,
-                  error: "Username already taken",
-                };
-                res.render("profile", templateVars);
-              } else {
-                res.redirect("/");
-              }
-            });
-        } else {
-          res.send(e.stack);
-        }
+      .catch((err) => {
+        console.log("Error Here:", err);
+        res.redirect("/");
       });
   });
 

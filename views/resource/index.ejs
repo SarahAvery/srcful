@@ -8,32 +8,32 @@
     <link rel="icon" href="/favicon_io/favicon-16x16.png" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <script>
+    <script
       src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
       data-auto-a11y="true"
-    </script>
+    ></script>
     <title>My Resources</title>
   </head>
 
   <body>
     <!-- header -->
-    <%- include("partials/_nav") %>
+    <%- include("../partials/_nav") %>
     <main>
       <div class="article-container">
         <div class="resource-container">
           <div class="header-banner">
-          <% if (loggedInUser !== "undefined") { %>
-            <% if (resource.user_id === loggedInUser) { %>
-              <div class="btn-container">
-                <a class="button edit-btn" href="/my-resources/:id/edit">edit</a>
-                <a class="button delete" href="#">delete</a>
-              </div>
-            <% } %>
-          <% } %>
+            <div class="btn-container">
+              <a
+                class="button edit-btn"
+                href="/resources/<%= resource.resource_id %>/edit"
+                >edit</a
+              >
+              <a class="button delete" href="/resources/<%= resource.resource_id %>/delete">delete</a>
+            </div>
           </div>
- 
+
           <div class="resource">
-            <%# if ( resource.resource_id !== null) { %>
+            <% if ( resource !== undefined) { %>
             <div class="card">
               <div class="title">
                 <h1><%= resource.title %></h1>
@@ -41,23 +41,20 @@
               </div>
               <div class="main">
                 <div class="img-container">
-                  <%# if ( resource.image_url !== null) { %>
-                  <img src="<%= resource.image_url %>" alt="" />
+                  <!-- <%# if ( resource.image_url !== null) { %>
+                  <img src="<%# resource.image_url %>" alt="" />
                   <%# } else { %>
-                  <!-- <img src="https://source.unsplash.com/random/600x600" alt="" /> -->
-                  <%# } %> 
+                  <img src="https://source.unsplash.com/random/600x600" alt="" />
+                  <%# } %> -->
+                  <img src="<%= resource.image_url %>" alt="" />
                 </div>
                 <div class="description">
                   <div class="web-link">
-                    <a
-                      href="<%= resource.url %>"
-                      target="_blank"
+                    <a href="<%= resource.url %>" target="_blank"
                       ><i class="fas fa-link fa-xs"></i
                     ></a>
                   </div>
-                  <p class="full-article">
-                    <%= resource.description %>
-                  </p>
+                  <p class="full-article"><%= resource.description %></p>
                 </div>
               </div>
               <div class="footer">
@@ -65,29 +62,27 @@
                   <a class="icon" href="/"
                     ><i class="fas fa-comment-dots"></i
                     ><sup>
-                       <%# if ( resource.commentCount !== 0) { %> <%=
-                        resource.commentCount %> <%# } else { %> <%# } %> 
-                      
+                      <% if ( resource.commentCount !== 0) { %> <%=
+                      resource.commentCount %> <% } else { %> <% } %>
                     </sup></a
                   >
                   <a class="icon" href="/">
                     <i class="fas fa-heart like-btn"></i
                     ><sup>
-                       <%# if ( resource.commentCount !== 0) { %> <%=
-                        resource.commentCount %> <%# } else { %> <%# } %> 
-                      
+                      <% if ( resource.commentCount !== 0) { %> <%=
+                      resource.commentCount %> <% } else { %> <% } %>
                     </sup></a
                   >
                   <i class="icon fas fa-star"></i
                   ><sup>
-                    <%# if ( resource.avgRating !== 0) { %> <%=
-                    resource.avgRating %> <%# } else { %> <%# } %> 
+                    <% if ( resource.avgRating !== 0) { %> <%=
+                    resource.avgRating %> <% } else { %> <% } %>
                   </sup>
                 </div>
                 <div class="badges">
-                  <% resource.categories.forEach(function(category) { %>
+                  <% resource.categories.forEach(category => { %>
                   <span class="badge"><%= category %></span>
-                  <% }); %> 
+                  <% } )%>
                 </div>
                 <div class="rating">
                   <form>
@@ -157,75 +152,70 @@
                       </div>
                     </div>
                   </form>
-                  <% for (let i = 0; i < 3; i++) { %>
-                  <% if (allComments[i]) { %>
-                    <div class="comment">
-                      <div class="comment-body">
-                        <h4 class="comment-title">
-                          <%= allComments[i].title %>
-                        </h4>
-                        <p class="username">Posted By: <%= allComments[i].username %></p>
-                        <p class="comment-content">
-                          <%= allComments[i].content %>
-                        </p>
-                      </div>
-                      <div>
-                        <p class="comment-date"><%= allComments[i].updated_at %></p>
-                      </div>
+                  <div class="comment">
+                    <div class="comment-body">
+                      <h4 class="comment-title">
+                        sapien non mi integer ac neque
+                      </h4>
+                      <p class="username">@vwedderburn2</p>
+                      <p class="comment-content">
+                        Aliquam sit amet diam in magna bibendum imperdiet.
+                        Nullam orci pede, venenatis non, sodales sed, tincidunt
+                        eu, felis ❤️
+                      </p>
                     </div>
-                    <% } %>
-                <% } %> 
-                
-                <style>.hidden { display: none; }</style>
-                  
-                <% if (allComments.length >= 3) { %>  
+                    <div>
+                      <p class="comment-date">June 20th, 2021 1:37pm</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-body">
+                      <p class="username">@vwedderburn2</p>
+                      <p class="comment-content">
+                        Aliquam sit amet diam in magna bibendum imperdiet.
+                        Nullam orci pede, venenatis non, sodales sed, tincidunt
+                        eu, felis ❤️
+                      </p>
+                    </div>
+                    <div>
+                      <p class="comment-date">June 20th, 2021 1:37pm</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-body">
+                      <h4 class="comment-title">
+                        sapien non mi integer ac neque
+                      </h4>
+                      <p class="username">@vwedderburn2</p>
+                      <p class="comment-content">
+                        Aliquam sit amet diam in magna bibendum imperdiet.
+                        Nullam orci pede, venenatis non, sodales sed, tincidunt
+                        eu, felis ❤️ Aliquam sit amet diam in magna bibendum
+                        imperdiet. Nullam orci pede, venenatis non, sodales sed,
+                        tincidunt eu, felis
+                      </p>
+                    </div>
+                    <div>
+                      <p class="comment-date">June 20th, 2021 1:37pm</p>
+                    </div>
+                  </div>
+                </div>
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
-                  <div id="hidden-comments" class="hidden">
-                   <% for (let i = 3; i < allComments.length; i++) { %>
-                     <div class="comment">
-                      <div class="comment-body">
-                        <h4 class="comment-title">
-                          <%= allComments[i].title %>
-                        </h4>
-                        <p class="username">Posted By: <%= allComments[i].username %></p>
-                        <p class="comment-content">
-                          <%= allComments[i].content %>
-                        </p>
-                      </div>
-                      <div>
-                        <p class="comment-date"><%= allComments[i].updated_at %></p>
-                      </div>
-                    </div>
-                  <% } %>
                 </div>
-                </div>
-                <% } %>
-                
-                  
-                
               </div>
             </div>
-            <%# } else { %>
+            <% } else { %>
             <!-- <p>there was an error</p> -->
-            <%# } %>
+            <% } %>
           </div>
         </div>
       </div>
     </main>
     <!-- footer -->
-    <%- include("partials/_footer") %>
-    
-    <script>
-
-    $(".load-more").on("click", function() { 
-      $(this).remove();
-      $('#hidden-comments').removeClass('hidden');
-    });
-    
-    </script>
+    <%- include("../partials/_footer") %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
