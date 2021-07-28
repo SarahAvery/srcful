@@ -57,7 +57,7 @@ module.exports = (db) => {
       });
   });
 
-  router.delete("/:id", (req, res) => {
+  router.get("/:id/delete", (req, res) => {
     // 403 forbidden if not resource creator
     // 404 not found if resource doesn't exist
     const queryString = `
