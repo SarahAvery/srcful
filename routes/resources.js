@@ -4,8 +4,6 @@ const fetch = require("node-fetch");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    if (!req.session.userId) res.redirect("/");
-
     fetch(`${process.env.API_URL}/user/${req.session.userId}/resources`, {
       method: "GET",
       ...(req.headers && { headers: req.headers }),
@@ -15,6 +13,7 @@ module.exports = (db) => {
         res.render("resources", {
           resources,
           likedResources,
+          user: req.session.userId
         });
       })
       .catch((err) => {
@@ -104,7 +103,7 @@ module.exports = (db) => {
           const currentResource = json.resources.filter((resource) => {
             return resource.resource_id == req.params.id;
           });
-          res.render("resource/edit", { resource: currentResource[0] });
+          res.render("resource/edit", { resource: currentResource[0], user: req.session.userId });
         } else {
           res.redirect("/");
         }

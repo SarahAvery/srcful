@@ -9,6 +9,9 @@ module.exports = () => {
       .then((json) => {
         if (json.resources) {
           const templateVars = { resources: json.resources };
+          if (req.session.userId) {
+            res.redirect("/resources");
+          }
           res.render("index", templateVars);
         } else {
           res.redirect("/");

@@ -6,8 +6,6 @@ const fetch = require("node-fetch");
 // ALL REQUESTS SHOULD BE MOCKED USING THIS STRUCTURE
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    if (!req.session.userId) res.redirect("/");
-
     fetch(`${process.env.API_URL}/user`, {
       method: "GET",
       // We must forward the request headers to the api request to access session data

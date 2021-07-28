@@ -7,6 +7,9 @@ const bcrypt = require("bcrypt");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    if (req.session.userId) {
+      res.redirect("/resources");
+    }
     res.render("signup");
   });
 
