@@ -83,7 +83,7 @@ module.exports = (db) => {
       [update.description, update.image_url, req.params.id]
     )
       .then(() => {
-        res.redirect("/resource");
+        res.redirect(`/resource/${req.params.id}`);
       })
       .catch((e) => {
         res.status(500);
