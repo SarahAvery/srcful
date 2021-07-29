@@ -1,77 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
-  <body>
-    <header>
-      <!-- Not Logged In -->
-      <!-- <nav>
-        <div class="logo"><a href="/">srcful</a></div>
-
-        <ul>
-          <li><a href="/login" class="login">login</a></li>
-          <li><a href="/signup" class="signup">sign up</a></li>
-        </ul>
-      </nav> -->
-
-      <!-- Logged In -->
-
-      <!-- <nav>
-        <div class="logo"><a href="/">srcful</a></div>
-        <ul>
-          <input type="text" placeholder="Search.." class="search" />
-          <li>
-            <a href="/resources"><i class="fas fa-book-open fa-lg"></i></a>
-          </li>
-          <li>
-            <a href="/profile">
-              <i class="fas fa-user-alt fa-lg"></i>
-            </a>
-          </li>
-          <li><a href="/logout" class="signup">logout</a></li>
-        </ul>
-      </nav> -->
-
-      <!-- ONCE SET UP TO CHECK IF USER, IMPLEMENT BELOW -->
-
-      <nav>
-        <div class="logo"><a href="/">srcful</a></div>
-        <ul>
-          <% if(typeof user !== 'undefined') { %>
-
-          <input type="text" placeholder="Search.." class="search" />
-          <li><a href="/resources">my resources</a></li>
-          <li>
-            <a href="/profile">
-              <i class="fas fa-user-alt fa-lg"></i>
-            </a>
-          </li>
-          <li><a href="/logout" class="signup">logout</a></li>
-
-          <% } else { %>
-
-          <li><a href="/login" class="login">login</a></li>
-          <li><a href="/signup" class="signup">sign up</a></li>
-
-          <% } %>
-        </ul>
-      </nav>
-    </header>
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
-    <script
-      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-      data-auto-a11y="true"
-    ></script>
-  </body>
-</html>
+<header>
+  <nav>
+    <div class="logo"><a href="/">srcful</a></div>
+    <ul>
+      <% if(typeof user !== 'undefined') { %>
+      <input type="text" name="search" placeholder="Search.." class="search" />
+      <li>
+        <a href="/resources"><i class="fas fa-book-open fa-lg"></i></a>
+      </li>
+      <li>
+        <a href="/profile">
+          <i class="fas fa-user-alt fa-lg"></i>
+        </a>
+      </li>
+      <li><a href="/logout" class="signup">logout</a></li>
+      <% } else { %>
+      <li><a href="/login" class="login">login</a></li>
+      <li><a href="/signup" class="signup">sign up</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>

@@ -72,6 +72,7 @@ app.use("/profile", require("./routes/profile")(db));
 app.use("/logout", require("./routes/logout")());
 app.use("/resources", require("./routes/resources")(db));
 app.use("/resource", require("./routes/resource")(db));
+app.use("/search", require("./routes/search")(db));
 
 // Note: mount other resources here, using the same pattern above
 

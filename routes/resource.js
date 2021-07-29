@@ -4,9 +4,12 @@ const fetch = require("node-fetch");
 
 module.exports = (db) => {
   router.get("/new", (req, res) => {
-    fetch(process.env.API_URL + "/categories")
+    fetch(process.env.API_URL + "/categories", {
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((data) => {
+
         res.render("resource/new", {
           categories: data,
           user: req.session.userId,
@@ -35,6 +38,18 @@ module.exports = (db) => {
               loggedInUser: loggedInUser,
             };
             res.render("resource", templateVars);
+// =======
+    // fetch(process.env.API_URL + "/resource/" + req.params.id, {
+      // ...(req.headers && { headers: req.headers }),
+    // })
+      // .then((data) => data.json())
+      // .then((json) => {
+        // if (json) {
+          // console.log("INDEX", json);
+          // res.render("resource", {
+            // resource: json[0],
+            // user: req.session.userId,
+// >>>>>>> main
           });
         } else {
           // error: could not grab json
