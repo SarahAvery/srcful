@@ -111,10 +111,14 @@
           }
         $('#comment-content').val('');
         $('#comment-title').val('');
-        if(commentStuff.title !== "" && commentStuff.description !== "" && username !== "") {
+        if(commentStuff.description !== "" && username !== "") {
           const newComment = createCommentElement(commentStuff);
           $('.inputComment').after(newComment);
           $.ajax({ url: '/api/resource_comments', method: 'POST', data: commentStuff })
+          const sup = $(this).closest(".card").find(".comment-dots sup");
+          console.log(sup);
+          const commentCount = Number(sup.text());
+          sup.text(commentCount + 1);
         }
         });
       });
@@ -126,7 +130,7 @@
           `<div class="comment">
             <div class="comment-body">
               <h4 class="comment-title">${commentInfo.title}</h4>
-              <p class="username">Posted By: ${commentInfo.username} </p>
+              <p class="username">@${commentInfo.username} </p>
               <p class="comment-content">${commentInfo.description}</p>
             </div>
             <div>
@@ -174,7 +178,10 @@
       $(this).toggleClass("liked");
       const resourceId = window.location.pathname.match(/\d+/gi)[0];
       const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
-
+      
+      const sup = $(this).closest(".card").find(".like-btn sup");
+      const currentLikesCount = Number(sup.text());
+      sup.text(currentLikesCount + ($(this).hasClass("liked") ? 1 : -1));
       $.post(url, { resourceId });
     });
 

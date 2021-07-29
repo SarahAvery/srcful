@@ -50,3 +50,9 @@ module.exports = () => {
 
   return router;
 };
+
+
+// Grab count of comments
+//Send this num as offset params
+// Query this many, limit 3
+

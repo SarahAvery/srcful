@@ -62,9 +62,9 @@
               </div>
               <div class="footer">
                 <div class="icons">
-                  <span class="icon"
+                  <span class="icon comment-dots"
                     ><i class="fas fa-comment-dots"></i
-                    ><sup id="comment-count">
+                    ><sup>
                       <% if ( resource.commentCount !== 0) { %> <%=
                       resource.commentCount %> <% } else { %> <% } %>
                     </sup></span
@@ -149,7 +149,7 @@
                     <h4>leave a comment</h4>
                     <div class="form-container">
                  
-                      <label for="comment-title">title</label>
+                      <label for="comment-title">title (optional)</label>
                       <input type="text" name="comment-title" id="comment-title" >
                         <label for="comment-content">comment</label>
                       <input type="text" name="comment" id="comment-content" >
@@ -167,7 +167,7 @@
                         <h4 class="comment-title">
                           <%= comment[i].title %>
                         </h4>
-                        <p class="username">Posted By: <%= comment[i].username %></p>
+                        <p class="username">@<%= comment[i].username %></p>
                         <p class="comment-content">
                           <%= comment[i].content %>
                         </p>
@@ -193,7 +193,7 @@
                         <h4 class="comment-title">
                           <%= comment[i].title %>
                         </h4>
-                        <p class="username">Posted By: <%= comment[i].username %></p>
+                        <p class="username">@<%= comment[i].username %></p>
                         <p class="comment-content">
                           <%= comment[i].content %>
                         </p>
