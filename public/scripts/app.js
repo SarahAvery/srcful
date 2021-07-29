@@ -13,8 +13,8 @@
 
 
 
-(function ($, db, req) {
-  $(document).ready(function (db) {
+(function ($) {
+  $(document).ready(function () {
     // Profile Edit Btn
     $(".profile-container")
       .find(".edit-btn")
@@ -89,7 +89,6 @@
         const rating = e.target.value;
         const url = window.location.href;
         const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
-
         $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
 
       });
@@ -100,7 +99,6 @@
     $("#article-div")
       .find("textarea")
       .on("click", () => {
-        e.stopImmediatePropogation();
         $("#article-div").css({ width: "600px", margin: "0 -50%" });
         $("textarea").css({ width: "600px", height: "300px" });
       });
@@ -110,20 +108,23 @@
       .find(".comment-btn")
       .on("click", function (event) {
         event.preventDefault();
-        $(".comment-btn").addClass("active");
-        db.query(`INSERT INTO resource_comments (title, content, user_id, resource_id)
-         VALUES("title", "content", 5, 2);`)
-        // `, [])
-        .then(db.query(`SELECT COUNT(resource_comments.id) as count FROM resource_comments`))
-        .then((data) => {
-          let numComments = data.rows[0];
+        const url = window.location.href;
+        const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
+        $.get('http://localhost:8080/profile', function(data) {
+          return data;
         })
-        .then(db.query(`SELECT * FROM resource_comments WHERE resource_id = $1;`, [numComments]))
         .then((data) => {
-          let commentInfo = data.rows[0];
-          const newComment = createCommentElement(commentInfo)
-          .then($(".comment-container").prepend("newComment"))
-          .then($(".comment-btn").removeClass("active"))
+          let username = data.split('username: <span>')[1].split('</span>')[0];
+         
+        const commentStuff = { 
+          title: $('#comment-title').val(), username: username, 
+          description: $('#comment-content').val(), updated_at: new Date(), resourceId: id
+          }
+        $('#comment-content').val('');
+        $('#comment-title').val('');
+        const newComment = createCommentElement(commentStuff);
+        $('.inputComment').after(newComment);
+        $.ajax({ url: '/api/resource_comments', method: 'POST', data: commentStuff })
         });
       });
       

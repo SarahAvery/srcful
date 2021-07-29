@@ -1,0 +1,25 @@
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+
+module.exports = (db) => {
+  
+  router.post("/", (req, res) => {
+
+    // req.body is commentStuff
+    const title = req.body.title;
+    const comment = req.body.description;
+    const userId = req.session.userId;
+    const resId = req.body.resourceId;
+    
+    if (title && comment) {
+      db.query(`INSERT INTO resource_comments (title, content, user_id, resource_id)
+                VALUES ($1, $2, $3, $4);`, 
+                [title, comment, userId, resId])
+      }
+              
+  });
+  
+  return router;
+  
+};

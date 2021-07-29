@@ -25,7 +25,7 @@ module.exports = (db) => {
         if (json) {
           const resourceData = json[0];
           db.query(
-            `SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`,
+            `SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at DESC;`,
             [req.params.id]
           ).then((data) => {
             const commentData = data.rows;
