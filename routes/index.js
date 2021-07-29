@@ -11,7 +11,12 @@ module.exports = () => {
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
+<<<<<<< HEAD
           const templateVars = { resources: json.resources, pageNum:1 };
+=======
+          const templateVars = { resources: json.resources, pageNum: 1 };
+
+>>>>>>> main
           res.render("index", templateVars);
         } else {
           res.redirect("/");
