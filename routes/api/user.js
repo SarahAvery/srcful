@@ -74,7 +74,7 @@ module.exports = (db) => {
     const update = req.body;
     //Check if inputs blank
     if(!update.username && !update.password) {
-      return;
+      return res.redirect("/profile");
     }
 
     console.log(req.query, req.params, update);
@@ -98,12 +98,9 @@ module.exports = (db) => {
     values.push(req.session.userId);
     queryString += `WHERE id = $${values.length};`;
 
-    console.log(queryString);
-    console.log(values);
-
     db.query(queryString, values)
       .then((data) => {
-        res.json({ user: data.rows[0] });
+        res.redirect("/profile");
       })
       .catch((e) => {
         res.status(500);
