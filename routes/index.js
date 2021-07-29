@@ -17,7 +17,7 @@ module.exports = () => {
       .then((json) => {
         if (json.resources) {
           const templateVars = { resources: json.resources, pageNum: 1 };
-          if(req.session.userId) {
+          if (req.session.userId) {
             templateVars.user = req.session.userId;
           }
           res.render("index", templateVars);
@@ -31,13 +31,16 @@ module.exports = () => {
     if (req.params.number === "1") res.redirect("/");
 
     const offset = req.params.number - 1;
-    fetch(process.env.API_URL + "/resources/page/" + offset)
+    fetch(process.env.API_URL + "/resources/page/" + offset, {
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
           const templateVars = {
             resources: json.resources,
             pageNum: req.params.number,
+            user: req.session.userId,
           };
           res.render("index", templateVars);
         } else {
