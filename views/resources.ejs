@@ -46,7 +46,7 @@
           <div id="myresources" class="tabcontent">
             <div class="resources">
               <% resources.forEach(resource => { %>
-              <div class="card">
+              <div class="card" data-resource-id="<%= resource.id %>">
                 <div class="title">
                   <h3><%= resource.title %></h3>
                   <p>written by: <%= resource.username %></p>
