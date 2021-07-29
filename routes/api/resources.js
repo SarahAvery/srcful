@@ -45,12 +45,17 @@ const ratingQuery = `
     FROM resource_ratings
     JOIN resources ON resource_id = resources.id
     GROUP BY resources.id;`;
+
 const isLikedQuery = `
-    SELECT resource_likes.*
+    SELECT  users.id AS user_id, array_agg(resources.id) AS resources_liked_arr
     FROM resource_likes
-    WHERE resource_id = $1 AND user_id = $2;`;
+    JOIN resources ON resource_id = resources.id
+    JOIN users ON user_id = users.id
+    WHERE users.id = $1
+    GROUP BY users.id;`;
+
 module.exports = (db) => {
-  const resourcesQuery = (offset) => {
+  const resourcesQuery = (offset, userId) => {
     const commentsQueryFunc = (prevResources) => {
       // commentsCount
       return new Promise((resolve) => {
@@ -123,14 +128,17 @@ module.exports = (db) => {
       });
     };
 
-    const isLikedQueryFunc = (data) => {
+    const isLikedQueryFunc = (data, userId) => {
       // categories
       return new Promise((resolve) => {
-        console.log(userId);
+        console.log("----------->", userId);
         db.query(isLikedQuery, [userId]).then((isLikedData) => {
+          console.log(isLikedData.rows[0].resources_liked_arr);
           const newResources = data.map((resource) => ({
             ...resource,
-            isLiked: !!isLikedData.rows.length,
+            isLiked: isLikedData.rows[0].resources_liked_arr.includes(
+              resource.resource_id
+            ),
           }));
 
           resolve(newResources);
@@ -138,25 +146,24 @@ module.exports = (db) => {
       });
     };
 
-    return (
-      db
-        .query(resourceQuery, [offset * limit || 0])
-        .then((data) => {
-          const resources = data.rows;
-          return resources;
-        })
-        .then(commentsQueryFunc)
-        .then(likesQueryFunc)
-        .then(ratingQueryFunc)
-        .then(categoryQueryFunc)
-        // .then(isLikedQueryFunc)
-        .then((data) => data)
-        .catch((err) => err)
-    );
+    return db
+      .query(resourceQuery, [offset * limit || 0]) // get all resources with users
+      .then((data) => {
+        const resources = data.rows;
+        return resources;
+      })
+      .then(commentsQueryFunc) // CommentsCount added
+      .then(likesQueryFunc) // likesCount added
+      .then(ratingQueryFunc)
+      .then(categoryQueryFunc)
+      .then((data) => isLikedQueryFunc(data, userId))
+      .then((data) => data)
+      .catch((err) => err);
   };
 
   router.get("/page/:number", (req, res) => {
-    resourcesQuery(req.params.number)
+    console.log(req.session.userId);
+    resourcesQuery(req.params.number, req.session.userId)
       .then((data) => {
         res.json({ resources: data });
       })
@@ -166,7 +173,8 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    resourcesQuery()
+    console.log('line 176: ',req.session.userId);
+    resourcesQuery(null, req.session.userId)
       .then((data) => {
         res.json({ resources: data });
       })
