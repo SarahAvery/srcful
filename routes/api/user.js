@@ -90,7 +90,8 @@ module.exports = (db) => {
       [update.username, update.password, req.session.userId]
     )
       .then((data) => {
-        res.json({ user: data.rows[0] });
+        // res.json({ user: data.rows[0] });
+        res.redirect("/profile");
       })
       .catch((e) => {
         res.status(500);

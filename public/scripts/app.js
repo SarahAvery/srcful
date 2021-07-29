@@ -171,23 +171,23 @@
     //     $("body").removeClass("scrolled");
     //   }
 
-    $("#update_profile").on("submit", function (event) {
-      event.preventDefault();
+    // $("#update_profile").on("submit", function (event) {
+    //   event.preventDefault();
 
-      const data = $(this).serialize();
+    //   const data = $(this).serialize();
 
-      $.ajax({
-        url: $(this).attr("action"),
-        method: "POST",
-        data,
-      })
-        .then((res) => {
-          console.log(res);
-          // update view on sucess
-        })
-        .catch((err) => {
-          // update view on err
-        });
-    });
+    //   $.ajax({
+    //     url: $(this).attr("action"),
+    //     method: "POST",
+    //     data,
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //       // update view on sucess
+    //     })
+    //     .catch((err) => {
+    //       // update view on err
+    //     });
+    // });
   });
 })(jQuery);
