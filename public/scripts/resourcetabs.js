@@ -1,11 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
-
-// });
-
-// Get the element with id="defaultOpen" and click on it
-// document.getElementById("defaultOpen").click();
-// document.getElementById("defaultOpen").style.display = "block";
-
 document.getElementById("defaultOpen").click();
 
 // eslint-disable-next-line func-style

@@ -1,14 +1,4 @@
 /* eslint-disable no-undef */
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
 
 (function ($) {
   $(document).ready(function () {
@@ -133,12 +123,28 @@
         });
       });
 
-    // // Like button
-    // $(".like-btn").on("click", function(e) {
-    //     $(this).toggleClass("liked");
-    //     const url = ($(this).attr("class").includes("liked")) ? "/like" : "/like/remove";
-    //     $.post(url, resource_id);
-    //   });
+    // Like button on /resource/:id
+    $(".article-container .like-btn").on("click", function (e) {
+      e.preventDefault();
+      $(this).toggleClass("liked");
+      const resourceId = window.location.pathname.match(/\d+/gi)[0];
+      const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
+
+      $.post(url, { resourceId });
+    });
+
+    // Like buttons on /
+    $(".home-page .like-btn").on("click", function (e) {
+      e.preventDefault();
+      $(this).toggleClass("liked");
+      const resourceId = $(this).closest(".card").attr("data-resource-id");
+      const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
+
+      const sup = $(this).closest(".card").find(".like-btn sup");
+      const currentLikesCount = Number(sup.text());
+      sup.text(currentLikesCount + ($(this).hasClass("liked") ? 1 : -1));
+      $.post(url, { resourceId });
+    });
 
     // DONT REMOVE BELOW CODE PLEASE
 

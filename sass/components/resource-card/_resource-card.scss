@@ -7,6 +7,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px 0;
+    margin: 0 auto;
 
     .card .title,
     .main,
@@ -16,7 +17,7 @@
 
     .card {
       margin: 10px 0;
-      max-width: 30%;
+      max-width: calc(33.333% - 20px);
       min-width: 300px;
       margin: 10px auto;
       border: 1px solid rgb(38, 116, 135);
@@ -56,10 +57,14 @@
         .img-container {
           width: 100%;
 
+          height: auto;
+
           img {
             width: 100%;
-            height: 320px;
+            // height: 320px;
             object-fit: cover;
+
+            object-fit: contain;
           }
         }
 
@@ -122,7 +127,7 @@
           width: 100%;
           text-align: right;
 
-          a {
+          span {
             color: black;
             .fa-comment-dots {
               color: rgb(38, 116, 135);

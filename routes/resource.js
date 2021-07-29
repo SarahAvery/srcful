@@ -4,11 +4,16 @@ const fetch = require("node-fetch");
 
 module.exports = (db) => {
   router.get("/new", (req, res) => {
-    fetch(process.env.API_URL + "/categories")
+    fetch(process.env.API_URL + "/categories", {
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
-        res.render("resource/new", { categories: data, user: req.session.userId });
+        res.render("resource/new", {
+          categories: data,
+          user: req.session.userId,
+        });
       })
       .catch((err) => {
         res.redirect("/");
@@ -16,7 +21,9 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    fetch(process.env.API_URL + "/resource/" + req.params.id)
+    fetch(process.env.API_URL + "/resource/" + req.params.id, {
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((json) => {
         if (json) {

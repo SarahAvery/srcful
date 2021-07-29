@@ -13,7 +13,7 @@ module.exports = (db) => {
         res.render("resources", {
           resources,
           likedResources,
-          user: req.session.userId
+          user: req.session.userId,
         });
       })
       .catch((err) => {
