@@ -58,59 +58,75 @@ module.exports = (db) => {
 
   router.get("/:id/delete", (req, res) => {
     // 403 forbidden if not resource creator
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id == req.session.userId) {
+        const queryString = `
+        DELETE FROM resources
+        WHERE id = ${req.params.id};
+        `;
+        db.query(queryString)
+          .then(() => res.redirect("/resources"))
+      } else {
+        res.redirect(`/resource/${req.params.id}`);
+      }
+    })
+    .catch((e) => res.send(e.stack));
     // 404 not found if resource doesn't exist
-    const queryString = `
-      DELETE FROM resources
-      WHERE id = ${req.params.id};
-    `;
-    db.query(queryString)
-      .then(() => res.redirect("/resources"))
-      .catch((e) => res.send(e.stack));
   });
 
   router.post("/:id/edit", (req, res) => {
     const update = req.body;
 
-    // Update resource in database
-    db.query(
-      `
-      UPDATE resources
-      SET description = $1,
-          image_url = $2
-      WHERE id = $3;
-      `,
-      [update.description, update.image_url, req.params.id]
-    )
-      .then(() => {
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id == req.session.userId) {
+        // Update resource in database
+        db.query(
+          `
+          UPDATE resources
+          SET description = $1,
+              image_url = $2
+          WHERE id = $3;
+          `,
+          [update.description, update.image_url, req.params.id]
+        )
+        .then(() => {
+          res.redirect(`/resource/${req.params.id}`);
+        })
+      } else {
         res.redirect(`/resource/${req.params.id}`);
-      })
-      .catch((e) => {
-        res.status(500);
-        res.send(e.stack);
-      });
+      }
+    })
+    .catch((e) => res.send(e.stack));
   });
 
   router.get("/:id/edit", (req, res) => {
-    fetch(`${process.env.API_URL}/resources/all`, {
-      method: "GET",
-      ...(req.headers && {
-        headers: req.headers,
-      }),
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id !== req.session.userId) {
+        res.redirect(`/resource/${req.params.id}`);
+      } else {
+        fetch(`${process.env.API_URL}/resources/all`, {
+          method: "GET",
+          ...(req.headers && {
+            headers: req.headers,
+          }),
+        })
+        .then((data) => data.json())
+        .then((json) => {
+          if (json.resources) {
+            const currentResource = json.resources.filter((resource) => {
+              return resource.resource_id == req.params.id;
+            });
+            res.render("resource/edit", { resource: currentResource[0], user: req.session.userId });
+          } else {
+            res.redirect("/");
+          }
+        });
+      }
     })
-      .then((data) => data.json())
-      .then((json) => {
-        if (json.resources) {
-          const currentResource = json.resources.filter((resource) => {
-            return resource.resource_id === req.params.id;
-          });
-          res.render("resource/edit", {
-            resource: currentResource[0],
-            user: req.session.userId,
-          });
-        } else {
-          res.redirect("/");
-        }
-      });
+    .catch(e => res.send(e.stack));
   });
 
   return router;
