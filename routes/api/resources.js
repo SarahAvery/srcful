@@ -162,8 +162,7 @@ module.exports = (db) => {
   };
 
   router.get("/page/:number", (req, res) => {
-    console.log(req.session.userId);
-    resourcesQuery(req.params.number, req.session.userId)
+    resourcesQuery(req.params.number)
       .then((data) => {
         res.json({ resources: data });
       })
