@@ -8,7 +8,7 @@
     <link rel="icon" href="/favicon_io/favicon-16x16.png" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <title>Edit Resource</title>
+    <title>srcful</title>
   </head>
 
   <body>
@@ -23,15 +23,15 @@
             <div class="edit-container">
               <h2>Edit Resource</h2>
               <p id="errorMessage" class="hidden"></p>
-              <form class="form" method="POST" action="/resource/edit">
+              <form class="form" method="POST" action="/resources/<%= resource.resource_id %>/edit">
                 <div class="form-group">
                   <div>
                     <label for="description">new description:</label>
-                    <textarea name="description" placeholder="description" required></textarea>
+                    <textarea name="description" placeholder="description" ></textarea>
                   </div>
                   <div>
                     <label for="image_url">new image URL:</label>
-                    <input type="text" name="image_url" placeholder="image URL" required/>
+                    <input type="text" name="image_url" placeholder="image URL" />
                   </div>
                   <div class="btn-container">
                     <button class="save-btn" type="submit">save</button>
@@ -54,9 +54,9 @@
           <p class="username-box">
             Image URL: <span><%= resource.image_url %></span>
           </p>
-          <p class="username-box">
+          <!-- <p class="username-box">
             Categories: <span><%= resource.categories %></span>
-          </p>
+          </p> -->
         </div>
         <div class="btn-container">
           <button class="edit-btn">edit</button>

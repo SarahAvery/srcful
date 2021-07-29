@@ -18,7 +18,7 @@ module.exports = (db) => {
         } else {
           //invalid password
           console.log("invalid pass");
-          res.json({ error: "incorrect password" });
+          res.json({ error: "Incorrect password" });
         }
       })
       .catch((err) => {

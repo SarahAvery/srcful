@@ -5,6 +5,9 @@ const qs = require("qs");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    if (req.session.userId) {
+      res.redirect("/resources");
+    }
     res.render("login");
   });
 
@@ -33,5 +36,6 @@ module.exports = (db) => {
         res.render("login", { error: e });
       });
   });
+
   return router;
 };

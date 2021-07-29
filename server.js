@@ -54,9 +54,18 @@ app.use("/api/login", require("./routes/api/login")(db));
 
 // html routes
 app.use("/", require("./routes/index")(db));
-app.use("/profile", require("./routes/profile")(db));
 app.use("/login", require("./routes/login")(db));
 app.use("/signup", require("./routes/signup")(db));
+
+// authentication middleware (must go here, ie after the 3 routes above)
+app.use("/", (req, res, next) => {
+  if(req.session.userId) {
+    return next();
+  }
+  res.redirect("/");
+});
+
+app.use("/profile", require("./routes/profile")(db));
 app.use("/logout", require("./routes/logout")());
 app.use("/resources", require("./routes/resources")(db));
 app.use("/resource", require("./routes/resource")(db));

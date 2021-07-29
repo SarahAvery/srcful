@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
-
 module.exports = (db) => {
   router.get("/new", (req, res) => {
     fetch(process.env.API_URL + "/categories")
       .then((data) => data.json())
       .then((data) => {
-        res.render("resource/new", { categories: data });
+        res.render("resource/new", {
+          categories: data,
+          user: req.session.userId,
+        });
       })
       .catch((err) => {
         res.redirect("/");
@@ -22,29 +24,31 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           const resourceData = json[0];
-          db.query(`SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`
-          , [req.params.id])
-          .then((data) => {
+          db.query(
+            `SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`,
+            [req.params.id]
+          ).then((data) => {
             const commentData = data.rows;
             const templateVars = {
               resource: resourceData,
               comment: commentData,
-              loggedInUser: loggedInUser
-            }
-              res.render("resource", templateVars);
-            });
+              loggedInUser: loggedInUser,
+            };
+            res.render("resource", templateVars);
+          });
         } else {
           // error: could not grab json
           res.redirect("/");
         }
       });
   });
-  
-  
 
   // Create a resource
   router.post("/new", (req, res) => {
     const resource = req.body;
+    if (!Array.isArray(resource.categories)) {
+      resource.categories = [resource.categories];
+    }
     //All fields mandatory
 
     let queryString = `

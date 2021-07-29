@@ -12,49 +12,108 @@
       src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
       data-auto-a11y="true"
     ></script>
-    <title>My Resources</title>
+
+    <title>srcful</title>
   </head>
 
-  <body>
+  <body class="full-height">
     <!-- header -->
     <%- include('partials/_nav') %>
     <main>
       <div class="myresource-container">
         <div class="header-banner">
-          <h1>my resources</h1>
+          <!-- <h1>my resources</h1> -->
           <div class="btn-container">
             <a class="button create-new" href="/resource/new">create new</a>
-            <!-- <a class="button edit-btn" href="/resource/edit">edit</a> -->
           </div>
         </div>
-        <div class="resources">
-          <% resources.forEach(resource => { %>
-          <div class="card">
-            <div class="title">
-              <h3><%= resource.title %></h3>
-              <p>written by: <%= resource.username %></p>
-              <div class="web-link">
-                <a href="<%= resource.url %>"><i class="fas fa-link"></i></a>
+        <div class="tab-container">
+          <button
+            class="tablink"
+            onclick="openPage('myresources', this, 'rgb(38, 116, 135)')"
+            id="defaultOpen"
+          >
+            my resources
+          </button>
+          <button
+            class="tablink"
+            onclick="openPage('mylikes', this, 'rgb(176, 141, 125)')"
+          >
+            things i like
+          </button>
+        </div>
+        <div class="all-resources">
+          <div id="myresources" class="tabcontent">
+            <div class="resources">
+              <% resources.forEach(resource => { %>
+              <div class="card">
+                <div class="title">
+                  <h3><%= resource.title %></h3>
+                  <p>written by: <%= resource.username %></p>
+                  <div class="web-link">
+                    <a href="<%= resource.url %>"
+                      ><i class="fas fa-link"></i
+                    ></a>
+                  </div>
+                </div>
+                <div class="main">
+                  <div class="img-container">
+                    <% if ( resource.image_url !== undefined) { %>
+                    <img src="<%= resource.image_url %>" alt="" />
+                    <% } else { %>
+                    <img
+                      src="https://source.unsplash.com/random/600x600"
+                      alt=""
+                    />
+                    <% } %>
+                  </div>
+                  <div class="btn-container">
+                    <a
+                      class="button full"
+                      href="/resource/<%= resource.resource_id %>"
+                      >full article</a
+                    >
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="main">
-              <div class="img-container">
-                <% if ( resource.image_url !== undefined) { %>
-                <img src="<%= resource.image_url %>" alt="" />
-                <% } else { %>
-                <img src="https://source.unsplash.com/random/600x600" alt="" />
-                <% } %>
-              </div>
-              <div class="btn-container">
-                <a
-                  class="button full"
-                  href="/resource/<%= resource.resource_id %>"
-                  >full article</a
-                >
-              </div>
+              <% }) %>
             </div>
           </div>
-          <% }) %>
+
+          <div id="mylikes" class="likes tabcontent">
+            <div class="resources">
+              <% likedResources.forEach(like => { %>
+              <div class="card">
+                <div class="title">
+                  <h3><%= like.title %></h3>
+                  <p>written by: <%= like.username %></p>
+                  <div class="web-link">
+                    <a href="<%= like.url %>"><i class="fas fa-link"></i></a>
+                  </div>
+                </div>
+                <div class="main">
+                  <div class="img-container">
+                    <% if ( like.image_url !== undefined) { %>
+                    <img src="<%= like.image_url %>" alt="" />
+                    <% } else { %>
+                    <img
+                      src="https://source.unsplash.com/random/600x600"
+                      alt=""
+                    />
+                    <% } %>
+                  </div>
+                  <div class="btn-container">
+                    <a
+                      class="button full"
+                      href="/resource/<%= like.resource_id %>"
+                      >full article</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -62,6 +121,8 @@
     <%- include('partials/_footer') %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/resourcetabs.js"></script>
+
     <script type="text/javascript" src="/scripts/app.js"></script>
   </body>
 </html>
