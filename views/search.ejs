@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="icon" href="/favicon_io/favicon-16x16.png" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <title>srcful</title>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/_nav') %>
+
+    <main>
+      <h1>Search Results</h1>
+      <div class="myresource-container">
+        <div class="resources">
+          <% if (results.length === 0) { %>
+            <h3 class="subtitle">No Results Found</h3>
+          <% } else { %>
+            <% results.forEach(result => { %>
+            <div class="card">
+              <div class="title">
+                <h3><%= result.title %></h3>
+                <p>written by: <%= result.username %></p>
+                <div class="web-link">
+                  <a href="<%= result.url %>"><i class="fas fa-link"></i></a>
+                </div>
+              </div>
+              <div class="main">
+                <div class="img-container">
+                  <% if ( result.image_url !== undefined) { %>
+                  <img src="<%= result.image_url %>" alt="" />
+                  <% } else { %>
+                  <img src="https://source.unsplash.com/random/600x600" alt="" />
+                  <% } %>
+                </div>
+                <div class="btn-container">
+                  <a
+                    class="button full"
+                    href="/resource/<%= result.id %>"
+                    >full article</a
+                  >
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <%- include('partials/_footer') %>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </body>
+</html>
