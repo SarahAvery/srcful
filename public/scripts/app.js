@@ -90,7 +90,6 @@
         const url = window.location.href;
         const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
         $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
-
       });
 
 
