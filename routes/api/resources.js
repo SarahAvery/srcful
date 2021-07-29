@@ -129,7 +129,7 @@ module.exports = (db) => {
     };
 
     const isLikedQueryFunc = (data, userId) => {
-      // categories
+      // isLiked
       return new Promise((resolve) => {
         console.log("----------->", userId);
         db.query(isLikedQuery, [userId]).then((isLikedData) => {
@@ -147,13 +147,13 @@ module.exports = (db) => {
     };
 
     return db
-      .query(resourceQuery, [offset * limit || 0]) // get all resources with users
+      .query(resourceQuery, [offset * limit || 0])
       .then((data) => {
         const resources = data.rows;
         return resources;
       })
-      .then(commentsQueryFunc) // CommentsCount added
-      .then(likesQueryFunc) // likesCount added
+      .then(commentsQueryFunc)
+      .then(likesQueryFunc)
       .then(ratingQueryFunc)
       .then(categoryQueryFunc)
       .then((data) => isLikedQueryFunc(data, userId))
@@ -173,7 +173,7 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    console.log('line 176: ',req.session.userId);
+    console.log("line 176: ", req.session.userId);
     resourcesQuery(null, req.session.userId)
       .then((data) => {
         res.json({ resources: data });

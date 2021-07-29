@@ -28,14 +28,19 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           console.log("INDEX", json);
-          db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
-          .then((data) => {
+          db.query(`SELECT creator_id FROM resources WHERE id = $1`, [
+            req.params.id,
+          ]).then((data) => {
             let creator = false;
-            if (data.rows[0].creator_id == req.session.userId) {
+            if (data.rows[0].creator_id === req.session.userId) {
               creator = true;
             }
-            res.render("resource", { resource: json[0], user: req.session.userId, creator });
-          })
+            res.render("resource", {
+              resource: json[0],
+              user: req.session.userId,
+              creator,
+            });
+          });
         } else {
           res.redirect("/");
         }
