@@ -16,14 +16,14 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    const loggedInUser = req.params.id;
-    fetch(process.env.API_URL + "/resource/" + loggedInUser)
+    const loggedInUser = req.session.userId;
+    fetch(process.env.API_URL + "/resource/" + req.params.id)
       .then((data) => data.json())
       .then((json) => {
         if (json) {
           const resourceData = json[0];
           db.query(`SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at ASC;`
-          , [loggedInUser])
+          , [req.params.id])
           .then((data) => {
             const commentData = data.rows;
             const templateVars = {
@@ -31,7 +31,6 @@ module.exports = (db) => {
               comment: commentData,
               loggedInUser: loggedInUser
             }
-              console.log(loggedInUser);
               res.render("resource", templateVars);
             });
         } else {

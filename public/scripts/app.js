@@ -10,8 +10,11 @@
 //   });;
 // });
 
-(function ($) {
-  $(document).ready(function () {
+
+
+
+(function ($, db, req) {
+  $(document).ready(function (db) {
     // Profile Edit Btn
     $(".profile-container")
       .find(".edit-btn")
@@ -82,9 +85,16 @@
       .find("form")
       .on("click", (e) => {
         const rating = e.target.value;
-        console.log(rating);
-
-        // We need to do something with the value!!
+        db.query(`SELECT COUNT(*) FROM resource_ratings WHERE resource_id = $1 AND user_id = $2;`, [req.params.id, req.session.userId])
+        .then((data) => {
+          console.log(data.rows[0]);
+          if (data.rows[0] === 0) {
+            db.query(`INSERT INTO resource_ratings (rating, user_id, resource_id)
+                  VALUES()`)
+          } else { 
+            // db.query('UPDATE resource_ratings ON 
+          }
+        });
       });
 
     // Create New Resource Article Textarea
@@ -99,23 +109,52 @@
     // Comment Button
     $(".comment-container")
       .find(".comment-btn")
-      .on("click", function () {
+      .on("click", function (event) {
+        event.preventDefault();
         $(".comment-btn").addClass("active");
+        db.query(`INSERT INTO resource_comments (title, content, user_id, resource_id)
+         VALUES("title", "content", 5, 2);`)
+        // `, [])
+        .then(db.query(`SELECT COUNT(resource_comments.id) as count FROM resource_comments`))
+        .then((data) => {
+          let numComments = data.rows[0];
+        })
+        .then(db.query(`SELECT * FROM resource_comments WHERE resource_id = $1;`, [numComments]))
+        .then((data) => {
+          let commentInfo = data.rows[0];
+          const newComment = createCommentElement(commentInfo)
+          .then($(".comment-container").prepend("newComment"))
+          .then($(".comment-btn").removeClass("active"))
+        });
       });
+      
+
+      const createCommentElement = function(commentInfo) {
+
+        let $comment = $(
+          `<div class="comment">
+            <div class="comment-body">
+              <h4 class="comment-title">${commentInfo.title}</h4>
+              <p class="username">Posted By: ${commentInfo.username} </p>
+              <p class="comment-content">${commentInfo.description}</p>
+            </div>
+            <div>
+              <p class="comment-date">${commentInfo.updated_at}</p>
+            </div>
+          </div>`
+          );
+        return $comment;
+      };
+      
     // !!! When need to handle this with ajax, like tweeter. Once comment is rendered, the button will need to have the active class removed
 
     // Comments Load More Button
 
-    $(".load-more").find(".load-more")on("click", function() { 
+    $(".load-more").find(".load-more").on("click", function() { 
       $(this).remove();
       $('#hidden-comments').removeClass('hidden');
     });
 
-    // $("#load-more")
-      // .find(".load-more")
-      // .on("click", function () {
-        // $(".load-more").addClass("active");
-      // });
     // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
     // Error Messages Login
