@@ -55,6 +55,26 @@ const isLikedQuery = `
     GROUP BY users.id;`;
 
 module.exports = (db) => {
+
+  const resourcesQuery = (offset) => {
+    const commentsQueryFunc = (prevResources) => {
+      // commentsCount
+      return new Promise((resolve) => {
+        db.query(commentQuery).then((data) => {
+          const commentData = data.rows;
+          const combined = prevResources.map((resource) => {
+            const match = commentData.find(
+              (commentRes) => commentRes.id === resource.resource_id
+            );
+            resource.commentCount = (match && match.num_of_comments) || 0;
+            return resource;
+          });
+
+          resolve(combined);
+        });
+      });
+    };
+
   const resourcesQuery = (offset, userId) => {
     const commentsQueryFunc = (prevResources) => {
       // commentsCount
@@ -147,13 +167,13 @@ module.exports = (db) => {
     };
 
     return db
-      .query(resourceQuery, [offset * limit || 0]) // get all resources with users
+      .query(resourceQuery, [offset * limit || 0]) 
       .then((data) => {
         const resources = data.rows;
         return resources;
       })
-      .then(commentsQueryFunc) // CommentsCount added
-      .then(likesQueryFunc) // likesCount added
+      .then(commentsQueryFunc) 
+      .then(likesQueryFunc) 
       .then(ratingQueryFunc)
       .then(categoryQueryFunc)
       .then((data) => isLikedQueryFunc(data, userId))
@@ -162,8 +182,8 @@ module.exports = (db) => {
   };
 
   router.get("/page/:number", (req, res) => {
-    console.log(req.session.userId);
-    resourcesQuery(req.params.number, req.session.userId)
+    // console.log(req.session.userId);
+    resourcesQuery(req.params.number)
       .then((data) => {
         res.json({ resources: data });
       })
@@ -173,7 +193,7 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    console.log('line 176: ',req.session.userId);
+    console.log("line 176: ", req.session.userId);
     resourcesQuery(null, req.session.userId)
       .then((data) => {
         res.json({ resources: data });
