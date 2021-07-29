@@ -45,7 +45,10 @@ const ratingQuery = `
     FROM resource_ratings
     JOIN resources ON resource_id = resources.id
     GROUP BY resources.id;`;
-
+const isLikedQuery = `
+    SELECT resource_likes.*
+    FROM resource_likes
+    WHERE resource_id = $1 AND user_id = $2;`;
 module.exports = (db) => {
   const resourcesQuery = (offset) => {
     const commentsQueryFunc = (prevResources) => {
@@ -120,6 +123,20 @@ module.exports = (db) => {
       });
     };
 
+    const isLikedQueryFunc = (data) => {
+      // categories
+      return new Promise((resolve) => {
+        db.query(isLikedQuery, [id, userId]).then((isLikedData) => {
+          const newResources = data.map((resource) => ({
+            ...resource,
+            isLiked: !!isLikedData.rows.length,
+          }));
+
+          resolve(newResources);
+        });
+      });
+    };
+
     return db
       .query(resourceQuery, [offset * limit || 0])
       .then((data) => {
@@ -156,12 +173,12 @@ module.exports = (db) => {
 
   router.get("/all", (req, res) => {
     db.query(allResourcesQuery)
-    .then((data) => {
-      res.json({ resources: data.rows });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+      .then((data) => {
+        res.json({ resources: data.rows });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   return router;

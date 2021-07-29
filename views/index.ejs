@@ -14,10 +14,6 @@
       data-auto-a11y="true"
     ></script>
     <title>srcful</title>
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/pages.js"></script>
   </head>
   <body>
     <!-- header -->
@@ -28,7 +24,7 @@
 
         <div class="card-container">
           <% resources.forEach(resource => { %>
-          <div class="card">
+          <div class="card" data-resource-id="<%= resource.resource_id %>">
             <div class="title">
               <h3><%= resource.title %></h3>
 
@@ -60,20 +56,22 @@
             </div>
             <div class="footer">
               <p class="icons">
-                <a href="/"
+                <span class="icon"
                   ><i class="fas fa-comment-dots"></i
                   ><sup>
                     <% if ( resource.commentCount !== 0) { %> <%=
                     resource.commentCount %> <% } else { %> <% } %>
-                  </sup></a
+                  </sup></span
                 >
-                <a href="/">
-                  <i class="fas fa-heart"></i
-                  ><sup>
-                    <% if ( resource.commentCount !== 0) { %> <%=
-                    resource.commentCount %> <% } else { %> <% } %></sup
-                  ></a
+                <span
+                  class="icon like-btn <%= resource.isLiked ? 'liked' : '' %>"
                 >
+                  <i class="fas fa-heart"></i>
+                  <sup>
+                    <% if ( resource.likeCount !== 0) { %> <%=
+                    resource.likeCount %> <% } else { %> <% } %>
+                  </sup>
+                </span>
                 <i class="fas fa-star"></i
                 ><sup>
                   <% if ( resource.avgRating !== 0) { %> <%= resource.avgRating
