@@ -81,27 +81,26 @@
       });
 
     // Star Rating
+  
+    
     $(".rating")
       .find("form")
       .on("click", (e) => {
         const rating = e.target.value;
-        db.query(`SELECT COUNT(*) FROM resource_ratings WHERE resource_id = $1 AND user_id = $2;`, [req.params.id, req.session.userId])
-        .then((data) => {
-          console.log(data.rows[0]);
-          if (data.rows[0] === 0) {
-            db.query(`INSERT INTO resource_ratings (rating, user_id, resource_id)
-                  VALUES()`)
-          } else { 
-            // db.query('UPDATE resource_ratings ON 
-          }
-        });
+        const url = window.location.href;
+        const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
+
+        $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
+
       });
+
 
     // Create New Resource Article Textarea
 
     $("#article-div")
       .find("textarea")
       .on("click", () => {
+        e.stopImmediatePropogation();
         $("#article-div").css({ width: "600px", margin: "0 -50%" });
         $("textarea").css({ width: "600px", height: "300px" });
       });
@@ -150,7 +149,7 @@
 
     // Comments Load More Button
 
-    $(".load-more").find(".load-more").on("click", function() { 
+    $("#load-more").find(".load-more").on("click", function() { 
       $(this).remove();
       $('#hidden-comments').removeClass('hidden');
     });
