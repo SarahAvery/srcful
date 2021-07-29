@@ -55,26 +55,6 @@ const isLikedQuery = `
     GROUP BY users.id;`;
 
 module.exports = (db) => {
-
-  const resourcesQuery = (offset) => {
-    const commentsQueryFunc = (prevResources) => {
-      // commentsCount
-      return new Promise((resolve) => {
-        db.query(commentQuery).then((data) => {
-          const commentData = data.rows;
-          const combined = prevResources.map((resource) => {
-            const match = commentData.find(
-              (commentRes) => commentRes.id === resource.resource_id
-            );
-            resource.commentCount = (match && match.num_of_comments) || 0;
-            return resource;
-          });
-
-          resolve(combined);
-        });
-      });
-    };
-
   const resourcesQuery = (offset, userId) => {
     const commentsQueryFunc = (prevResources) => {
       // commentsCount
@@ -149,7 +129,7 @@ module.exports = (db) => {
     };
 
     const isLikedQueryFunc = (data, userId) => {
-      // categories
+      // isLiked
       return new Promise((resolve) => {
         console.log("----------->", userId);
         db.query(isLikedQuery, [userId]).then((isLikedData) => {
@@ -167,13 +147,13 @@ module.exports = (db) => {
     };
 
     return db
-      .query(resourceQuery, [offset * limit || 0]) 
+      .query(resourceQuery, [offset * limit || 0])
       .then((data) => {
         const resources = data.rows;
         return resources;
       })
-      .then(commentsQueryFunc) 
-      .then(likesQueryFunc) 
+      .then(commentsQueryFunc)
+      .then(likesQueryFunc)
       .then(ratingQueryFunc)
       .then(categoryQueryFunc)
       .then((data) => isLikedQueryFunc(data, userId))
@@ -182,8 +162,7 @@ module.exports = (db) => {
   };
 
   router.get("/page/:number", (req, res) => {
-    // console.log(req.session.userId);
-    resourcesQuery(req.params.number)
+    resourcesQuery(req.params.number, req.session.userId)
       .then((data) => {
         res.json({ resources: data });
       })
