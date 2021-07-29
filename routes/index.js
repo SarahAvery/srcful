@@ -8,10 +8,8 @@ module.exports = () => {
       .then((data) => data.json())
       .then((json) => {
         if (json.resources) {
-          const templateVars = { resources: json.resources, pageNum:1 };
-          if (req.session.userId) {
-            res.redirect("/resources");
-          }
+          const templateVars = { resources: json.resources, pageNum: 1 };
+
           res.render("index", templateVars);
         } else {
           res.redirect("/");
