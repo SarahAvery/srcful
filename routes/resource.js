@@ -111,20 +111,37 @@ module.exports = (db) => {
 
   router.post("/:id/edit", (req, res) => {
     const update = req.body;
+    //Check if inputs blank
+    if(!update.description && !update.image_url) {
+      return res.redirect(`/resource/${req.params.id}/edit`);
+    }
 
     db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
     .then((data) => {
       if (data.rows[0].creator_id == req.session.userId) {
+
+        let queryString = 'UPDATE resources SET ';
+        const values = [];
+        const queryBuilder = [];
+
+        if (update.description) {
+          values.push(update.description);
+          queryBuilder.push(`description = $${values.length} `);
+        }
+        if (update.image_url) {
+          values.push(update.image_url);
+          queryBuilder.push(`image_url = $${values.length} `);
+        }
+
+        queryString += queryBuilder.join(', ');
+        values.push(req.params.id);
+        queryString += `WHERE id = $${values.length};`;
+
+        console.log(queryString);
+        console.log(values);
+
         // Update resource in database
-        db.query(
-          `
-          UPDATE resources
-          SET description = $1,
-              image_url = $2
-          WHERE id = $3;
-          `,
-          [update.description, update.image_url, req.params.id]
-        )
+        db.query(queryString, values)
         .then(() => {
           res.redirect(`/resource/${req.params.id}`);
         })
