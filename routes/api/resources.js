@@ -126,7 +126,8 @@ module.exports = (db) => {
     const isLikedQueryFunc = (data) => {
       // categories
       return new Promise((resolve) => {
-        db.query(isLikedQuery, [id, userId]).then((isLikedData) => {
+        console.log(userId);
+        db.query(isLikedQuery, [userId]).then((isLikedData) => {
           const newResources = data.map((resource) => ({
             ...resource,
             isLiked: !!isLikedData.rows.length,
@@ -137,18 +138,21 @@ module.exports = (db) => {
       });
     };
 
-    return db
-      .query(resourceQuery, [offset * limit || 0])
-      .then((data) => {
-        const resources = data.rows;
-        return resources;
-      })
-      .then(commentsQueryFunc)
-      .then(likesQueryFunc)
-      .then(ratingQueryFunc)
-      .then(categoryQueryFunc)
-      .then((data) => data)
-      .catch((err) => err);
+    return (
+      db
+        .query(resourceQuery, [offset * limit || 0])
+        .then((data) => {
+          const resources = data.rows;
+          return resources;
+        })
+        .then(commentsQueryFunc)
+        .then(likesQueryFunc)
+        .then(ratingQueryFunc)
+        .then(categoryQueryFunc)
+        // .then(isLikedQueryFunc)
+        .then((data) => data)
+        .catch((err) => err)
+    );
   };
 
   router.get("/page/:number", (req, res) => {
