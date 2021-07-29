@@ -47,8 +47,8 @@
         <div class="logo"><a href="/">srcful</a></div>
         <ul>
           <% if(typeof user !== 'undefined') { %>
-          <form class="form" method= 'POST' action= "/search">
-            <input type="text" placeholder="Search.." class="search" />
+          <form class="form" method= "POST" action= "/search">
+            <input type="text" name="search" placeholder="Search.." class="search" />
           </form>
           <li><a href="/resources">my resources</a></li>
           <li>

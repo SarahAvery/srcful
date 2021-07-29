@@ -19,6 +19,41 @@
 
     <main>
       <h1>Search Results</h1>
+      <div class="myresource-container">
+        <div class="resources">
+          <% if (results.length === 0) { %>
+            <h3 class="subtitle">No Results Found</h3>
+          <% } else { %>
+            <% results.forEach(result => { %>
+            <div class="card">
+              <div class="title">
+                <h3><%= result.title %></h3>
+                <p>written by: <%= result.username %></p>
+                <div class="web-link">
+                  <a href="<%= result.url %>"><i class="fas fa-link"></i></a>
+                </div>
+              </div>
+              <div class="main">
+                <div class="img-container">
+                  <% if ( result.image_url !== undefined) { %>
+                  <img src="<%= result.image_url %>" alt="" />
+                  <% } else { %>
+                  <img src="https://source.unsplash.com/random/600x600" alt="" />
+                  <% } %>
+                </div>
+                <div class="btn-container">
+                  <a
+                    class="button full"
+                    href="/resource/<%= result.id %>"
+                    >full article</a
+                  >
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
     </main>
     <!-- footer -->
     <%- include('partials/_footer') %>
