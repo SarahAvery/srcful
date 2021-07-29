@@ -72,25 +72,35 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const update = req.body;
+    //Check if inputs blank
+    if(!update.username && !update.password) {
+      return res.redirect("/profile");
+    }
 
     console.log(req.query, req.params, update);
-    // If inputs blank?
-    // Hash password
-    update.password = bcrypt.hashSync(update.password, 12);
 
-    // If username taken, error
-    // Else update user in database
-    db.query(
-      `
-      UPDATE users
-      SET username = $1,
-          password = $2
-      WHERE id = $3;
-      `,
-      [update.username, update.password, req.session.userId]
-    )
+    let queryString = 'UPDATE users SET ';
+    const values = [];
+    const queryBuilder = [];
+
+    if (update.username) {
+      values.push(update.username);
+      queryBuilder.push(`username = $${values.length} `);
+    }
+    if (update.password) {
+      // Hash password
+      update.password = bcrypt.hashSync(update.password, 12);
+      values.push(update.password);
+      queryBuilder.push(`password = $${values.length} `);
+    }
+
+    queryString += queryBuilder.join(', ');
+    values.push(req.session.userId);
+    queryString += `WHERE id = $${values.length};`;
+
+    db.query(queryString, values)
       .then((data) => {
-        res.json({ user: data.rows[0] });
+        res.redirect("/profile");
       })
       .catch((e) => {
         res.status(500);
