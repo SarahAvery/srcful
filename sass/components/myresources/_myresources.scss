@@ -6,6 +6,7 @@ body.full-height {
 .myresource-container {
   @include main-container;
   margin: 0 auto;
+  margin-bottom: 30px;
 
   .header-banner {
     display: flex;
@@ -50,10 +51,10 @@ body.full-height {
   }
 
   .all-resources {
-    height: 100%;
     margin: 0;
     display: block;
     border-radius: 4px;
+    margin-bottom: 80px;
 
     #myresources {
       border: 1px solid rgb(38, 116, 135);
@@ -78,6 +79,7 @@ body.full-height {
       padding-top: 40px;
       height: auto;
       width: 100%;
+      min-height: 300px;
 
       .card .title,
       .main {

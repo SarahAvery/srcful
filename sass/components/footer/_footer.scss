@@ -1,0 +1,46 @@
+footer {
+  // height: 200px;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: rgb(38, 116, 135);
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+
+    .logo-container {
+      border: 1px solid white;
+
+      .logo {
+        font-size: 42px;
+
+        a {
+          color: rgb(255, 255, 255);
+          font-weight: bolder;
+          padding: 5px;
+        }
+      }
+    }
+
+    .footer-menus {
+      border: 1px solid pink;
+
+      display: flex;
+
+      li {
+        list-style: none;
+      }
+      h3 {
+        font-weight: bolder;
+      }
+      a {
+        font-size: 18px;
+      }
+    }
+  }
+}
