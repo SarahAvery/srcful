@@ -67,6 +67,15 @@
         $(".delete").addClass("active");
       });
 
+    // Create New Resource Article Textarea
+
+    $("#article-div")
+      .find("textarea")
+      .on("click", () => {
+        $("#article-div").css({ width: "600px", margin: "0 -50%" });
+        $("textarea").css({ width: "600px", height: "300px" });
+      });
+
     // Star Rating
     $(".rating")
       .find("form")
@@ -75,15 +84,6 @@
         console.log(rating);
 
         // We need to do something with the value!!
-      });
-
-    // Create New Resource Article Textarea
-
-    $("#article-div")
-      .find("textarea")
-      .on("click", () => {
-        $("#article-div").css({ width: "600px", margin: "0 -50%" });
-        $("textarea").css({ width: "600px", height: "300px" });
       });
 
     // Comment Button
@@ -125,19 +125,8 @@
 
     // Like button on /resource/:id
     $(".article-container .like-btn").on("click", function (e) {
-      e.preventDefault();
       $(this).toggleClass("liked");
       const resourceId = window.location.pathname.match(/\d+/gi)[0];
-      const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
-
-      $.post(url, { resourceId });
-    });
-
-    // Like buttons on /
-    $(".home-page .like-btn").on("click", function (e) {
-      e.preventDefault();
-      $(this).toggleClass("liked");
-      const resourceId = $(this).closest(".card").attr("data-resource-id");
       const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
 
       const sup = $(this).closest(".card").find(".like-btn sup");
@@ -146,48 +135,17 @@
       $.post(url, { resourceId });
     });
 
-    // DONT REMOVE BELOW CODE PLEASE
+    // Like buttons on /
+    $(".home-page .like-btn").on("click", function (e) {
+      // e.preventDefault();
+      $(this).toggleClass("liked");
+      const resourceId = $(this).closest(".card").attr("data-resource-id");
+      const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
 
-    //   const animateTopHandler = function () {
-    //     $("html").animate({ scrollTop: 0 }, "slow");
-    //   };
-
-    //   $("#topBtn").on("click", animateTopHandler);
-    // });
-
-    // $(document).scroll(function () {
-    //   // scroll button
-    //   const scrollPosition = $(window).scrollTop();
-    //   if (scrollPosition > 100) {
-    //     $("#topBtn").css("visibility", "visible");
-    //   } else {
-    //     $("#topBtn").css("visibility", "hidden");
-    //   }
-
-    //   // nav
-    //   if (scrollPosition > 300) {
-    //     $("body").addClass("scrolled");
-    //   } else {
-    //     $("body").removeClass("scrolled");
-    //   }
-
-    $("#update_profile").on("submit", function (event) {
-      event.preventDefault();
-
-      const data = $(this).serialize();
-
-      $.ajax({
-        url: $(this).attr("action"),
-        method: "POST",
-        data,
-      })
-        .then((res) => {
-          console.log(res);
-          // update view on sucess
-        })
-        .catch((err) => {
-          // update view on err
-        });
+      const sup = $(this).closest(".card").find(".like-btn sup");
+      const currentLikesCount = Number(sup.text());
+      sup.text(currentLikesCount + ($(this).hasClass("liked") ? 1 : -1));
+      $.post(url, { resourceId });
     });
   });
 })(jQuery);
