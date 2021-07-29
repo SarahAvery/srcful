@@ -5,7 +5,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const query = req.body.search;
     let results = [];
-    db.query('SELECT * FROM resources WHERE title LIKE $1', [`%${query}%`])
+    db.query('SELECT * FROM resources WHERE title LIKE $1 OR description LIKE $1', [`%${query}%`])
     .then((data) => {
       results = results.concat(data.rows);
       const queryString =
