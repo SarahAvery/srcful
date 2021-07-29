@@ -29,8 +29,6 @@ body.full-height {
     }
   }
 
-  /* Style the tab content (and add height:100% for full page content) */
-
   .tab-container {
     height: 30px;
 
@@ -44,7 +42,6 @@ body.full-height {
       padding: 14px 16px;
       font-size: 17px;
       width: 25%;
-      // border-radius: 10px 10px 10px 0;
     }
 
     .tablink:hover {
@@ -71,14 +68,12 @@ body.full-height {
       color: white;
       display: none;
       border-radius: 4px;
-      // padding: 100px 20px;
-      // height: 100%;
     }
 
     .resources {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: space-evenly;
       padding: 10px 2%;
       padding-top: 40px;
       height: auto;
@@ -93,7 +88,6 @@ body.full-height {
         margin: 10px 0;
         max-width: 30%;
         min-width: 300px;
-        // border: 1px solid rgb(38, 116, 135);
         border-radius: 4px;
         display: flex;
         flex-wrap: wrap;
@@ -154,18 +148,6 @@ body.full-height {
             }
           }
         }
-      }
-    }
-
-    #myresources {
-      .card {
-        //
-      }
-    }
-
-    #mylikes {
-      .card {
-        //
       }
     }
   }
