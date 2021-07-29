@@ -3,7 +3,6 @@
     <div class="logo"><a href="/">srcful</a></div>
     <ul>
       <% if(typeof user !== 'undefined') { %>
-
       <input type="text" placeholder="Search.." class="search" />
       <li>
         <a href="/resources"><i class="fas fa-book-open fa-lg"></i></a>
@@ -14,12 +13,9 @@
         </a>
       </li>
       <li><a href="/logout" class="signup">logout</a></li>
-
       <% } else { %>
-
       <li><a href="/login" class="login">login</a></li>
       <li><a href="/signup" class="signup">sign up</a></li>
-
       <% } %>
     </ul>
   </nav>

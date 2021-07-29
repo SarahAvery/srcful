@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  const getResourceById = (id) => {
+  const getResourceById = (id, userId = null) => {
     return new Promise((resolve, reject) => {
       const resourceQuery = `
       SELECT users.username AS username, resources.title, resources.image_url, resources.id AS resource_id, resources.url, resources.description, substring(resources.description,1,140) AS substring, resources.created_at::date AS date, resources.created_at::time AS time
@@ -38,6 +39,11 @@ module.exports = (db) => {
       JOIN resources ON resource_id = resources.id 
       WHERE resource_id = $1
       GROUP BY resources.id;`;
+
+      const isLikedQuery = `
+      SELECT resource_likes.*
+      FROM resource_likes
+      WHERE resource_id = $1 AND user_id = $2;`;
 
       const commentsQueryFunc = (prevResources) => {
         // commentsCount
@@ -111,6 +117,20 @@ module.exports = (db) => {
         });
       };
 
+      const isLikedQueryFunc = (data) => {
+        // categories
+        return new Promise((resolve) => {
+          db.query(isLikedQuery, [id, userId]).then((isLikedData) => {
+            const newResources = data.map((resource) => ({
+              ...resource,
+              isLiked: !!isLikedData.rows.length,
+            }));
+
+            resolve(newResources);
+          });
+        });
+      };
+
       db.query(resourceQuery, [id])
         .then((data) => {
           const resources = data.rows;
@@ -120,6 +140,7 @@ module.exports = (db) => {
         .then(likesQueryFunc)
         .then(ratingQueryFunc)
         .then(categoryQueryFunc)
+        .then(isLikedQueryFunc)
         .then((data) => {
           resolve(data);
         })
@@ -132,7 +153,8 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     // TODO: Add authorization to permit users of the required scope to access user data
     const { id } = req.params;
-    getResourceById(id)
+    const userId = req.session.userId;
+    getResourceById(id, userId)
       .then((data) => res.json(data))
       .catch((err) => {
         res.status(500).json({ error: err.message });

@@ -60,20 +60,22 @@
               </div>
               <div class="footer">
                 <div class="icons">
-                  <a class="icon" href="/"
+                  <span class="icon"
                     ><i class="fas fa-comment-dots"></i
                     ><sup>
                       <% if ( resource.commentCount !== 0) { %> <%=
                       resource.commentCount %> <% } else { %> <% } %>
-                    </sup></a
+                    </sup></span
                   >
-                  <a class="icon" href="/">
-                    <i class="fas fa-heart like-btn"></i
-                    ><sup>
-                      <% if ( resource.commentCount !== 0) { %> <%=
-                      resource.commentCount %> <% } else { %> <% } %>
-                    </sup></a
+                  <span
+                    class="icon like-btn <%= resource.isLiked ? 'liked' : '' %>"
                   >
+                    <i class="fas fa-heart"></i>
+                    <sup>
+                      <% if ( resource.likeCount !== 0) { %> <%=
+                      resource.likeCount %> <% } else { %> <% } %>
+                    </sup>
+                  </span>
                   <i class="icon fas fa-star"></i
                   ><sup>
                     <% if ( resource.avgRating !== 0) { %> <%=
