@@ -3,9 +3,9 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    const query = req.body.search;
+    const query = req.body.search.toLowerCase();
     let results = [];
-    db.query('SELECT * FROM resources WHERE title LIKE $1 OR description LIKE $1', [`%${query}%`])
+    db.query('SELECT * FROM resources WHERE LOWER(title) LIKE $1 OR LOWER(description) LIKE $1', [`%${query}%`])
     .then((data) => {
       results = results.concat(data.rows);
       const queryString =
@@ -13,7 +13,7 @@ module.exports = (db) => {
       SELECT resources.* FROM resources,
       (SELECT resource_id FROM resource_categories,
           (SELECT categories.id FROM categories
-          WHERE title LIKE $1) as t
+          WHERE LOWER(title) LIKE $1) as t
           WHERE resource_categories.category_id = t.id
         ) as z
       WHERE resources.id = z.resource_id;
