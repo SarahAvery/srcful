@@ -38,7 +38,7 @@ module.exports = (db) => {
               loggedInUser: loggedInUser,
             };
             res.render("resource", templateVars);
-// =======
+
     // fetch(process.env.API_URL + "/resource/" + req.params.id, {
       // ...(req.headers && { headers: req.headers }),
     // })
@@ -49,7 +49,7 @@ module.exports = (db) => {
           // res.render("resource", {
             // resource: json[0],
             // user: req.session.userId,
-// >>>>>>> main
+
           });
         } else {
           // error: could not grab json

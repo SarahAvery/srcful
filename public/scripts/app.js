@@ -111,7 +111,7 @@
           }
         $('#comment-content').val('');
         $('#comment-title').val('');
-        if(commentStuff.title !== "" && commentStuff.description !== "") {
+        if(commentStuff.title !== "" && commentStuff.description !== "" && username !== "") {
           const newComment = createCommentElement(commentStuff);
           $('.inputComment').after(newComment);
           $.ajax({ url: '/api/resource_comments', method: 'POST', data: commentStuff })
