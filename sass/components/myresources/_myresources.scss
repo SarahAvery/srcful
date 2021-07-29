@@ -1,24 +1,21 @@
+body.full-height {
+  height: 100%;
+  margin: 0;
+}
+
 .myresource-container {
   @include main-container;
+  margin: 0 auto;
 
   .header-banner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 10px 0;
 
     .btn-container {
       width: auto;
-
-      .edit-btn {
-        border: 1px solid rgb(176, 141, 125);
-        color: rgb(176, 141, 125);
-      }
-
-      .edit-btn.active {
-        background-color: rgb(176, 141, 125);
-        color: rgb(255, 255, 255);
-      }
+      margin: 0 5%;
 
       .create-new {
         border: 1px solid rgb(38, 116, 135);
@@ -31,74 +28,139 @@
     }
   }
 
-  .resources {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 10px 0;
+  /* Style the tab content (and add height:100% for full page content) */
 
-    .card .title,
-    .main {
-      width: 100%;
+  .tab-container {
+    height: 30px;
+
+    .tablink {
+      background-color: #555;
+      color: white;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-size: 17px;
+      width: 25%;
+      // border-radius: 10px 10px 10px 0;
     }
 
-    .card {
-      margin: 10px 0;
-      max-width: 30%;
-      min-width: 300px;
+    .tablink:hover {
+      background-color: #777;
+    }
+  }
+
+  .all-resources {
+    height: 100%;
+    margin: 0;
+    display: block;
+    border-radius: 4px;
+
+    #myresources {
       border: 1px solid rgb(38, 116, 135);
+      background: rgb(38, 116, 135);
+    }
+    #mylikes {
+      border: 1px solid rgb(176, 141, 125);
+      background-color: rgb(176, 141, 125);
+    }
+
+    .tabcontent {
+      color: white;
+      display: none;
       border-radius: 4px;
+      // padding: 100px 20px;
+      // height: 100%;
+    }
+
+    .resources {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 10px 2%;
+      padding-top: 40px;
+      height: auto;
+      width: 100%;
 
-      .title {
-        margin: 5px;
+      .card .title,
+      .main {
+        width: 100%;
+      }
 
-        h3 {
-          text-transform: capitalize;
+      .card {
+        margin: 10px 0;
+        max-width: 30%;
+        min-width: 300px;
+        border: 1px solid rgb(38, 116, 135);
+        border-radius: 4px;
+        display: flex;
+        flex-wrap: wrap;
+
+        background-color: white;
+        color: black;
+
+        .title {
+          margin: 5px;
+
+          h3 {
+            text-transform: capitalize;
+          }
+          h3,
+          .web-link,
+          p {
+            padding: 4px 0;
+          }
+
+          .web-link {
+            width: 100%;
+
+            a {
+              color: black;
+            }
+          }
         }
-        h3,
-        .web-link,
-        p {
-          padding: 4px 0;
-        }
 
-        .web-link {
-          width: 100%;
+        .main {
+          display: block;
 
-          a {
-            color: black;
+          .img-container {
+            width: 100%;
+
+            img {
+              width: 100%;
+              height: 320px;
+              object-fit: cover;
+            }
+          }
+          .btn-container {
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+
+            .full {
+              border: 1px solid rgb(38, 116, 135);
+              color: rgb(38, 116, 135);
+            }
+
+            .full.active {
+              background-color: rgb(38, 116, 135);
+              color: rgb(255, 255, 255);
+            }
           }
         }
       }
+    }
 
-      .main {
-        display: block;
+    #myresources {
+      .card {
+        //
+      }
+    }
 
-        .img-container {
-          width: 100%;
-
-          img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-          }
-        }
-        .btn-container {
-          margin: 5px;
-          display: flex;
-          justify-content: center;
-
-          .full {
-            border: 1px solid rgb(38, 116, 135);
-            color: rgb(38, 116, 135);
-          }
-
-          .full.active {
-            background-color: rgb(38, 116, 135);
-            color: rgb(255, 255, 255);
-          }
-        }
+    #mylikes {
+      .card {
+        //
       }
     }
   }
