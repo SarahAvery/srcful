@@ -21,6 +21,7 @@
     <main>
       <div class="article-container">
         <div class="resource-container">
+          <% if (creator) { %>
           <div class="header-banner">
             <div class="btn-container">
               <a
@@ -35,7 +36,7 @@
               >
             </div>
           </div>
-
+          <% } %>
           <div class="resource">
             <% if ( resource !== undefined) { %>
             <div class="card">

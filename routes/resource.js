@@ -21,7 +21,14 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           console.log("INDEX", json);
-          res.render("resource", { resource: json[0], user: req.session.userId });
+          db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+          .then((data) => {
+            let creator = false;
+            if (data.rows[0].creator_id == req.session.userId) {
+              creator = true;
+            }
+            res.render("resource", { resource: json[0], user: req.session.userId, creator });
+          })
         } else {
           res.redirect("/");
         }
