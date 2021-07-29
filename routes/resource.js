@@ -86,8 +86,94 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/edit", (req, res) => {
-    // TODO: render edit page
+  router.get("/:id/edit", (req, res) => {
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id !== req.session.userId) {
+        res.redirect(`/resource/${req.params.id}`);
+      } else {
+        fetch(`${process.env.API_URL}/resources/all`, {
+          method: "GET",
+          ...(req.headers && {
+            headers: req.headers,
+          }),
+        })
+        .then((data) => data.json())
+        .then((json) => {
+          if (json.resources) {
+            const currentResource = json.resources.filter((resource) => {
+              return resource.resource_id == req.params.id;
+            });
+            res.render("resource/edit", { resource: currentResource[0], user: req.session.userId });
+          } else {
+            res.redirect("/");
+          }
+        });
+      }
+    })
+    .catch(e => res.send(e.stack));
+  });
+
+  router.post("/:id/edit", (req, res) => {
+    const update = req.body;
+    //Check if inputs blank
+    if(!update.description && !update.image_url) {
+      return res.redirect(`/resource/${req.params.id}/edit`);
+    }
+
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id == req.session.userId) {
+
+        let queryString = 'UPDATE resources SET ';
+        const values = [];
+        const queryBuilder = [];
+
+        if (update.description) {
+          values.push(update.description);
+          queryBuilder.push(`description = $${values.length} `);
+        }
+        if (update.image_url) {
+          values.push(update.image_url);
+          queryBuilder.push(`image_url = $${values.length} `);
+        }
+
+        queryString += queryBuilder.join(', ');
+        values.push(req.params.id);
+        queryString += `WHERE id = $${values.length};`;
+
+        console.log(queryString);
+        console.log(values);
+
+        // Update resource in database
+        db.query(queryString, values)
+        .then(() => {
+          res.redirect(`/resource/${req.params.id}`);
+        })
+      } else {
+        res.redirect(`/resource/${req.params.id}`);
+      }
+    })
+    .catch((e) => res.send(e.stack));
+  });
+
+  router.get("/:id/delete", (req, res) => {
+    // 403 forbidden if not resource creator
+    db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+    .then((data) => {
+      if (data.rows[0].creator_id == req.session.userId) {
+        const queryString = `
+        DELETE FROM resources
+        WHERE id = ${req.params.id};
+        `;
+        db.query(queryString)
+          .then(() => res.redirect("/resources"))
+      } else {
+        res.redirect(`/resource/${req.params.id}`);
+      }
+    })
+    .catch((e) => res.send(e.stack));
+    // 404 not found if resource doesn't exist
   });
 
   return router;
