@@ -13,7 +13,7 @@ module.exports = (db) => {
         res.render("resources", {
           resources,
           likedResources,
-          user: req.session.userId
+          user: req.session.userId,
         });
       })
       .catch((err) => {
@@ -101,9 +101,12 @@ module.exports = (db) => {
       .then((json) => {
         if (json.resources) {
           const currentResource = json.resources.filter((resource) => {
-            return resource.resource_id == req.params.id;
+            return resource.resource_id === req.params.id;
           });
-          res.render("resource/edit", { resource: currentResource[0], user: req.session.userId });
+          res.render("resource/edit", {
+            resource: currentResource[0],
+            user: req.session.userId,
+          });
         } else {
           res.redirect("/");
         }
