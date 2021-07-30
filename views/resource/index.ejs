@@ -14,12 +14,13 @@
 
   <body>
     <!-- header -->
-    <%- include('../partials/_nav') %>
+    <%- include("../partials/_nav") %>
     <main>
       <div class="article-container">
         <div class="resource-container">
           <% if (creator) { %>
           <div class="header-banner">
+            <% if (user) { %>
             <div class="btn-container">
               <a
                 class="button edit-btn"
@@ -32,6 +33,7 @@
                 >delete</a
               >
             </div>
+            <% } %>
           </div>
           <% } %>
           <div class="resource">
@@ -61,7 +63,7 @@
               </div>
               <div class="footer">
                 <div class="icons">
-                  <span class="icon"
+                  <span class="icon comment-dots"
                     ><i class="fas fa-comment-dots"></i
                     ><sup>
                       <% if ( resource.commentCount !== 0) { %> <%=
@@ -69,7 +71,7 @@
                     </sup></span
                   >
                   <span
-                    class="icon like-btn <%= resource.isLiked ? 'liked' : '' %>"
+                    class="icon like-btn" <%= resource.isLiked ? "liked" : "" %>
                   >
                     <i class="fas fa-heart"></i>
                     <sup>
@@ -144,11 +146,13 @@
                   </form>
                 </div>
                 <div class="comment-container">
-                  <form action="">
+                  <form id="comment-form" class="inputComment" action="" data-username="<%= user.username %>">
                     <h4>leave a comment</h4>
                     <div class="form-container">
-                      <label for="comment-content"></label>
-                      <input type="text" name="comment" id="comment-content" />
+                      <label for="comment-title">title (optional)</label>
+                      <input type="text" name="comment-title" id="comment-title" >
+                        <label for="comment-content">comment</label>
+                      <input type="text" name="comment" id="comment-content" >
                       <div class="btn-container">
                         <button class="comment-btn" type="submit">
                           comment
@@ -156,70 +160,46 @@
                       </div>
                     </div>
                   </form>
+                 
+                <% comments.forEach(function(comment) { %>
                   <div class="comment">
                     <div class="comment-body">
                       <h4 class="comment-title">
-                        sapien non mi integer ac neque
+                        <%= comment.title %>
                       </h4>
-                      <p class="username">@vwedderburn2</p>
+                      <p class="username">@<%= comment.username %></p>
                       <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
+                        <%= comment.content %>
                       </p>
                     </div>
                     <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
+                      <p class="comment-date"><%= comment.post_time %></p>
                     </div>
                   </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-body">
-                      <h4 class="comment-title">
-                        sapien non mi integer ac neque
-                      </h4>
-                      <p class="username">@vwedderburn2</p>
-                      <p class="comment-content">
-                        Aliquam sit amet diam in magna bibendum imperdiet.
-                        Nullam orci pede, venenatis non, sodales sed, tincidunt
-                        eu, felis ❤️ Aliquam sit amet diam in magna bibendum
-                        imperdiet. Nullam orci pede, venenatis non, sodales sed,
-                        tincidunt eu, felis
-                      </p>
-                    </div>
-                    <div>
-                      <p class="comment-date">June 20th, 2021 1:37pm</p>
-                    </div>
-                  </div>
-                </div>
+                <% }) %> 
+                  
+                <% if (resource.commentCount > 3) { %>  
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
                 </div>
+                <% } %>
+                
+                 
               </div>
             </div>
             <% } else { %>
             <!-- <p>there was an error</p> -->
             <% } %>
+           
           </div>
         </div>
       </div>
     </main>
     <!-- footer -->
-    <%- include('../partials/_footer') %>
+    <%- include("../partials/_footer") %>
+
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -227,5 +207,6 @@
       src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
       data-auto-a11y="true"
     ></script>
+
   </body>
 </html>

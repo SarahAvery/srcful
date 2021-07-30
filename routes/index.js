@@ -4,7 +4,6 @@ const fetch = require("node-fetch");
 
 module.exports = () => {
   router.get("/", (req, res) => {
-    console.log("==-=>", req.session.userId);
     if (!req.session.userId) {
       res.render("index");
     } else {
