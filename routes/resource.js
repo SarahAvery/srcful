@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
-module.exports = (db) => {
+module.exports = (db, queryHelpers) => {
   router.get("/new", (req, res) => {
     fetch(process.env.API_URL + "/categories", {
       ...(req.headers && { headers: req.headers }),
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
         res.render("resource/new", {
           categories: data,
           user: req.session.userId,
@@ -27,31 +26,40 @@ module.exports = (db) => {
       .then((data) => data.json())
       .then((json) => {
         if (json) {
-          console.log("INDEX", json);
           let resource = json[0];
-          db.query(`SELECT creator_id FROM resources WHERE id = $1`, [
-            req.params.id,
-          ]).then((data) => {
-            let creator = false;
-            if (data.rows[0].creator_id === req.session.userId) {
-              creator = true;
-            }
-              fetch(process.env.API_URL + "/resource_comments/" + req.params.id, {
-                ...(req.headers && { headers: req.headers }),
-              })  
+
+          queryHelpers.getUserById(req.session.userId).then((userData) => {
+            db.query(`SELECT creator_id FROM resources WHERE id = $1`, [
+              req.params.id,
+            ]).then((data) => {
+              let creator = false;
+              if (data.rows[0].creator_id === req.session.userId) {
+                creator = true;
+              }
+
+              fetch(
+                process.env.API_URL + "/resource_comments/" + req.params.id,
+                {
+                  ...(req.headers && { headers: req.headers }),
+                }
+              )
                 .then((data) => data.json())
-                .then((json) => { 
-                   if (json) {
-                    const comments = json[0];
+                .then((json) => {
+                  if (json) {
+                    const comments = json;
                     res.render("resource", {
-                      resource: resource,
-                      comments: comments,
-                      user: req.session.userId,
-                      creator
+                      resource,
+                      comments,
+                      user: {
+                        id: req.session.userId,
+                        username: userData.username,
+                      },
+                      creator,
                     });
-                   }
+                  }
                 });
             });
+          });
         } else {
           res.redirect("/");
         }
@@ -154,9 +162,6 @@ module.exports = (db) => {
           queryString += queryBuilder.join(", ");
           values.push(req.params.id);
           queryString += `WHERE id = $${values.length};`;
-
-          console.log(queryString);
-          console.log(values);
 
           // Update resource in database
           db.query(queryString, values).then(() => {

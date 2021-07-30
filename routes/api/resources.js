@@ -131,9 +131,7 @@ module.exports = (db) => {
     const isLikedQueryFunc = (data, userId) => {
       // isLiked
       return new Promise((resolve) => {
-        console.log("----------->", userId);
         db.query(isLikedQuery, [userId]).then((isLikedData) => {
-          console.log(isLikedData.rows[0].resources_liked_arr);
           const newResources = data.map((resource) => ({
             ...resource,
             isLiked: isLikedData.rows[0].resources_liked_arr.includes(
@@ -172,7 +170,6 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    console.log("line 176: ", req.session.userId);
     resourcesQuery(null, req.session.userId)
       .then((data) => {
         res.json({ resources: data });
