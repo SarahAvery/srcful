@@ -46,7 +46,7 @@ module.exports = (db) => {
       WHERE resource_id = $1 AND user_id = $2;`;
       
       const firstThreeCommentsQuery = `
-      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, resource_comments.updated_at, users.username AS username
+      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, to_char(resource_comments.updated_at, 'MON-DD-YYYY HH12:MIPM'), users.username AS username
       FROM resource_comments
       JOIN users ON resource_comments.user_id = users.id
       WHERE resource_id = $1 
@@ -54,7 +54,7 @@ module.exports = (db) => {
       LIMIT 3;`
 
       const moreCommentsQuery = `
-      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, resource_comments.updated_at, users.username AS username
+      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, to_char(resource_comments.updated_at, 'MON-DD-YYYY HH12:MIPM'), users.username AS username
       FROM resource_comments
       JOIN users ON resource_comments.user_id = users.id
       WHERE resource_id = $1 

@@ -99,9 +99,18 @@
         .then((data) => {
           let username = data.split('username: <span>')[1].split('</span>')[0];
          
+        const currentTime = new Date();
+        const formattedTime = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', hour12: 'true'}).format(currentTime);
+        const day = formattedTime.slice(0,2);
+        const month = formattedTime.slice(3,6).toUpperCase();
+        const year = formattedTime.slice(7,11);
+        const time = formattedTime.slice(13,18);
+        const twelveHourSuffix = formattedTime.slice(19,21).toUpperCase();
+        const fullyFormattedTime = `${month}-${day}-${year} ${time}${twelveHourSuffix}`
+         
         const commentStuff = { 
           title: $('#comment-title').val(), username: username, 
-          content: $('#comment-content').val(), updated_at: new Date(), resourceId: id
+          content: $('#comment-content').val(), to_char: fullyFormattedTime, resourceId: id
           }
         $('#comment-content').val('');
         $('#comment-title').val('');
@@ -128,7 +137,7 @@
               <p class="comment-content">${commentInfo.content}</p>
             </div>
             <div>
-              <p class="comment-date">${commentInfo.updated_at}</p>
+              <p class="comment-date">${commentInfo.to_char}</p>
             </div>
           </div>`
           );
