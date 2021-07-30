@@ -15,7 +15,7 @@
     <%- include('partials/_nav') %>
 
     <main>
-      <div class="home-page">
+      <div class="search-page">
         <h1>Search Results</h1>
 
         <div class="resources">
@@ -24,17 +24,20 @@
           <% } else { %>
           <div class="card-container">
             <% results.forEach(result => { %>
-            <div class="card">
+            <div class="card" data-resource-id="<%= result.resource_id %>">
               <div class="title">
                 <h3><%= result.title %></h3>
-                <p>written by: <%= result.username %></p>
+
                 <div class="web-link">
-                  <a href="<%= result.url %>"><i class="fas fa-link"></i></a>
+                  <p>written by: <%= result.username %></p>
+                  <a href="<%= result.url %>" target="_blank"
+                    ><i class="fas fa-link fa-xs"></i
+                  ></a>
                 </div>
               </div>
               <div class="main">
                 <div class="img-container">
-                  <% if ( result.image_url !== undefined) { %>
+                  <% if ( result.image_url !== null) { %>
                   <img src="<%= result.image_url %>" alt="" />
                   <% } else { %>
                   <img
@@ -43,11 +46,46 @@
                   />
                   <% } %>
                 </div>
-                <div class="btn-container">
-                  <a class="button full" href="/resource/<%= result.id %>"
-                    >full article</a
-                  >
+                <div class="description">
+                  <p class="teaser"><%= result.substring %>...</p>
+                  <div class="btn-container">
+                    <a
+                      class="button full"
+                      href="/resource/<%= result.resource_id %>"
+                      >read more</a
+                    >
+                  </div>
                 </div>
+              </div>
+              <div class="footer">
+                <p class="icons">
+                  <span class="icon"
+                    ><i class="fas fa-comment-dots"></i
+                    ><sup>
+                      <% if ( result.commentCount !== 0) { %> <%=
+                      result.commentCount %> <% } else { %> <% } %>
+                    </sup></span
+                  >
+                  <span
+                    class="icon like-btn <%= result.isLiked ? 'liked' : '' %>"
+                  >
+                    <i class="fas fa-heart"></i>
+                    <sup>
+                      <% if ( result.likeCount !== 0) { %> <%= result.likeCount
+                      %> <% } else { %> <% } %>
+                    </sup>
+                  </span>
+                  <i class="fas fa-star"></i
+                  ><sup>
+                    <% if ( result.avgRating !== 0) { %> <%= result.avgRating %>
+                    <% } else { %> <% } %>
+                  </sup>
+                </p>
+                <p class="badges">
+                  <% result.categories.forEach(category => { %>
+                  <span class="badge"><%= category %></span>
+                  <% } )%>
+                </p>
               </div>
             </div>
             <% }) %> <% } %>
