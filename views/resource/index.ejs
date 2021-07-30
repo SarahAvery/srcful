@@ -19,7 +19,7 @@
       <div class="article-container">
         <div class="resource-container">
           <div class="header-banner">
-            <% if (loggedInUser) { %>
+            <% if (user) { %>
             <div class="btn-container">
               <a
                 class="button edit-btn"
@@ -160,55 +160,33 @@
                       </div>
                     </div>
                   </form>
-                  <% for (let i = 0; i < 3; i++) { %>
-                  <% if (comment[i]) { %>
-                    <div class="comment">
-                      <div class="comment-body">
-                        <h4 class="comment-title">
-                          <%= comment[i].title %>
-                        </h4>
-                        <p class="username">@<%= comment[i].username %></p>
-                        <p class="comment-content">
-                          <%= comment[i].content %>
-                        </p>
-                      </div>
-                      <div>
-                        <p class="comment-date"><%= comment[i].updated_at %></p>
-                      </div>
+                 
+                <% resource.firstThreeComments.forEach(function(comment) { %>
+                  <div class="comment">
+                    <div class="comment-body">
+                      <h4 class="comment-title">
+                        <%= comment.title %>
+                      </h4>
+                      <p class="username">@<%= comment.username %></p>
+                      <p class="comment-content">
+                        <%= comment.content %>
+                      </p>
                     </div>
-                    <% } %>
-                <% } %> 
-                
-                <style>.hidden { display: none; }</style>
+                    <div>
+                      <p class="comment-date"><%= comment.updated_at %></p>
+                    </div>
+                  </div>
+                <% }) %> 
                   
-                <% if (comment.length > 3) { %>  
+                <% if (resource.commentCount > 3) { %>  
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
-                  <div id="hidden-comments" class="hidden">
-                   <% for (let i = 3; i < comment.length; i++) { %>
-                     <div class="comment">
-                      <div class="comment-body">
-                        <h4 class="comment-title">
-                          <%= comment[i].title %>
-                        </h4>
-                        <p class="username">@<%= comment[i].username %></p>
-                        <p class="comment-content">
-                          <%= comment[i].content %>
-                        </p>
-                      </div>
-                      <div>
-                        <p class="comment-date"><%= comment[i].updated_at %></p>
-                      </div>
-                    </div>
-                  <% } %>
-                </div>
                 </div>
                 <% } %>
                 
-                  
-                
+                 
               </div>
             </div>
             <% } else { %>

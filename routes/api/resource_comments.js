@@ -6,7 +6,6 @@ module.exports = (db) => {
   
   router.post("/", (req, res) => {
 
-    // req.body is commentStuff
     const title = req.body.title;
     const comment = req.body.description;
     const userId = req.session.userId;

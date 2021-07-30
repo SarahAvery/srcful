@@ -9,7 +9,7 @@ module.exports = (db) => {
     })
       .then((data) => data.json())
       .then((data) => {
-
+        console.log(data);
         res.render("resource/new", {
           categories: data,
           user: req.session.userId,
@@ -21,38 +21,23 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    const loggedInUser = req.session.userId;
-    fetch(process.env.API_URL + "/resource/" + req.params.id)
+    fetch(process.env.API_URL + "/resource/" + req.params.id, {
+      ...(req.headers && { headers: req.headers }),
+    })
       .then((data) => data.json())
       .then((json) => {
         if (json) {
-          const resourceData = json[0];
-          db.query(
-            `SELECT *, username FROM resource_comments JOIN users ON user_id = users.id WHERE resource_id = $1 ORDER BY resource_comments.updated_at DESC;`,
-            [req.params.id]
-          ).then((data) => {
-            const commentData = data.rows;
-            const templateVars = {
-              resource: resourceData,
-              comment: commentData,
-              loggedInUser: loggedInUser,
-            };
-            res.render("resource", templateVars);
-
-    // fetch(process.env.API_URL + "/resource/" + req.params.id, {
-      // ...(req.headers && { headers: req.headers }),
-    // })
-      // .then((data) => data.json())
-      // .then((json) => {
-        // if (json) {
-          // console.log("INDEX", json);
-          // res.render("resource", {
-            // resource: json[0],
-            // user: req.session.userId,
-
-          });
+          console.log("INDEX", json);
+          db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
+          .then((data) => {
+            let creator = false;
+            if (data.rows[0].creator_id == req.session.userId) {
+              creator = true;
+            }
+            res.render("resource", { resource: json[0], user: req.session.userId, creator });
+            console.log(resource);
+          })
         } else {
-          // error: could not grab json
           res.redirect("/");
         }
       });

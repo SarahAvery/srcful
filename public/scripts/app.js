@@ -146,8 +146,18 @@
     // Comments Load More Button
 
     $("#load-more").find(".load-more").on("click", function() { 
+      console.log('clicked!');
       $(this).remove();
-      $('#hidden-comments').removeClass('hidden');
+      const url = window.location.href;
+      console.log(url);
+      const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
+      $.get("http://localhost:8080/api/resource/" + id, function(data) {
+        const resource =  data.rows[0];
+        resource.moreComments.forEach(function(comment) {
+          const thisComment = createCommentElement(comment);
+          $('#load-more').after(thisComment);
+        });
+      });
     });
 
     // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
