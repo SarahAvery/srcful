@@ -3,7 +3,6 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    console.log(req.session.userId, req.body);
     if (!req.session.userId || !req.body.resourceId) {
       res.status(400).json({ error: "Resource id and user id required" });
     } else {

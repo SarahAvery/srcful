@@ -12,9 +12,6 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req.headers);
-    console.log(qs.stringify(req.body));
-
     fetch(`${process.env.API_URL}/login?${qs.stringify(req.body)}`, {
       method: "POST",
       ...(req.headers && {

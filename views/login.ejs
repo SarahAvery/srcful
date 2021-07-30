@@ -15,45 +15,45 @@
     <%- include('partials/_nav') %>
 
     <main>
-      <!-- Login Form -->
-      <div class="login-form">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-          <div class="error-container" style="opacity: 1">
-            <% if (locals.error) { %>
-            <p id="error-msg">
-              <span class="error"><%= error %></span>
-            </p>
-            <% } %>
-          </div>
-          <div class="form-group">
-            <div>
-              <label for="email">email:</label>
-              <input
-                class=""
-                type="email"
-                name="email"
-                placeholder="email@email.com"
-              />
+      <div class="login wrapper">
+        <div class="login-form">
+          <h2>Login</h2>
+          <form action="/login" method="POST">
+            <div class="error-container" style="opacity: 1">
+              <% if (locals.error) { %>
+              <p id="error-msg">
+                <span class="error"><%= error %></span>
+              </p>
+              <% } %>
             </div>
-            <div>
-              <label for="password">password:</label>
-              <input
-                class=""
-                type="password"
-                name="password"
-                placeholder="****"
-              />
+            <div class="form-group">
+              <div>
+                <label for="email">email:</label>
+                <input
+                  class=""
+                  type="email"
+                  name="email"
+                  placeholder="email@email.com"
+                />
+              </div>
+              <div>
+                <label for="password">password:</label>
+                <input
+                  class=""
+                  type="password"
+                  name="password"
+                  placeholder="****"
+                />
+              </div>
+              <div class="btn-container">
+                <button type="submit" class="">login</button>
+              </div>
             </div>
-            <div class="btn-container">
-              <button type="submit" class="">login</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </main>
-    <!-- footer -->
-    <%- include('partials/_footer') %>
+    <%# include('partials/_footer') %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

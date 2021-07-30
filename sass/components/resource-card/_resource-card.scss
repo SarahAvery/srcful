@@ -57,14 +57,10 @@
 
         .img-container {
           width: 100%;
-
           height: auto;
 
           img {
             width: 100%;
-            // height: 320px;
-            object-fit: cover;
-
             object-fit: contain;
           }
         }
@@ -148,6 +144,12 @@
 
           sup {
             font-size: 14px;
+          }
+
+          .liked {
+            .fa-heart {
+              color: rgba(196, 66, 66, 0.8);
+            }
           }
         }
       }
