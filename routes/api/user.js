@@ -44,6 +44,7 @@ module.exports = (db, queryHelpers) => {
     queryString += `WHERE id = $${values.length};`;
 
     db.query(queryString, values)
+      // eslint-disable-next-line no-unused-vars
       .then((data) => {
         res.redirect("/profile");
       })
