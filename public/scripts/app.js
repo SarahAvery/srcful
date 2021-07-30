@@ -107,11 +107,11 @@
          
         const commentStuff = { 
           title: $('#comment-title').val(), username: username, 
-          description: $('#comment-content').val(), updated_at: new Date(), resourceId: id
+          content: $('#comment-content').val(), updated_at: new Date(), resourceId: id
           }
         $('#comment-content').val('');
         $('#comment-title').val('');
-        if(commentStuff.description !== "" && username !== "") {
+        if(commentStuff.content !== "" && username !== "") {
           const newComment = createCommentElement(commentStuff);
           $('.inputComment').after(newComment);
           $.ajax({ url: '/api/resource_comments', method: 'POST', data: commentStuff })
@@ -131,7 +131,7 @@
             <div class="comment-body">
               <h4 class="comment-title">${commentInfo.title}</h4>
               <p class="username">@${commentInfo.username} </p>
-              <p class="comment-content">${commentInfo.description}</p>
+              <p class="comment-content">${commentInfo.content}</p>
             </div>
             <div>
               <p class="comment-date">${commentInfo.updated_at}</p>
@@ -146,16 +146,14 @@
     // Comments Load More Button
 
     $("#load-more").find(".load-more").on("click", function() { 
-      console.log('clicked!');
       $(this).remove();
       const url = window.location.href;
-      console.log(url);
       const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
       $.get("http://localhost:8080/api/resource/" + id, function(data) {
         const resource = data[0];
         resource.moreComments.forEach(function(comment) {
           const thisComment = createCommentElement(comment);
-          $('#load-more').after(thisComment);
+          $('#load-more').before(thisComment);
         });
       });
     });

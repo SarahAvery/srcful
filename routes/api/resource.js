@@ -55,8 +55,10 @@ module.exports = (db) => {
 
       const moreCommentsQuery = `
       SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, resource_comments.updated_at, users.username AS username
+      FROM resource_comments
+      JOIN users ON resource_comments.user_id = users.id
       WHERE resource_id = $1 
-      ORDER BY resource_comments.updated_at DESC
+      ORDER BY resource_comments.id DESC
       OFFSET 3;`
 
       const commentsQueryFunc = (prevResources) => {
