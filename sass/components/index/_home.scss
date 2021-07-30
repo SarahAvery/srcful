@@ -1,0 +1,15 @@
+#home-page {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 20px;
+  height: calc(100vh - 220px);
+  color: rgb(38, 116, 135);
+
+  h1 {
+    font-size: 72px;
+  }
+
+  .subtitle {
+    font-size: 36px;
+  }
+}

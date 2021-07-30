@@ -68,7 +68,6 @@
       });
 
     // Create New Resource Article Textarea
-
     const newArticle = $(".new-form ");
     const newDescription = newArticle.find("textarea");
 
@@ -79,12 +78,6 @@
         newDescription.css({ height: "300px" });
       }
     });
-
-    // $("#article-div")
-    //   .find("textarea")
-    //   .on("click", () => {
-    //     $("textarea").css({ height: "300px" });
-    //   });
 
     // Star Rating
     $(".rating")
@@ -218,7 +211,6 @@
 
     // Like buttons on /
     $(".home-page .like-btn").on("click", function (e) {
-      // e.preventDefault();
       $(this).toggleClass("liked");
       const resourceId = $(this).closest(".card").attr("data-resource-id");
       const url = $(this).hasClass("liked") ? "/api/like" : "/api/like/remove";
