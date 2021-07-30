@@ -137,19 +137,18 @@
               }
             }
 
-            .liked {
-              .fa-heart {
-                color: red;
-                fill: red;
-              }
-            }
-
             .fa-star {
               color: rgb(255, 215, 0);
             }
 
             sup {
               font-size: 14px;
+            }
+
+            .liked {
+              .fa-heart {
+                color: rgba(196, 66, 66, 0.8);
+              }
             }
           }
 

@@ -1,16 +1,18 @@
+.signup.wrapper,
 .login.wrapper {
-  margin: 0 auto;
-  height: 100%;
+  @include main-container;
 }
 
+.signup-form,
 .login-form {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
 
   h2 {
+    color: rgb(38, 116, 135);
     padding: 20px 0;
     width: 100%;
     text-align: center;
@@ -48,13 +50,7 @@
         margin: 10px auto;
 
         button {
-          outline: none;
-          border-radius: 10px;
-          padding: 8px;
-          min-width: 60px;
-          font-size: 18px;
-          border: none;
-          background-color: rgb(201, 143, 125);
+          background-color: rgb(176, 141, 125);
           color: rgb(255, 255, 255);
         }
       }

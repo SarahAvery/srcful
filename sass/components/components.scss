@@ -8,20 +8,20 @@
 @import "./layout/generic";
 
 //
-//______ LOGIN
-@import "./login/login";
+//______ LOGIN/SIGNUP
+@import "./login-signup/login-signup";
 
 //
 //______ NAV
 @import "./nav/nav";
 
 //
-//______ PROFILE
-@import "./profile/profile";
+//______ INDEX
+@import "./index/home";
 
 //
-//______ SIGNUP
-@import "./signup/signup";
+//______ PROFILE
+@import "./profile/profile";
 
 //
 //______ MY RESOURCES
@@ -35,9 +35,6 @@
 //
 //______ RESOURCE CARD (FULL ARTICLE)
 @import "./resource-card/full_card";
-
-//
-//______ FOOTER
 
 //
 //______ FOOTER
