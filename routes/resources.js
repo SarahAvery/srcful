@@ -9,10 +9,11 @@ module.exports = (db) => {
       ...(req.headers && { headers: req.headers }),
     })
       .then((data) => data.json())
-      .then(({ resources, likedResources }) => {
+      .then(({ resources, likedResources, likedResourcesCreators }) => {
         res.render("resources", {
           resources,
           likedResources,
+          likedResourcesCreators,
           user: req.session.userId,
         });
       })
