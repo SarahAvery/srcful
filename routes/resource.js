@@ -14,6 +14,7 @@ module.exports = (db, queryHelpers) => {
           user: req.session.userId,
         });
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((err) => {
         res.redirect("/");
       });

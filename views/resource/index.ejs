@@ -45,12 +45,11 @@
               </div>
               <div class="main">
                 <div class="img-container">
-                  <!-- <%# if ( resource.image_url !== null) { %>
-                  <img src="<%# resource.image_url %>" alt="" />
-                  <%# } else { %>
-                  <img src="https://source.unsplash.com/random/600x600" alt="" />
-                  <%# } %> -->
+                  <% if ( resource.image_url !== null) { %>
                   <img src="<%= resource.image_url %>" alt="" />
+                  <% } else { %>
+                  <!-- <img src="https://source.unsplash.com/random/600x600" alt="" /> -->
+                  <% } %>
                 </div>
                 <div class="description">
                   <div class="web-link">
