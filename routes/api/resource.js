@@ -12,31 +12,31 @@ module.exports = (db) => {
       WHERE resources.id = $1;`;
 
       const commentQuery = `
-      SELECT resources.id, count(resource_comments.title) AS num_of_comments 
-      FROM resource_comments 
-      JOIN resources ON resource_id = resources.id 
+      SELECT resources.id, count(resource_comments.title) AS num_of_comments
+      FROM resource_comments
+      JOIN resources ON resource_id = resources.id
       WHERE resources.id = $1
       GROUP BY resources.id;`;
 
       const likesQuery = `
-      SELECT resources.id, count(resource_likes) AS num_of_likes 
-      FROM resource_likes 
-      JOIN resources ON resource_id = resources.id 
+      SELECT resources.id, count(resource_likes) AS num_of_likes
+      FROM resource_likes
+      JOIN resources ON resource_id = resources.id
       WHERE resources.id = $1
       GROUP BY resources.id;`;
 
       const categoryQuery = `
-      SELECT resources.id AS resource_id, array_agg(categories.title) AS categories 
-      FROM resource_categories 
-      JOIN resources ON resource_id = resources.id 
-      JOIN categories ON category_id = categories.id 
+      SELECT resources.id AS resource_id, array_agg(categories.title) AS categories
+      FROM resource_categories
+      JOIN resources ON resource_id = resources.id
+      JOIN categories ON category_id = categories.id
       WHERE resource_categories.resource_id = resources.id AND resources.id = $1
       GROUP BY resources.id`;
 
       const ratingQuery = `
-      SELECT resources.id AS resource_id, round(avg(resource_ratings.rating),1) AS avg_rating 
-      FROM resource_ratings 
-      JOIN resources ON resource_id = resources.id 
+      SELECT resources.id AS resource_id, round(avg(resource_ratings.rating),1) AS avg_rating
+      FROM resource_ratings
+      JOIN resources ON resource_id = resources.id
       WHERE resource_id = $1
       GROUP BY resources.id;`;
 
