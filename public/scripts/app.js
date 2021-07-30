@@ -108,23 +108,23 @@
         const twelveHourSuffix = formattedTime.slice(19,21).toUpperCase();
         const fullyFormattedTime = `${month}-${day}-${year} ${time}${twelveHourSuffix}`
          
-        const commentStuff = { 
+        const commentItems = { 
           title: $('#comment-title').val(), username: username, 
           content: $('#comment-content').val(), to_char: fullyFormattedTime, resourceId: id
           }
+          
         $('#comment-content').val('');
         $('#comment-title').val('');
-        if(commentStuff.content !== "" && username !== "") {
-          const newComment = createCommentElement(commentStuff);
+        if(commentItems.content !== "" && username !== "") {
+          const newComment = createCommentElement(commentItems);
           $('.inputComment').after(newComment);
-          $.ajax({ url: '/api/resource_comments', method: 'POST', data: commentStuff })
+          $.ajax({ url: '/api/resource_comments/' + id, method: 'POST', data: commentItems })
           const sup = $(this).closest(".card").find(".comment-dots sup");
-          console.log(sup);
           const commentCount = Number(sup.text());
           sup.text(commentCount + 1);
         }
-        });
       });
+    });
       
 
       const createCommentElement = function(commentInfo) {
@@ -152,8 +152,9 @@
       $(this).remove();
       const url = window.location.href;
       const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
-      $.get("http://localhost:8080/api/resource/" + id, function(data) {
+      $.get("http://localhost:8080/api/resource_comments/" + id, function(data) {
         const resource = data[0];
+        console.log("resource data[0]:", resource)
         resource.moreComments.forEach(function(comment) {
           const thisComment = createCommentElement(comment);
           $('#load-more').before(thisComment);

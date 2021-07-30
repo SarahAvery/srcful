@@ -44,22 +44,6 @@ module.exports = (db) => {
       SELECT resource_likes.*
       FROM resource_likes
       WHERE resource_id = $1 AND user_id = $2;`;
-      
-      const firstThreeCommentsQuery = `
-      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, to_char(resource_comments.updated_at, 'MON-DD-YYYY HH12:MIPM'), users.username AS username
-      FROM resource_comments
-      JOIN users ON resource_comments.user_id = users.id
-      WHERE resource_id = $1 
-      ORDER BY resource_comments.updated_at DESC
-      LIMIT 3;`
-
-      const moreCommentsQuery = `
-      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, to_char(resource_comments.updated_at, 'MON-DD-YYYY HH12:MIPM'), users.username AS username
-      FROM resource_comments
-      JOIN users ON resource_comments.user_id = users.id
-      WHERE resource_id = $1 
-      ORDER BY resource_comments.id DESC
-      OFFSET 3;`
 
       const commentsQueryFunc = (prevResources) => {
         // commentsCount
@@ -114,44 +98,6 @@ module.exports = (db) => {
           });
         });
       };
-      
-      const firstThreeCommentsQueryFunc = (prevResources) => {
-        // get comment info for first 3 comments
-        return new Promise((resolve) => {
-          db.query(firstThreeCommentsQuery, [id]).then((data) => {
-            const comments = data.rows;
-            console.log(comments);
-            const combined = prevResources.map((resource) => {
-              // const match = comments.find(
-                // (comment) => comment.resource_id === resource.resource_id
-              // );
-            resource.firstThreeComments = comments;
-            return resource;
-            });
-
-            resolve(combined);
-          });
-        });
-      };
-      
-      const moreCommentsQueryFunc = (prevResources) => {
-        // get comment info for comments 4 and on
-        return new Promise((resolve) => {
-          db.query(moreCommentsQuery, [id]).then((data) => {
-            const moreComments = data.rows;
-            const combined = prevResources.map((resource) => {
-              // const match = moreComments.find(
-                // (comment) => comment.resource_id === resource.resource_id
-              // );
-            resource.moreComments = moreComments;
-            return resource;
-            });
-
-            resolve(combined);
-          });
-        });
-      };
-      
 
       const categoryQueryFunc = (data) => {
         // categories
@@ -183,8 +129,6 @@ module.exports = (db) => {
           });
         });
       };
-      
-      
 
       db.query(resourceQuery, [id])
         .then((data) => {
@@ -194,8 +138,6 @@ module.exports = (db) => {
         .then(commentsQueryFunc)
         .then(likesQueryFunc)
         .then(ratingQueryFunc)
-        .then(firstThreeCommentsQueryFunc)
-        .then(moreCommentsQueryFunc)
         .then(categoryQueryFunc)
         .then(isLikedQueryFunc)
         .then((data) => {
@@ -213,7 +155,6 @@ module.exports = (db) => {
     const userId = req.session.userId;
     getResourceById(id, userId)
       .then((data) => res.json(data))
-        // console.log(res.json(data))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });

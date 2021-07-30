@@ -28,6 +28,7 @@ module.exports = (db) => {
       .then((json) => {
         if (json) {
           console.log("INDEX", json);
+          let resource = json[0];
           db.query(`SELECT creator_id FROM resources WHERE id = $1`, [
             req.params.id,
           ]).then((data) => {
@@ -35,12 +36,22 @@ module.exports = (db) => {
             if (data.rows[0].creator_id === req.session.userId) {
               creator = true;
             }
-            res.render("resource", {
-              resource: json[0],
-              user: req.session.userId,
-              creator,
+              fetch(process.env.API_URL + "/resource_comments/" + req.params.id, {
+                ...(req.headers && { headers: req.headers }),
+              })  
+                .then((data) => data.json())
+                .then((json) => { 
+                   if (json) {
+                    const comments = json[0];
+                    res.render("resource", {
+                      resource: resource,
+                      comments: comments,
+                      user: req.session.userId,
+                      creator
+                    });
+                   }
+                });
             });
-          });
         } else {
           res.redirect("/");
         }
