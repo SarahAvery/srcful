@@ -92,10 +92,13 @@
       .on("click", function (event) {
         event.preventDefault();
         const url = window.location.href;
+        const host = window.location.hostname;
+        const port = window.location.port;
         const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
-        $.get('http://localhost:8080/profile', function(data) {
+        $.get(`http://${host}:${port}/profile`, function(data) {
           return data;
         })
+        
         .then((data) => {
           let username = data.split('username: <span>')[1].split('</span>')[0];
          
@@ -151,10 +154,11 @@
     $("#load-more").find(".load-more").on("click", function() { 
       $(this).remove();
       const url = window.location.href;
+      const host = window.location.hostname;
+      const port = window.location.port;
       const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
-      $.get("http://localhost:8080/api/resource_comments/" + id, function(data) {
+      $.get(`http://${host}:${port}/api/resource_comments/` + id, function(data) {
         const resource = data[0];
-        console.log("resource data[0]:", resource)
         resource.moreComments.forEach(function(comment) {
           const thisComment = createCommentElement(comment);
           $('#load-more').before(thisComment);
