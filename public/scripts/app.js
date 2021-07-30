@@ -102,7 +102,7 @@
         });
       });
 
-    // Comment Button
+    // Add Comment Button
     $(".comment-container")
       .find(".comment-btn")
       .on("click", function (event) {
@@ -160,10 +160,7 @@
       return $comment;
     };
 
-    // !!! When need to handle this with ajax, like tweeter. Once comment is rendered, the button will need to have the active class removed
-
     // Comments Load More Button
-
     $("#load-more")
       .find(".load-more")
       .on("click", function () {
@@ -172,11 +169,10 @@
         const resourceId = url
           .substring(url.lastIndexOf("/") + 1)
           .split("?")[0];
-        console.log(resourceId);
-        $.get(`/api/resource_comments/` + resourceId).then((data) => {
-          const resource = data[0];
+        $.get(`/api/resource_comments/${resourceId}/all`).then((data) => {
+          const moreComments = data.slice(3);
 
-          resource.moreComments.forEach(function (comment) {
+          moreComments.forEach(function (comment) {
             const formattedComment = {
               ...comment,
               postTime: comment.post_time,
@@ -187,8 +183,6 @@
           });
         });
       });
-
-    // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
     // Error Messages Login
     $(".login-form form")

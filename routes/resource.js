@@ -36,6 +36,7 @@ module.exports = (db, queryHelpers) => {
               if (data.rows[0].creator_id === req.session.userId) {
                 creator = true;
               }
+
               fetch(
                 process.env.API_URL + "/resource_comments/" + req.params.id,
                 {
@@ -45,10 +46,10 @@ module.exports = (db, queryHelpers) => {
                 .then((data) => data.json())
                 .then((json) => {
                   if (json) {
-                    const comments = json[0];
+                    const comments = json;
                     res.render("resource", {
-                      resource: resource,
-                      comments: comments,
+                      resource,
+                      comments,
                       user: {
                         id: req.session.userId,
                         username: userData.username,
