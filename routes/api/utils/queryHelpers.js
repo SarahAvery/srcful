@@ -290,20 +290,31 @@ const generateHelpers = (db) => ({
         WHERE users.id = $1;`;
 
       const likedResourceQuery = `
-      SELECT  users.id AS user_id, resources.title, resources.image_url, resources.id AS resource_id, resources.url
+        SELECT  users.id AS user_id, resources.title, resources.image_url, resources.id AS resource_id, resources.url
         FROM resource_likes
         JOIN users ON user_id = users.id
         JOIN resources ON resource_id = resources.id
         WHERE users.id = $1;`;
 
+      const likedResourcesCreatorsQuery = `
+        SELECT users.username FROM users,
+        (SELECT  users.id AS user_id, resources.title, resources.image_url, resources.id AS resource_id, resources.url, resources.creator_id
+        FROM resource_likes
+        JOIN users ON user_id = users.id
+        JOIN resources ON resource_id = resources.id
+        WHERE users.id = $1) as t
+        WHERE users.id = t.creator_id;`;
+
       Promise.all([
         db.query(resourceQuery, [userId]),
         db.query(likedResourceQuery, [userId]),
+        db.query(likedResourcesCreatorsQuery, [userId]),
       ])
-        .then(([resources, likedResources]) => {
+        .then(([resources, likedResources, likedResourcesCreators]) => {
           const data = {
             resources: resources.rows || [],
             likedResources: likedResources.rows || [],
+            likedResourcesCreators: likedResourcesCreators.rows || [],
           };
 
           resolve(data);
@@ -319,7 +330,7 @@ const generateHelpers = (db) => ({
       SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, to_char(resource_comments.updated_at, 'mon dd, YYYY, HH12:MIPM') AS post_time, users.username AS username
       FROM resource_comments
       JOIN users ON resource_comments.user_id = users.id
-      WHERE resource_id = $1 
+      WHERE resource_id = $1
       ORDER BY resource_comments.updated_at DESC
       ${limitNum ? `LIMIT $2` : ""};`;
 

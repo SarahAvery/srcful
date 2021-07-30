@@ -71,7 +71,7 @@
                     </sup></span
                   >
                   <span
-                    class="icon like-btn" <%= resource.isLiked ? "liked" : "" %>
+                    class="icon like-btn <%= resource.isLiked ? 'liked' : '' %>"
                   >
                     <i class="fas fa-heart"></i>
                     <sup>
@@ -160,7 +160,7 @@
                       </div>
                     </div>
                   </form>
-                 
+
                 <% comments.forEach(function(comment) { %>
                   <div class="comment">
                     <div class="comment-body">
@@ -176,23 +176,23 @@
                       <p class="comment-date"><%= comment.post_time %></p>
                     </div>
                   </div>
-                <% }) %> 
-                  
-                <% if (resource.commentCount > 3) { %>  
+                <% }) %>
+
+                <% if (resource.commentCount > 3) { %>
                 <div id="load-more">
                   <button class="load-more">
                     all comments <i class="fas fa-caret-down"></i>
                   </button>
                 </div>
                 <% } %>
-                
-                 
+
+
               </div>
             </div>
             <% } else { %>
             <!-- <p>there was an error</p> -->
             <% } %>
-           
+
           </div>
         </div>
       </div>
