@@ -69,12 +69,22 @@
 
     // Create New Resource Article Textarea
 
-    $("#article-div")
-      .find("textarea")
-      .on("click", () => {
-        $("#article-div").css({ width: "600px", margin: "0 -50%" });
-        $("textarea").css({ width: "600px", height: "300px" });
-      });
+    const newArticle = $(".new-form ");
+    const newDescription = newArticle.find("textarea");
+
+    newArticle.click(function (e) {
+      if (!newDescription.is(e.target)) {
+        newDescription.css({ height: "100px" });
+      } else {
+        newDescription.css({ height: "300px" });
+      }
+    });
+
+    // $("#article-div")
+    //   .find("textarea")
+    //   .on("click", () => {
+    //     $("textarea").css({ height: "300px" });
+    //   });
 
     // Star Rating
     $(".rating")

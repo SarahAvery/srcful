@@ -1,9 +1,10 @@
 footer {
-  // height: 200px;
+  margin-top: 50px;
+  font-size: 18px;
   width: 100%;
-  color: white;
   text-align: center;
   background-color: rgb(38, 116, 135);
+  color: rgb(255, 255, 255);
 
   .footer-inner {
     max-width: 1200px;
@@ -14,8 +15,6 @@ footer {
     padding: 30px 20px;
 
     .logo-container {
-      border: 1px solid white;
-
       .logo {
         font-size: 42px;
 
@@ -28,19 +27,52 @@ footer {
     }
 
     .footer-menus {
-      border: 1px solid pink;
-
+      width: 50%;
       display: flex;
+      justify-content: flex-end;
+      color: rgb(255, 255, 255);
 
-      li {
-        list-style: none;
+      // max-width: 50%;
+
+      .about,
+      .policy {
+        margin: 0 30px;
+        padding: 0 10px;
+        width: auto;
       }
+
+      .policy {
+        margin-right: 0;
+      }
+
       h3 {
         font-weight: bolder;
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgb(255, 255, 255);
+
+        span {
+          padding: 5px 0;
+        }
       }
-      a {
-        font-size: 18px;
+
+      ul {
+        margin-top: 10px;
+
+        li {
+          list-style: none;
+          margin: 5px 0;
+        }
+        a {
+          font-size: 18px;
+          color: rgb(255, 255, 255);
+        }
       }
     }
+  }
+
+  .copyright {
+    text-align: left;
+    padding-left: 5px;
+    font-size: 14px;
   }
 }

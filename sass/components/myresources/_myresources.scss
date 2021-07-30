@@ -6,7 +6,6 @@ body.full-height {
 .myresource-container {
   @include main-container;
   margin: 0 auto;
-  margin-bottom: 30px;
 
   .header-banner {
     display: flex;
