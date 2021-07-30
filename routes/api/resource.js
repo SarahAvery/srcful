@@ -172,7 +172,6 @@ module.exports = (db) => {
       };
 
       const isLikedQueryFunc = (data) => {
-        // likes
         return new Promise((resolve) => {
           db.query(isLikedQuery, [id, userId]).then((isLikedData) => {
             const newResources = data.map((resource) => ({

@@ -18,23 +18,24 @@
     <main>
       <div class="article-container">
         <div class="resource-container">
+          <% if (creator) { %>
           <div class="header-banner">
             <% if (user) { %>
             <div class="btn-container">
               <a
                 class="button edit-btn"
-                href="/resources/<%= resource.resource_id %>/edit"
+                href="/resource/<%= resource.resource_id %>/edit"
                 >edit</a
               >
               <a
                 class="button delete"
-                href="/resources/<%= resource.resource_id %>/delete"
+                href="/resource/<%= resource.resource_id %>/delete"
                 >delete</a
               >
             </div>
             <% } %>
           </div>
-
+          <% } %>
           <div class="resource">
             <% if ( resource !== undefined) { %>
             <div class="card">
