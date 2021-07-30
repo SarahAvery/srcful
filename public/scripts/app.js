@@ -152,7 +152,7 @@
       console.log(url);
       const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
       $.get("http://localhost:8080/api/resource/" + id, function(data) {
-        const resource =  data.rows[0];
+        const resource = data[0];
         resource.moreComments.forEach(function(comment) {
           const thisComment = createCommentElement(comment);
           $('#load-more').after(thisComment);

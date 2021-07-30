@@ -54,7 +54,7 @@ module.exports = (db) => {
       LIMIT 3;`
 
       const moreCommentsQuery = `
-      SELECT * FROM resource_comments 
+      SELECT resource_comments.id, resource_comments.title, resource_comments.resource_id, resource_comments.user_id, resource_comments.content, resource_comments.updated_at, users.username AS username
       WHERE resource_id = $1 
       ORDER BY resource_comments.updated_at DESC
       OFFSET 3;`
