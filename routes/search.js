@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, queryHelpers) => {
   router.post("/", (req, res) => {
     const query = req.body.search.toLowerCase();
     let results = [];
@@ -22,7 +22,21 @@ module.exports = (db) => {
       `;
         db.query(queryString, [`%${query}%`]).then((data) => {
           results = results.concat(data.rows);
-          res.render("search", { user: req.session.userId, results });
+
+          queryHelpers.getAllResources().then((data) => {
+            const combined = results.map((result) => {
+              const match = data.find(
+                (resource) => resource.resource_id === result.id
+              );
+              return { ...result, ...match };
+            });
+            console.log(combined);
+
+            res.render("search", {
+              user: req.session.userId,
+              results: combined,
+            });
+          });
         });
       })
       .catch((e) => res.send(e.stack));
