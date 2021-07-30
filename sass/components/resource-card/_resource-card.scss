@@ -30,6 +30,7 @@
 
         h3 {
           text-transform: capitalize;
+          text-align: center;
         }
         h3,
         .web-link,
@@ -71,22 +72,21 @@
         .description {
           margin: 10px 5px;
           text-transform: capitalize;
+        }
+        .btn-container {
+          margin: 5px;
+          margin-top: 15px;
+          display: flex;
+          justify-content: center;
 
-          .btn-container {
-            margin: 5px;
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
+          .full {
+            border: 1px solid rgb(38, 116, 135);
+            color: rgb(38, 116, 135);
+          }
 
-            .full {
-              border: 1px solid rgb(38, 116, 135);
-              color: rgb(38, 116, 135);
-            }
-
-            .full.active {
-              background-color: rgb(38, 116, 135);
-              color: rgb(255, 255, 255);
-            }
+          .full.active {
+            background-color: rgb(38, 116, 135);
+            color: rgb(255, 255, 255);
           }
         }
       }
@@ -96,7 +96,7 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        border-top: 1px solid rgb(38, 116, 135);
+        border-top: 1px solid rgba(38, 115, 135, 0.5);
         padding-top: 5px;
 
         .badges {
@@ -129,6 +129,8 @@
 
           span {
             color: black;
+            padding-left: 5px;
+
             .fa-comment-dots {
               color: rgb(38, 116, 135);
               fill: rgb(38, 116, 135);
@@ -142,6 +144,10 @@
 
           .fa-star {
             color: gold;
+          }
+
+          sup {
+            font-size: 14px;
           }
         }
       }

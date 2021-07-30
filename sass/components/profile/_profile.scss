@@ -1,6 +1,11 @@
 @import "../mixins.scss";
 .profile-container {
   @include main-container;
+  // margin-bottom: 50px;
+
+  h1 {
+    color: rgb(38, 116, 135);
+  }
 
   .info-container {
     padding: 20px 0;
@@ -27,6 +32,7 @@
 
       .password-box span {
         margin-top: 6px;
+        color: rgb(38, 116, 135);
       }
     }
   }
@@ -49,7 +55,7 @@
   .edit-popout {
     background: rgb(255, 255, 255);
     height: 300px;
-    width: 400px;
+    width: 40%;
     z-index: 12;
     position: absolute;
     right: -10px;

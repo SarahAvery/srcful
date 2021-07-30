@@ -7,7 +7,7 @@
 
 const express = require("express");
 const router = express.Router();
-const limit = 10;
+const limit = 11;
 const resourceQuery = `SELECT users.username AS username, resources.title, resources.image_url, resources.id AS resource_id, resources.url, resources.description, substring(resources.description,1,140) AS substring,
     resources.created_at::date AS date, resources.created_at::time
     AS time
