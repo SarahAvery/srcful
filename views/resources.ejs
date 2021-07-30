@@ -78,11 +78,11 @@
 
           <div id="mylikes" class="likes tabcontent">
             <div class="resources">
-              <% likedResources.forEach(like => { %>
+              <% likedResources.forEach((like, i) => { %>
               <div class="card">
                 <div class="title">
                   <h3><%= like.title %></h3>
-                  <p>written by: <%= like.username %></p>
+                  <p>written by: <%= likedResourcesCreators[i].username %></p>
                   <div class="web-link">
                     <a href="<%= like.url %>"><i class="fas fa-link"></i></a>
                   </div>
