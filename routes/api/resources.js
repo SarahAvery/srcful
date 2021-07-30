@@ -132,13 +132,16 @@ module.exports = (db) => {
       // isLiked
       return new Promise((resolve) => {
         console.log("----------->", userId);
+
         db.query(isLikedQuery, [userId]).then((isLikedData) => {
-          console.log(isLikedData.rows[0].resources_liked_arr);
           const newResources = data.map((resource) => ({
             ...resource,
-            isLiked: isLikedData.rows[0].resources_liked_arr.includes(
-              resource.resource_id
-            ),
+            isLiked:
+              (!!isLikedData.rows.length &&
+                isLikedData.rows[0].resources_liked_arr.includes(
+                  resource.resource_id
+                )) ||
+              false,
           }));
 
           resolve(newResources);
