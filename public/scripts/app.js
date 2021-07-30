@@ -89,32 +89,100 @@
     // Star Rating
     $(".rating")
       .find("form")
-      .on("click", function(e) {
+      .on("click", function (e) {
         const rating = e.target.value;
         const url = window.location.href;
-        const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
-        $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
-          .then(function(res) {
-            document.getElementById('avgrating').innerHTML = res.avg_rating;
-          });
+        const id = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+        $.ajax({
+          url: "/api/resource_ratings",
+          method: "POST",
+          data: { rating, resourceId: id },
+        }).then(function (res) {
+          document.getElementById("avgrating").innerHTML = res.avg_rating;
+        });
       });
 
-    // Comment Button
+    // Add Comment Button
     $(".comment-container")
       .find(".comment-btn")
-      .on("click", function () {
-        $(".comment-btn").addClass("active");
+      .on("click", function (event) {
+        event.preventDefault();
+        const url = window.location.href;
+        const resourceId = url
+          .substring(url.lastIndexOf("/") + 1)
+          .split("?")[0];
+        const username = $("#comment-form").attr("data-username");
+
+        const currentTime = new Date();
+        const formattedTime = new Intl.DateTimeFormat("en-CA", {
+          dateStyle: "medium",
+          timeStyle: "short",
+          hour12: "true",
+        }).format(currentTime);
+
+        const commentItems = {
+          title: $("#comment-title").val(),
+          username: username,
+          content: $("#comment-content").val(),
+          postTime: formattedTime,
+          resourceId,
+        };
+
+        $("#comment-content").val("");
+        $("#comment-title").val("");
+        if (commentItems.content !== "" && username !== "") {
+          const newComment = createCommentElement(commentItems);
+          $(".inputComment").after(newComment);
+          $.ajax({
+            url: "/api/resource_comments/" + resourceId,
+            method: "POST",
+            data: commentItems,
+          });
+          const sup = $(this).closest(".card").find(".comment-dots sup");
+          const commentCount = Number(sup.text());
+          sup.text(commentCount + 1);
+        }
       });
-    // !!! When need to handle this with ajax, like tweeter. Once comment is rendered, the button will need to have the active class removed
+
+    const createCommentElement = function (commentInfo) {
+      let $comment = $(
+        `<div class="comment">
+            <div class="comment-body">
+              <h4 class="comment-title">${commentInfo.title}</h4>
+              <p class="username">@${commentInfo.username} </p>
+              <p class="comment-content">${commentInfo.content}</p>
+            </div>
+            <div>
+              <p class="comment-date">${commentInfo.postTime}</p>
+            </div>
+          </div>`
+      );
+      return $comment;
+    };
 
     // Comments Load More Button
-
     $("#load-more")
       .find(".load-more")
       .on("click", function () {
-        $(".load-more").addClass("active");
+        $(this).remove();
+        const url = window.location.href;
+        const resourceId = url
+          .substring(url.lastIndexOf("/") + 1)
+          .split("?")[0];
+        $.get(`/api/resource_comments/${resourceId}/all`).then((data) => {
+          const moreComments = data.slice(3);
+
+          moreComments.forEach(function (comment) {
+            const formattedComment = {
+              ...comment,
+              postTime: comment.post_time,
+            };
+
+            const thisComment = createCommentElement(formattedComment);
+            $("#load-more").before(thisComment);
+          });
+        });
       });
-    // !!! When need to handle this with ajax, like tweeter. Once more comments are fetched and rendered, the button will need to have the active class removed
 
     // Error Messages Login
     $(".login-form form")
