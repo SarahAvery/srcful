@@ -113,7 +113,7 @@
          
         const commentItems = { 
           title: $('#comment-title').val(), username: username, 
-          content: $('#comment-content').val(), to_char: fullyFormattedTime, resourceId: id
+          content: $('#comment-content').val(), post_time: fullyFormattedTime, resourceId: id
           }
           
         $('#comment-content').val('');
@@ -140,7 +140,7 @@
               <p class="comment-content">${commentInfo.content}</p>
             </div>
             <div>
-              <p class="comment-date">${commentInfo.to_char}</p>
+              <p class="comment-date">${commentInfo.post_time}</p>
             </div>
           </div>`
           );
