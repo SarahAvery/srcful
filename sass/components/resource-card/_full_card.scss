@@ -118,16 +118,14 @@
             width: 100%;
             text-align: right;
 
-            span.icon {
-              padding: 0 4px;
-            }
-
             i.icon {
-              margin: 0 4px;
+              margin: 0 5px;
             }
 
             span {
               color: black;
+              padding-left: 5px;
+
               .fa-comment-dots {
                 color: rgb(38, 116, 135);
                 fill: rgb(38, 116, 135);
@@ -139,8 +137,19 @@
               }
             }
 
+            .liked {
+              .fa-heart {
+                color: red;
+                fill: red;
+              }
+            }
+
             .fa-star {
               color: rgb(255, 215, 0);
+            }
+
+            sup {
+              font-size: 14px;
             }
           }
 

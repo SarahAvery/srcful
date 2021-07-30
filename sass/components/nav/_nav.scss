@@ -12,6 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    padding: 0 20px;
 
     ul {
       display: flex;
@@ -57,7 +58,6 @@ header {
     }
 
     input[type="text"] {
-      padding: 6px;
       border: none;
       font-size: 16px;
       margin: auto;
@@ -65,7 +65,7 @@ header {
     .search {
       border-radius: 10px;
       outline: none;
-      padding: 4px;
+      padding: 8px 15px;
       min-width: 300px;
       background-color: rgb(255, 255, 255, 0.8);
     }

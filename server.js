@@ -54,7 +54,6 @@ app.use("/api/login", require("./routes/api/login")(db));
 app.use("/api/resource_ratings", require("./routes/api/resource_ratings")(db));
 app.use("/api/resource_comments", require("./routes/api/resource_comments")(db));
 
-
 // html routes
 app.use("/", require("./routes/index")(db));
 app.use("/login", require("./routes/login")(db));

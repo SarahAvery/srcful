@@ -69,21 +69,34 @@
 
     // Create New Resource Article Textarea
 
-    $("#article-div")
-      .find("textarea")
-      .on("click", () => {
-        $("#article-div").css({ width: "600px", margin: "0 -50%" });
-        $("textarea").css({ width: "600px", height: "300px" });
-      });
+    const newArticle = $(".new-form ");
+    const newDescription = newArticle.find("textarea");
+
+    newArticle.click(function (e) {
+      if (!newDescription.is(e.target)) {
+        newDescription.css({ height: "100px" });
+      } else {
+        newDescription.css({ height: "300px" });
+      }
+    });
+
+    // $("#article-div")
+    //   .find("textarea")
+    //   .on("click", () => {
+    //     $("textarea").css({ height: "300px" });
+    //   });
 
     // Star Rating
     $(".rating")
       .find("form")
-      .on("click", (e) => {
+      .on("click", function(e) {
         const rating = e.target.value;
         const url = window.location.href;
         const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
         $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
+          .then(function(res) {
+            document.getElementById('avgrating').innerHTML = res.avg_rating;
+          });
       });
 
     // Comment Button
