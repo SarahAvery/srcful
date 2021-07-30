@@ -12,12 +12,10 @@
   </head>
   <body>
     <!-- header -->
-    <%- include('partials/_nav') %>
+    <%- include('partials/_nav') %> <%= locals.some %> <% if (typeof resources
+    !== 'undefined') { %>
     <main>
       <div class="home-page">
-        <!-- <h1>Home Page</h1> -->
-        <%= locals.some %> <% if (typeof resources !== 'undefined') { %>
-        <!-- <%#if ( resources !== undefined ) { %> -->
         <div class="card-container">
           <% resources.forEach(resource => { %>
           <div class="card" data-resource-id="<%= resource.resource_id %>">
@@ -103,26 +101,28 @@
             ></a>
           </div>
         </div>
-        <% } else { %>
+      </div>
+    </main>
+    <% } else { %>
+    <main class="index-main">
+      <div class="image-box">
         <div id="home-page">
           <!-- <div>
-            <h1>Welcome to <span class="logo">srcful</span></h1>
-          </div>
+          <h1>Welcome to <span class="logo">srcful</span></h1>
+        </div>
+        <div class="subtitle">
+          <p>a collection of dev resources,</p>
+          <p>created by people like you!</p>
+        </div> -->
+          <h1>Welcome to <span class="logo">srcful</span></h1>
           <div class="subtitle">
             <p>a collection of dev resources,</p>
             <p>created by people like you!</p>
-          </div> -->
-          <div class="image-box">
-            <h1>Welcome to <span class="logo">srcful</span></h1>
-            <div class="subtitle">
-              <p>a collection of dev resources,</p>
-              <p>created by people like you!</p>
-            </div>
           </div>
         </div>
-        <% } %>
       </div>
     </main>
+    <% } %>
 
     <!-- footer -->
     <%= locals.some %> <% if (typeof resources !== 'undefined') { %> <%-

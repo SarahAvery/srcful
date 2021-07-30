@@ -37,7 +37,7 @@ module.exports = (db, queryHelpers) => {
               if (data.rows.length === 0) {
                 res.redirect("/");
               }
-              if (data.rows[0].creator_id == req.session.userId) {
+              if (data.rows[0].creator_id === req.session.userId) {
                 creator = true;
               }
 
@@ -112,7 +112,10 @@ module.exports = (db, queryHelpers) => {
   router.get("/:id/edit", (req, res) => {
     db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
       .then((data) => {
-        if (data.rows.length === 0 || data.rows[0].creator_id != req.session.userId) {
+        if (
+          data.rows.length === 0 ||
+          data.rows[0].creator_id !== req.session.userId
+        ) {
           res.redirect(`/resource/${req.params.id}`);
         } else {
           fetch(`${process.env.API_URL}/resources/all`, {
@@ -125,7 +128,7 @@ module.exports = (db, queryHelpers) => {
             .then((json) => {
               if (json.resources) {
                 const currentResource = json.resources.filter((resource) => {
-                  return resource.resource_id == req.params.id;
+                  return resource.resource_id === req.params.id;
                 });
                 res.render("resource/edit", {
                   resource: currentResource[0],
@@ -149,7 +152,10 @@ module.exports = (db, queryHelpers) => {
 
     db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
       .then((data) => {
-        if (data.rows.length !== 0 && data.rows[0].creator_id == req.session.userId) {
+        if (
+          data.rows.length !== 0 &&
+          data.rows[0].creator_id === req.session.userId
+        ) {
           let queryString = "UPDATE resources SET ";
           const values = [];
           const queryBuilder = [];
@@ -182,8 +188,11 @@ module.exports = (db, queryHelpers) => {
     // 403 forbidden if not resource creator
     db.query(`SELECT creator_id FROM resources WHERE id = $1`, [req.params.id])
       .then((data) => {
-        if (data.rows.length !== 0 && data.rows[0].creator_id == req.session.userId) {
-        const queryString = `
+        if (
+          data.rows.length !== 0 &&
+          data.rows[0].creator_id === req.session.userId
+        ) {
+          const queryString = `
         DELETE FROM resources
         WHERE id = ${req.params.id};
         `;

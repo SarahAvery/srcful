@@ -80,17 +80,3 @@ h6 {
   font-family: "Open Sans", sans-serif;
   line-height: 1.3;
 }
-
-.image-box {
-  /* Here's the trick */
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../images/home-page-logged-in.png") center center;
-
-  /* Here's the same styles we applied to our content-div earlier */
-  color: white;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
