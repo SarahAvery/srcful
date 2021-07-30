@@ -16,7 +16,8 @@
     <main>
       <div class="home-page">
         <!-- <h1>Home Page</h1> -->
-
+        <%= locals.some %> <% if (typeof resources !== 'undefined') { %>
+        <!-- <%#if ( resources !== undefined ) { %> -->
         <div class="card-container">
           <% resources.forEach(resource => { %>
           <div class="card" data-resource-id="<%= resource.resource_id %>">
@@ -102,11 +103,15 @@
             ></a>
           </div>
         </div>
+        <% } else { %>
+        <p>hello</p>
+        <% } %>
       </div>
     </main>
 
     <!-- footer -->
-    <%- include('partials/_footer') %>
+    <%= locals.some %> <% if (typeof resources !== 'undefined') { %> <%-
+    include('partials/_footer') %> <% } %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
