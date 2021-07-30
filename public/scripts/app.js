@@ -82,11 +82,14 @@
     // Star Rating
     $(".rating")
       .find("form")
-      .on("click", (e) => {
+      .on("click", function(e) {
         const rating = e.target.value;
-        console.log(rating);
-
-        // We need to do something with the value!!
+        const url = window.location.href;
+        const id = url.substring(url.lastIndexOf('/') + 1).split('?')[0];
+        $.ajax({ url: '/api/resource_ratings', method: 'POST', data: {rating, resourceId: id} })
+          .then(function(res) {
+            document.getElementById('avgrating').innerHTML = res.avg_rating;
+          });
       });
 
     // Comment Button
